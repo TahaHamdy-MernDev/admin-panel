@@ -1,0 +1,239 @@
+{
+  "Metadata": {
+    "title": "Dashboard"
+  },
+  "Page": {
+    "title": "Page not found"
+  },
+  "app-sidebar": {
+    "dashboard": "Dashboard",
+
+    "plans": {
+      "title": "Plans & Subscriptions",
+      "all_plans": "All Plans",
+      "pay_as_you_go": "Pay As You Go",
+      "monthly": "Monthly Plans",
+      "yearly": "Yearly Plans",
+      "subscribers": "Subscribers",
+      "trials": "Trial Periods",
+      "renewals": "Renewals",
+      "invoices": "Invoices"
+    },
+
+    "customers": {
+      "title": "Customers",
+      "all": "All Customers",
+      "active": "Active Customers",
+      "suspended": "Suspended Customers",
+      "expired": "Expired Subscriptions",
+      "sessions": "Login Sessions",
+      "activity": "Activity Logs"
+    },
+
+    "finance": {
+      "title": "Finance",
+      "accounts": "Accounts & Banks",
+      "income": "Income",
+      "expenses": "Expenses",
+      "terms": "Terms",
+      "withdrawals": "Withdraw Requests"
+    },
+
+    "staff": {
+      "title": "Staff Management",
+      "all": "All Staff",
+      "roles": "Roles & Permissions",
+      "teams": "Teams",
+      "logs": "Login Logs"
+    },
+
+    "coupons": {
+      "title": "Coupons",
+      "all": "All Coupons",
+      "create": "Create Coupon",
+      "active": "Active Coupons",
+      "expired": "Expired Coupons",
+      "usage": "Usage History"
+    },
+
+    "support": {
+      "title": "Support Tickets",
+      "open": "Open Tickets",
+      "pending": "In Progress",
+      "closed": "Closed Tickets",
+      "chat": "Live Chat"
+    },
+
+    "reports": {
+      "title": "Reports",
+      "customers": "Customer Reports",
+      "revenue": "Revenue Reports",
+      "expenses": "Expense Reports",
+      "orders": "Order Reports",
+      "delivery": "Delivery Rates",
+      "products": "Top Products",
+      "shipping": "Shipping Companies",
+      "cities": "City Reports",
+      "referrals": "Referral Reports",
+      "sales": "Sales",
+      "communications": "Communications",
+      "repeat_customers": "Repeat Customers"
+    },
+
+    "settings": {
+      "title": "Settings",
+      "countries": "Countries",
+      "system": "System Settings",
+      "payment": "Payment Settings",
+      "notifications": "Notification Settings",
+      "security": "Security Settings",
+      "integrations": "Integrations",
+      "audit_log": "Audit Log"
+    }
+  },
+  "alert-dialog": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "plans": {
+      "on": {
+        "title": "Enable Plan",
+        "description": "Are you sure you want to enable this plan?"
+      },
+      "off": {
+        "title": "Disable Plan",
+        "description": "Are you sure you want to disable this plan?"
+      }
+    },
+    "customer_status": {
+      "on": {
+        "title": "Enable Customer",
+        "description": "Are you sure you want to enable this customer?"
+      },
+      "off": {
+        "title": "Disable Customer",
+        "description": "Are you sure you want to disable this customer?"
+      }
+    }
+  },
+  "data-table": {
+    "columns": {
+      "id": "#",
+      "created_at": "Created At",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete",
+      "logs": "Logs",
+      "more": "More",
+      "status": "Status",
+      "plans": {
+        "name": "Name",
+        "price": "Price",
+        "pilling": "Pilling",
+        "description": "Description"
+      },
+      "customers": {
+        "customer_info": "معلومات العميل",
+        "phone": "Phone",
+        "name": "Name",
+        "last_login": "Last Login",
+        "ip": "IP",
+        "device": "Device"
+      },
+      "finance": {
+        "account_name": "Name",
+        "balance": "Balance",
+        "status": "Status",
+        "logs": "Logs",
+        "terms": "Terms",
+        "term_name": "Term Name",
+        "received_at": "Received At",
+        "amount": "Amount",
+        "note": "Note",
+        "transaction_ref": "Transaction Ref"
+      },
+      "coupon": {
+        "code": "Code",
+        "validity": "Validity Period",
+        "discount": "Discount",
+        "usage_count": "Usage Count",
+        "usage_limit": "Usage Limit"
+      }
+    }
+  },
+  "Overview": {
+    "title": "Overview",
+    "description": "Overview on the statistics and basic numbers for the site and users",
+    "total_customers": "Total Customers",
+    "total_customers_pay_as_you_go": "Pay As You Go",
+    "total_customers_monthly": "Monthly Plans",
+    "total_customers_yearly": "Yearly Plans",
+    "total_customers_active": "Active Customers",
+    "total_customers_suspended": "Suspended Customers",
+    "total_customers_expired": "Expired Subscriptions",
+    "total_customers_sessions": "Login Sessions",
+    "total_customers_activity": "Activity Logs",
+    "total_customers_trials": "Trial Periods",
+    "total_employees": "Employees",
+    "total_coupons": "Coupons",
+    "tickets": {
+      "open": "Open Tickets",
+      "pending": "In Progress",
+      "closed": "Closed Tickets"
+    },
+    "orders": "Orders - (14Days)",
+    "income_expenses": "Income/Outcome",
+    "plans": "Plans",
+    "pay_health": "Pay Health"
+  },
+  "finance-tabs": {
+    "transactions": "Transactions",
+    "terms": "Terms"
+  },
+  "page-header": {
+    "overview": {
+      "title": "Overview",
+      "description": "Overview on the statistics and basic numbers for the site and users"
+    },
+    "plans": {
+      "title": "Plans",
+      "description": "Plans on the statistics and basic numbers for the site and users"
+    },
+    "accounts-safes": {
+      "title": "Accounts & Safes",
+      "description": "Accounts & Safes on the statistics and basic numbers for the site and users"
+    },
+    "customers": {
+      "title": "Customers",
+      "description": "Customers on the statistics and basic numbers for the site and users"
+    },
+    "accounts": {
+      "title": "Accounts & Safes",
+      "description": "Manage your bank accounts and cash safes, track balances, and monitor financial status."
+    },
+    "income": {
+      "title": "Income",
+      "description": "Track all income transactions, manage income sources, and review received amounts."
+    },
+
+    "expenses": {
+      "title": "Expenses",
+      "description": "Monitor expense transactions, control spending, and analyze outgoing payments."
+    },
+    "terms": {
+      "title": "Terms",
+      "description": "Manage income and expense categories to organize and classify transactions."
+    },
+    "coupons": {
+      "title": "Coupons",
+      "description": "Manage discount coupons, control usage limits, and track coupon activity."
+    },
+    "integrations": {
+      "title": "Integrations",
+      "description": "Manage integrations with other services and applications."
+    },
+    "countries": {
+      "title": "Countries",
+      "description": "Manage countries and their settings."
+    }
+  }
+}

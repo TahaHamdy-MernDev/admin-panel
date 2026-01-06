@@ -1,0 +1,232 @@
+{
+  "Metadata": {
+    "title": "لوحة التحكم"
+  },
+  "Page": {
+    "title": "الصفحة غير موجودة"
+  },
+  "app-sidebar": {
+    "dashboard": "لوحة التحكم",
+
+    "plans": {
+      "title": "الباقات والاشتراكات",
+      "all_plans": "جميع الباقات",
+      "pay_as_you_go": "الدفع حسب الاستخدام",
+      "monthly": "الباقات الشهرية",
+      "yearly": "الباقات السنوية",
+      "subscribers": "المشتركين",
+      "trials": "الفترة التجريبية",
+      "renewals": "التجديدات",
+      "invoices": "الفواتير"
+    },
+
+    "customers": {
+      "title": "إدارة العملاء",
+      "all": "جميع العملاء",
+      "active": "العملاء النشطين",
+      "suspended": "العملاء الموقوفين",
+      "expired": "الاشتراكات المنتهية",
+      "sessions": "جلسات الدخول",
+      "activity": "سجل النشاط"
+    },
+
+    "finance": {
+      "title": "إدارة الماليات",
+      "accounts": "حسابات وخزائن بنكيه",
+      "income": "الوارد",
+      "expenses": "الصادر",
+      "terms": "البنود",
+      "withdrawals": "طلبات السحب"
+    },
+
+    "staff": {
+      "title": "إدارة الموظفين",
+      "all": "جميع الموظفين",
+      "roles": "الأدوار والصلاحيات",
+      "teams": "فرق العمل",
+      "logs": "سجلات الدخول"
+    },
+
+    "coupons": {
+      "title": "الكوبونات",
+      "all": "جميع الكوبونات",
+      "create": "إنشاء كوبون",
+      "active": "كوبونات نشطة",
+      "expired": "كوبونات منتهية",
+      "usage": "سجل الاستخدام"
+    },
+
+    "support": {
+      "title": "تكت العملاء",
+      "open": "تكت مفتوحة",
+      "pending": "قيد المعالجة",
+      "closed": "تكت مغلقة",
+      "chat": "المحادثات المباشرة"
+    },
+
+    "reports": {
+      "title": "التقارير",
+      "customers": "تقارير العملاء",
+      "revenue": "تقارير الإيرادات",
+      "expenses": "تقارير المصاريف",
+      "orders": "تقارير الطلبات",
+      "delivery": "نسب التسليم",
+      "products": "المنتجات الأكثر مبيعًا",
+      "shipping": "تقارير شركات الشحن",
+      "cities": "تقارير المدن",
+      "referrals": "تقارير الإحالة",
+      "sales": "تقارير المبيعات",
+      "communications": "تقارير التواصل",
+      "repeat_customers": "العملاء المكررين"
+    },
+
+    "settings": {
+      "title": "الإعدادات",
+      "countries": "الدول",
+      "system": "إعدادات النظام",
+      "payment": "إعدادات الدفع",
+      "notifications": "إعدادات الإشعارات",
+      "security": "إعدادات الأمان",
+      "integrations": "التكاملات",
+      "audit_log": "سجل الأحداث"
+    }
+  },
+  "data-table": {
+    "columns": {
+      "id": "#",
+      "created_at": "تاريخ الاضافة",
+      "actions": "اجراءات",
+      "more": "المزيد",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "status": "الحالة",
+      "logs": "سجلات",
+      "plans": {
+        "name": "اسم الباقه",
+        "price": "السعر",
+        "pilling": "الفوتره",
+        "description": "الوصف"
+      },
+      "customers": {
+        "customer_info": "معلومات العميل",
+        "phone": "الهاتف",
+        "name": "الاسم",
+        "last_login": "آخر تسجيل دخول",
+        "ip": "الآي بي ip",
+        "device": "الجهاز"
+      },
+      "finance": {
+        "account_name": "اسم الحساب",
+        "balance": "الرصيد",
+        "status": "الحالة",
+        "logs": "سجلات الحساب",
+        "terms": "البنود",
+        "term_name": "اسم البند",
+        "received_at": "تاريخ الاستلام",
+        "amount": "المبلغ",
+        "note": "الملاحظه",
+        "transaction_ref": "رقم المعامله"
+      },
+      "coupon": {
+        "code": "الكود",
+        "validity": "فترة الصلاحية",
+        "discount": "الخصم",
+        "usage_count": "عدد الاستخدامات",
+        "usage_limit": "حد الاستخدامات"
+      }
+    }
+  },
+  "alert-dialog": {
+    "confirm": "تأكيد",
+    "cancel": "إلغاء",
+    "plans": {
+      "on": {
+        "title": "تمكين الباقه",
+        "description": "هل انت متأكد من تفعيل هذه الباقه؟"
+      },
+      "off": {
+        "title": " تعطيل الباقه",
+        "description": "هل انت متأكد من تعطيل هذه الباقه؟"
+      }
+    },
+    "customer_status": {
+      "on": {
+        "title": "تمكين الحساب",
+        "description": "هل انت متأكد من تفعيل هذا الحساب؟"
+      },
+      "off": {
+        "title": "تعطيل الحساب",
+        "description": "هل انت متأكد من تعطيل هذا الحساب؟"
+      }
+    }
+  },
+  "Overview": {
+    "total_customers": "المستخدمين",
+    "total_customers_pay_as_you_go": "المستخدمين حسب الاستخدام",
+    "total_customers_monthly": "عملاء الباقات الشهرية",
+    "total_customers_yearly": "عملاء الباقات السنوية",
+    "total_customers_active": "عملاء نشطين",
+    "total_customers_suspended": "حسابات معلقة",
+    "total_customers_expired": "حسابات منتهية",
+    "total_customers_sessions": "جلسات الدخول",
+    "total_customers_activity": "سجل النشاط",
+    "total_customers_trials": "حسابات التجريبية",
+    "total_employees": "الموظفين",
+    "total_coupons": "الكوبونات",
+    "tickets": {
+      "open": "تكت مفتوحة",
+      "pending": "قيد المعالجة",
+      "closed": "تكت مغلقة"
+    },
+    "orders": "الطلبات - 14يوم",
+    "income_expenses": "الصادر/الوارد",
+    "plans": "الباقات",
+    "pay_health": "صحة الدفع"
+  },
+  "finance-tabs": {
+    "transactions": "المعاملات",
+    "terms": "البنود"
+  },
+  "page-header": {
+    "overview": {
+      "title": "نظرة عامة",
+      "description": "نظرة عامة على الأحصائيات والأرقام الأساسية للموقع والمستخدمين"
+    },
+    "plans": {
+      "title": "إدارة الباقات",
+      "description": "إدارة وتنظيم الباقات والأسعار المتاحة للمستخدمين"
+    },
+    "customers": {
+      "title": "إدارة العملاء",
+      "description": "إدارة وتنظيم العملاء"
+    },
+    "accounts": {
+      "title": "الحسابات والخزائن",
+      "description": "إدارة الحسابات البنكية والخزائن النقدية، وتتبع الأرصدة، ومراقبة الحالة المالية."
+    },
+    "income": {
+      "title": "الإيرادات",
+      "description": "تتبع معاملات الإيرادات، وإدارة مصادر الدخل، ومراجعة المبالغ المستلمة."
+    },
+    "expenses": {
+      "title": "المصروفات",
+      "description": "مراقبة معاملات المصروفات، والتحكم في الإنفاق، وتحليل المدفوعات الخارجة."
+    },
+    "terms": {
+      "title": "البنود",
+      "description": "إدارة بنود الإيرادات والمصروفات لتنظيم معاملات الأرباح والمصروفات."
+    },
+    "coupons": {
+      "title": "الكوبونات",
+      "description": "إدارة كوبونات الخصم، التحكم في عدد الاستخدامات، ومتابعة نشاط الكوبونات."
+    },
+    "integrations": {
+      "title": "التكاملات",
+      "description": "إدارة التكاملات مع خدمات أخرى وتطبيقات أخرى."
+    },
+    "countries": {
+      "title": "الدول",
+      "description": "إدارة الدول والإعدادات."
+    }
+  }
+}
