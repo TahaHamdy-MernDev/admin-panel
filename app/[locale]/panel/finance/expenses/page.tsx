@@ -1,14 +1,11 @@
-import TransactionsDataTable from "@/components/finance/transations/data-tabel";
+import TransactionsDataTable from "@/components/finance/transactions/data-table";
 import PageHeader from "@/components/page-header";
-import { Button } from "@/components/ui/button";
+import AddExpenseDialog from "./form";
 
 export default function ExpensesPage() {
   return (
     <div className="page">
-      <PageHeader
-        t_key="expenses"
-        right={<Button>Add Expense</Button>}
-      />
+      <PageHeader t_key="expenses" right={<AddExpenseDialog />} />
       <TransactionsDataTable type="expenses" />
     </div>
   );

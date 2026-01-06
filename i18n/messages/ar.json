@@ -5,6 +5,11 @@
   "Page": {
     "title": "الصفحة غير موجودة"
   },
+  "common": {
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "save": "حفظ"
+  },
   "app-sidebar": {
     "dashboard": "لوحة التحكم",
 
@@ -227,6 +232,80 @@
     "countries": {
       "title": "الدول",
       "description": "إدارة الدول والإعدادات."
+    }
+  },
+  "finance": {
+    "accounts": {
+      "add": "إضافة حساب",
+      "dialog": {
+        "title": "إضافة حساب",
+        "description": "أدخل تفاصيل الحساب الجديد.",
+        "form": {
+          "name": "اسم الحساب/الخزينة",
+          "initial_balance": "الرصيد الافتتاحي"
+        }
+      }
+    },
+    "income": {
+      "add": "إضافة إيراد",
+      "dialog": {
+        "title": "إضافة إيراد",
+        "description": "أدخل تفاصيل الإيراد الجديد."
+      },
+      "form": {
+        "amount": "المبلغ",
+        "bank": "البنك/ الخزينة",
+        "term": "البند",
+        "receive_date": "تاريخ الاستلام",
+        "notes": "الملاحظات"
+      }
+    },
+    "expenses": {
+      "add": "إضافة مصروف",
+      "dialog": {
+        "title": "إضافة مصروف",
+        "description": "أدخل تفاصيل المصروف الجديد."
+      },
+      "form": {
+        "amount": "المبلغ",
+        "bank": "البنك/ الخزينة",
+        "term": "البند",
+        "employee": "الموظف",
+        "expense_date": "تاريخ المصروف",
+        "notes": "الملاحظات"
+      }
+    },
+    "terms": {
+      "add": "إضافة بند",
+      "dialog": {
+        "title": "إضافة بند",
+        "description": "أدخل تفاصيل البند الجديد."
+      },
+      "form": {
+        "term_name": "اسم البند",
+        "type": "النوع",
+        "notes": "الملاحظات",
+        "labels": {
+          "income": "إيراد",
+          "expense": "مصروف"
+        }
+      }
+    }
+  },
+  "customers": {
+    "change_password": {
+      "title": "تغيير كلمة المرور",
+      "description": "أدخل كلمة المرور الجديدة لهذا العميل.",
+      "form": {
+        "password": "كلمة المرور",
+        "confirm_password": "تأكيد كلمة المرور"
+      }
+    },
+    "delete_customer_account": {
+      "title": "حذف حساب العميل",
+      "description": "هل أنت متأكد من حذف حساب {name}? لا يمكن التراجع عن هذا الإجراء.",
+      "confirm": "حذف الحساب",
+      "success": "تم حذف حساب العميل بنجاح"
     }
   }
 }

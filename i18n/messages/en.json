@@ -5,6 +5,11 @@
   "Page": {
     "title": "Page not found"
   },
+  "common": {
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "save": "Save"
+  },
   "app-sidebar": {
     "dashboard": "Dashboard",
 
@@ -234,6 +239,80 @@
     "countries": {
       "title": "Countries",
       "description": "Manage countries and their settings."
+    }
+  },
+  "finance": {
+    "accounts": {
+      "add": "Add Account",
+      "dialog": {
+        "title": "Add Account",
+        "description": "Enter the new account details.",
+        "form": {
+          "name": "Account Name/Cash Box",
+          "initial_balance": "Initial Balance"
+        }
+      }
+    },
+    "income": {
+      "add": "Add Income",
+      "dialog": {
+        "title": "Add Income",
+        "description": "Enter the new income details."
+      },
+      "form": {
+        "amount": "Amount",
+        "bank": "Bank/Cash Box",
+        "term": "Term",
+        "receive_date": "Receive Date",
+        "notes": "Notes"
+      }
+    },
+    "expenses": {
+      "add": "Add Expense",
+      "dialog": {
+        "title": "Add Expense",
+        "description": "Enter the new expense details."
+      },
+      "form": {
+        "amount": "Amount",
+        "bank": "Bank/Cash Box",
+        "term": "Term",
+        "employee": "Employee",
+        "expense_date": "Expense Date",
+        "notes": "Notes"
+      }
+    },
+    "terms": {
+      "add": "Add Term",
+      "dialog": {
+        "title": "Add Term",
+        "description": "Enter the new term details."
+      },
+      "form": {
+        "term_name": "Term Name",
+        "type": "Type",
+        "notes": "Notes",
+        "labels": {
+          "income": "Income",
+          "expense": "Expense"
+        }
+      }
+    }
+  },
+  "customers": {
+    "change_password": {
+      "title": "Change Password",
+      "description": "Enter the new password for this customer.",
+      "form": {
+        "password": "Password",
+        "confirm_password": "Confirm Password"
+      }
+    },
+    "delete_customer_account": {
+      "title": "Delete Customer Account",
+      "description": "Are you sure you want to delete {name}? This action cannot be undone.",
+      "confirm": "Delete Account",
+      "success": "Customer account deleted successfully"
     }
   }
 }

@@ -1,10 +1,12 @@
+import ChangePasswordDialog from "@/components/customers/change-password-dialog";
+import ConfirmDeleteCustomerDialog from "@/components/customers/confirm-delete-customer-dialog";
 import {
   RowCheckbox,
   SelectAllCheckbox,
 } from "@/components/data-table/row-cells";
 import { ConfirmableSwitch } from "@/components/dialogs/confirmable-switch";
 import Text from "@/components/typography";
-import { TableButton } from "@/components/ui/tabel-button";
+import { TableButton } from "@/components/ui/table-button";
 import { Link } from "@/i18n/navigation";
 import { ColumnDef } from "@tanstack/react-table";
 import { Activity, KeyRound, Trash2, User } from "lucide-react";
@@ -120,15 +122,29 @@ export function useCustomersColumns(): ColumnDef<CustomerRow>[] {
       cell: ({ row }) => {
         return (
           <div className="flex flex-row gap-1 space-x-1">
-            <TableButton variant={"table_icon_edit"}>
-              <KeyRound />
-            </TableButton>
+            <ChangePasswordDialog
+              trigger={
+                <TableButton variant={"table_icon_edit"}>
+                  <KeyRound />
+                </TableButton>
+              }
+              customer_id={row.original.customer_id}
+            />
             <TableButton variant={"table_icon_login_as"}>
+              {/* <Link
+                href={`/panel/customers/activity/${row.original.customer_id}`}
+              > */}
               <User />
+              {/* </Link> */}
             </TableButton>
-            <TableButton variant={"table_icon_danger"}>
-              <Trash2 />
-            </TableButton>
+            <ConfirmDeleteCustomerDialog
+              trigger={
+                <TableButton variant={"table_icon_danger"}>
+                  <Trash2 />
+                </TableButton>
+              }
+              customerName={row.original.name}
+            />
           </div>
         );
       },

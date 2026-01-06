@@ -1,11 +1,11 @@
 import PageHeader from "@/components/page-header";
-import { Button } from "@/components/ui/button";
 import AccountsDataTable from "./data-table";
+import { AddAccountDialog } from "./form";
 
 export default function AccountsPage() {
   return (
     <div className="page">
-      <PageHeader t_key="accounts" right={<Button>Add Plan</Button>} />
+      <PageHeader t_key="accounts" right={<AddAccountDialog />} />
       <AccountsDataTable />
     </div>
   );

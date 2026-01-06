@@ -6,7 +6,7 @@ import {
   SelectAllCheckbox,
 } from "@/components/data-table/row-cells";
 import { ConfirmableSwitch } from "@/components/dialogs/confirmable-switch";
-import { TableButton } from "@/components/ui/tabel-button";
+import { TableButton } from "@/components/ui/table-button";
 import { Link } from "@/i18n/navigation";
 import { Activity, Pen, Trash2 } from "lucide-react";
 
