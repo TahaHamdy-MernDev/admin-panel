@@ -14,6 +14,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 type RHFDialogFormProps<T extends FieldValues> = {
   form: UseFormReturn<T>;
@@ -22,6 +23,8 @@ type RHFDialogFormProps<T extends FieldValues> = {
   title: string;
   description?: string;
   children: React.ReactNode;
+  loading?: boolean;
+  width?: string;
 };
 
 export function RHFDialogForm<T extends FieldValues>({
@@ -31,28 +34,29 @@ export function RHFDialogForm<T extends FieldValues>({
   description,
   onSubmit,
   children,
+  loading,
+  width,
 }: RHFDialogFormProps<T>) {
+  const [open, setOpen] = React.useState(false);
   const t = useTranslations();
   function handleCancel() {
     form.reset();
+    setOpen(false);
   }
 
   async function handleSubmit(data: T) {
     await onSubmit(data);
     form.reset();
+    setOpen(false);
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        {typeof trigger === "string" ? (
-          <Button>{trigger}</Button>
-        ) : (
-          trigger
-        )}
+        {typeof trigger === "string" ? <Button>{trigger}</Button> : trigger}
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className={cn("sm:max-w-[425px]", width)}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           {description && <DialogDescription>{description}</DialogDescription>}
@@ -66,10 +70,11 @@ export function RHFDialogForm<T extends FieldValues>({
               type="button"
               onClick={handleCancel}
               className="cursor-pointer"
+              disabled={loading}
             >
               {t("common.cancel")}
             </DialogClose>
-            <Button type="submit" variant={"default"}>
+            <Button type="submit" variant={"default"} disabled={loading}>
               {t("common.save")}
             </Button>
           </DialogFooter>

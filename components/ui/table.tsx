@@ -31,7 +31,6 @@ function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
     <thead
       data-slot="table-header"
       className={cn(
-        // header background + border
         "bg-slate-50/80 dark:bg-slate-900/40",
         "[&_tr]:border-b [&_tr]:border-slate-200 dark:[&_tr]:border-slate-800",
         className
@@ -88,7 +87,7 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
     <th
       data-slot="table-head"
       className={cn(
-        "py-1 px-3 text-left align-middle font-semibold whitespace-nowrap",
+        "p-2 text-left align-middle font-semibold whitespace-nowrap",
         "text-slate-600 dark:text-slate-300",
         "[&:has([role=checkbox])]:pr-0 *:[[role=checkbox]]:translate-y-[2px]",
         className
@@ -103,7 +102,7 @@ function TableCell({ className, ...props }: React.ComponentProps<"td">) {
     <td
       data-slot="table-cell"
       className={cn(
-        "px-3 py-3 align-middle whitespace-nowrap",
+        "p-2 align-middle whitespace-nowrap",
         "text-slate-800 dark:text-slate-200",
         "[&:has([role=checkbox])]:pr-0 *:[[role=checkbox]]:translate-y-[2px]",
         className

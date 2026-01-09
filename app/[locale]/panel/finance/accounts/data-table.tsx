@@ -1,22 +1,18 @@
 "use client";
 import DataTable from "@/components/data-table";
 import { useAccountsColumns } from "./columns";
+import { useAccountsQuery } from "@/hooks/api/finance/use-accounts";
+import { useSearchParams } from "next/navigation";
 
 export default function AccountsDataTable() {
+  const searchParams = useSearchParams();
+  const columns = useAccountsColumns();
+  const page = Number(searchParams.get("page")) || 1;
+  const limit = Number(searchParams.get("limit")) || 25;
+  const state = useAccountsQuery({ page, limit });
   return (
     <section className="data-table">
-      <DataTable
-        columns={useAccountsColumns()}
-        data={{
-          items: [],
-          meta: {
-            current_page: 1,
-            total_pages: 1,
-            total_count: 0,
-            limit: 25,
-          },
-        }}
-      />
+      <DataTable query_state={state} columns={columns} data={state.data} />
     </section>
   );
 }

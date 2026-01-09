@@ -4,6 +4,7 @@ import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { InputGroup } from "@/components/ui/input-group";
+import { cn } from "@/lib/utils";
 
 type RHFInputFieldProps<T extends FieldValues> = {
   control: Control<T>;
@@ -12,6 +13,7 @@ type RHFInputFieldProps<T extends FieldValues> = {
   placeholder?: string;
   disabled?: boolean;
   type?: string;
+  className?: string;
 };
 
 export function RHFInputField<T extends FieldValues>({
@@ -20,27 +22,37 @@ export function RHFInputField<T extends FieldValues>({
   label,
   placeholder,
   disabled,
+  className,
   type = "text",
 }: RHFInputFieldProps<T>) {
   return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field, fieldState }) => (
-        <Field data-invalid={fieldState.invalid}>
-          <FieldLabel>{label}</FieldLabel>
-          <InputGroup>
-            <Input
-              {...field}
-              placeholder={placeholder}
-              disabled={disabled}
-              aria-invalid={fieldState.invalid}
-              type={type}
-            />
-          </InputGroup>
-          {fieldState.error && <FieldError errors={[fieldState.error]} />}
-        </Field>
-      )}
-    />
+    <>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid} className={cn(className)}>
+            <FieldLabel>{label}</FieldLabel>
+            <InputGroup>
+              <Input
+                {...field}
+                value={
+                  type === "number"
+                    ? Number(field.value)
+                      ? field.value
+                      : ""
+                    : field.value
+                }
+                placeholder={placeholder}
+                disabled={disabled}
+                aria-invalid={fieldState.invalid}
+                type={type}
+              />
+            </InputGroup>
+            {fieldState.error && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+    </>
   );
 }

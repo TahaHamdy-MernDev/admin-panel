@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "gap-2 bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900",
+          "gap-2 bg-primary text-white dark:text-slate-900",
         // default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
@@ -19,7 +19,7 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+          "hover:bg-accent hover:text-muted",
         link: "text-primary underline-offset-4 hover:underline",
         icon: "group flex items-center gap-2 rounded-lg border px-4 py-2 bg-white dark:bg-[#0f172a] border-[#e5e7eb] dark:border-[#334155] hover:border-[#f7b23b] hover:bg-[rgba(247,178,59,0.12)] dark:hover:bg-[rgba(29,232,182,0.12)] transition-all",
         button_icon:

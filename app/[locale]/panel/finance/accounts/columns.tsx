@@ -1,17 +1,8 @@
-import {
-  RowCheckbox,
-  SelectAllCheckbox,
-} from "@/components/data-table/row-cells";
+
+import { AccountRow } from "@/hooks/api/finance/use-accounts";
 import { ColumnDef } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
 
-export type AccountRow = {
-  account_id: number;
-  name: string;
-  balance: number;
-  created_at: string;
-  status: boolean;
-};
 export function useAccountsColumns(): ColumnDef<AccountRow>[] {
   const t = useTranslations("data-table.columns");
   return [

@@ -54,12 +54,8 @@ export function useCustomersColumns(): ColumnDef<CustomerRow>[] {
       cell: ({ row }) => {
         return (
           <div className="flex flex-col gap-0">
-            <Text as="p" className="mb-0">
-              {row.original.name}
-            </Text>
-            <Text as="p" className="mb-0">
-              {row.original.phone}
-            </Text>
+            {row.original.name} <br />
+            {row.original.phone}
           </div>
         );
       },
@@ -76,7 +72,7 @@ export function useCustomersColumns(): ColumnDef<CustomerRow>[] {
       accessorKey: "login_history",
       accessorFn: (row) => row.login_history[0],
       header: () => (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-0">
           {t("customers.ip")} <br />
           {t("customers.device")}
         </div>

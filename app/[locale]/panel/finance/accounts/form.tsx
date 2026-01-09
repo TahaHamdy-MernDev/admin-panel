@@ -10,32 +10,35 @@ import { FieldGroup } from "@/components/ui/field";
 
 import { useTranslations } from "next-intl";
 import { RHFInputField } from "@/components/rhf-form/fields/rhf-input-field";
+import { useCreateAccountMutation } from "@/hooks/api/finance/use-accounts";
 
 const formSchema = z.object({
   account_name: z.string().min(5).max(32),
-  initial_balance: z.string().min(20).max(100),
+  balance: z.string().max(15),
 });
 
-type FormValues = z.infer<typeof formSchema>;
+export type AccountFormValues = z.infer<typeof formSchema>;
 
-export function AddAccountDialog() {
+export function AccountDialog() {
   const t = useTranslations("finance.accounts");
-  const form = useForm<FormValues>({
+  const mutation = useCreateAccountMutation();
+  const form = useForm<AccountFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       account_name: "",
-      initial_balance: "",
+      balance: "",
     },
   });
 
-  async function onSubmit(data: FormValues) {
-    toast("Account created", {
-      description: JSON.stringify(data, null, 2),
-    });
+  async function onSubmit(data: AccountFormValues) {
+    await mutation.mutateAsync(data);
+    // toast("Account created", {
+    //   description: JSON.stringify(data, null, 2),
+    // });
   }
 
   return (
-    <RHFDialogForm<FormValues>
+    <RHFDialogForm<AccountFormValues>
       form={form}
       trigger={t("add")}
       title={t("dialog.title")}
@@ -50,7 +53,7 @@ export function AddAccountDialog() {
         />
         <RHFInputField
           control={form.control}
-          name="initial_balance"
+          name="balance"
           label={t("dialog.form.initial_balance")}
         />
       </FieldGroup>

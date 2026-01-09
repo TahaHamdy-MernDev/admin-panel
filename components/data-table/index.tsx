@@ -1,64 +1,81 @@
 "use client";
 import {
   ColumnDef,
+  ColumnFiltersState,
   getCoreRowModel,
   getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import { PaginationBar } from "./core/paginations";
+import { PaginationBar } from "./core/pagination";
 import TableActions from "./core/table-actions";
 import MainTable from "./core/table";
-import { useDebounce } from "@/hooks/use-debounce";
+import { PaginationMeta } from "@/types/api-types";
+import ErrorState from "../shared/error";
 
-export type PaginationMeta = {
-  current_page: number;
-  total_pages: number;
-  total_count: number;
-  limit: number;
-};
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: {
-    items: TData[];
-    meta: PaginationMeta;
-  };
+  data?:
+    | {
+        items: TData[];
+        meta: PaginationMeta;
+      }
+    | undefined;
   right?: React.ReactNode;
+
+  query_state?: {
+    isLoading: boolean;
+    isError: boolean;
+    error: unknown;
+    isFetching: boolean;
+    refetch: () => void;
+  };
 }
+
 export default function DataTable<TData, TValue>({
   columns,
   data,
   right,
+  query_state,
 }: DataTableProps<TData, TValue>) {
   const [globalFilter, setGlobalFilter] = useState("");
-  const debouncedGlobalFilter = useDebounce(globalFilter, 50);
-  // eslint-disable-next-line react-hooks/incompatible-library
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const table = useReactTable({
-    data: data.items,
+    data: data?.items && data.items.length > 0 ? data.items : [],
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-
+    onColumnFiltersChange: setColumnFilters,
     manualPagination: true,
     manualFiltering: false,
-    pageCount: data.meta.total_pages,
+    pageCount: data?.meta.total_pages || 0,
     enableGlobalFilter: true,
     state: {
-      globalFilter: debouncedGlobalFilter,
+      globalFilter,
+      columnFilters,
     },
     onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: "includesString",
   });
+
+  if (query_state?.isError) {
+    return <ErrorState onRetry={query_state.refetch} />;
+  }
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 relative">
       <TableActions
         table={table}
         right={right}
-        total_count={data.meta.total_count}
-        current_limit={data.meta.limit}
+        total_count={data?.meta.total_count || 0}
+        current_limit={data?.meta.limit || 25}
+        is_loading={query_state?.isLoading}
       />
-      <MainTable table={table} columns={columns} />
-      <PaginationBar meta={data.meta} />
+      <MainTable
+        table={table}
+        columns={columns}
+        is_loading={query_state?.isLoading}
+      />
+      <PaginationBar meta={data?.meta} />
     </div>
   );
 }

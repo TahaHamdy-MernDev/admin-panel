@@ -6,9 +6,17 @@
     "title": "الصفحة غير موجودة"
   },
   "common": {
+    "create": "إنشاء",
     "cancel": "إلغاء",
     "delete": "حذف",
     "save": "حفظ"
+  },
+  "auth": {
+    "login": {
+      "password": "كلمة المرور",
+      "phoneNumber": "رقم الهاتف",
+      "submit": "تسجيل الدخول"
+    }
   },
   "app-sidebar": {
     "dashboard": "لوحة التحكم",
@@ -19,7 +27,7 @@
       "pay_as_you_go": "الدفع حسب الاستخدام",
       "monthly": "الباقات الشهرية",
       "yearly": "الباقات السنوية",
-      "subscribers": "المشتركين",
+      "subscribers": "المشتركون",
       "trials": "الفترة التجريبية",
       "renewals": "التجديدات",
       "invoices": "الفواتير"
@@ -28,18 +36,18 @@
     "customers": {
       "title": "إدارة العملاء",
       "all": "جميع العملاء",
-      "active": "العملاء النشطين",
-      "suspended": "العملاء الموقوفين",
+      "active": "العملاء النشطون",
+      "suspended": "العملاء الموقوفون",
       "expired": "الاشتراكات المنتهية",
-      "sessions": "جلسات الدخول",
+      "sessions": "جلسات تسجيل الدخول",
       "activity": "سجل النشاط"
     },
 
     "finance": {
       "title": "إدارة الماليات",
-      "accounts": "حسابات وخزائن بنكيه",
-      "income": "الوارد",
-      "expenses": "الصادر",
+      "accounts": "الحسابات والخزائن البنكية",
+      "income": "الإيرادات",
+      "expenses": "المصروفات",
       "terms": "البنود",
       "withdrawals": "طلبات السحب"
     },
@@ -62,10 +70,10 @@
     },
 
     "support": {
-      "title": "تكت العملاء",
-      "open": "تكت مفتوحة",
+      "title": "تذاكر العملاء",
+      "open": "تذاكر مفتوحة",
       "pending": "قيد المعالجة",
-      "closed": "تكت مغلقة",
+      "closed": "تذاكر مغلقة",
       "chat": "المحادثات المباشرة"
     },
 
@@ -73,7 +81,7 @@
       "title": "التقارير",
       "customers": "تقارير العملاء",
       "revenue": "تقارير الإيرادات",
-      "expenses": "تقارير المصاريف",
+      "expenses": "تقارير المصروفات",
       "orders": "تقارير الطلبات",
       "delivery": "نسب التسليم",
       "products": "المنتجات الأكثر مبيعًا",
@@ -82,7 +90,7 @@
       "referrals": "تقارير الإحالة",
       "sales": "تقارير المبيعات",
       "communications": "تقارير التواصل",
-      "repeat_customers": "العملاء المكررين"
+      "repeat_customers": "العملاء المتكررون"
     },
 
     "settings": {
@@ -96,30 +104,41 @@
       "audit_log": "سجل الأحداث"
     }
   },
+
   "data-table": {
     "columns": {
       "id": "#",
-      "created_at": "تاريخ الاضافة",
-      "actions": "اجراءات",
+      "created_at": "تاريخ الإضافة",
+      "actions": "الإجراءات",
       "more": "المزيد",
       "edit": "تعديل",
       "delete": "حذف",
       "status": "الحالة",
-      "logs": "سجلات",
+      "logs": "السجلات",
+      "code": "الكود",
       "plans": {
-        "name": "اسم الباقه",
+        "name": "اسم الباقة",
         "price": "السعر",
-        "pilling": "الفوتره",
+        "pilling": "الفوترة",
         "description": "الوصف"
       },
+
       "customers": {
         "customer_info": "معلومات العميل",
-        "phone": "الهاتف",
+        "phone": "رقم الهاتف",
         "name": "الاسم",
         "last_login": "آخر تسجيل دخول",
-        "ip": "الآي بي ip",
+        "ip": "عنوان IP",
         "device": "الجهاز"
       },
+      "staff": {
+        "info": "الموظف",
+        "phone": "رقم الهاتف",
+        "email": "البريد الإلكتروني",
+        "role": "الدور",
+        "status": "الحالة"
+      },
+
       "finance": {
         "account_name": "اسم الحساب",
         "balance": "الرصيد",
@@ -129,162 +148,202 @@
         "term_name": "اسم البند",
         "received_at": "تاريخ الاستلام",
         "amount": "المبلغ",
-        "note": "الملاحظه",
-        "transaction_ref": "رقم المعامله"
+        "note": "الملاحظات",
+        "transaction_ref": "رقم المعاملة"
       },
+
       "coupon": {
-        "code": "الكود",
+        "code": "كود الكوبون",
         "validity": "فترة الصلاحية",
-        "discount": "الخصم",
-        "usage_count": "عدد الاستخدامات",
-        "usage_limit": "حد الاستخدامات"
+        "discount": "قيمة الخصم",
+        "usage_count": "عدد مرات الاستخدام",
+        "usage_limit": "الحد الأقصى للاستخدام"
       }
     }
   },
+
   "alert-dialog": {
     "confirm": "تأكيد",
     "cancel": "إلغاء",
+
     "plans": {
       "on": {
-        "title": "تمكين الباقه",
-        "description": "هل انت متأكد من تفعيل هذه الباقه؟"
+        "title": "تمكين الباقة",
+        "description": "هل أنت متأكد من تفعيل هذه الباقة؟ ستكون متاحة للاشتراك فورًا."
       },
       "off": {
-        "title": " تعطيل الباقه",
-        "description": "هل انت متأكد من تعطيل هذه الباقه؟"
+        "title": "تعطيل الباقة",
+        "description": "هل أنت متأكد من تعطيل هذه الباقة؟ لن يتمكن العملاء من الاشتراك بها."
       }
     },
+    "staff": {
+      "on": {
+        "title": "تفعيل الموظف",
+        "description": "هل أنت متأكد من تفعيل هذا الموظف؟"
+      },
+      "off": {
+        "title": "تعطيل الموظف",
+        "description": "هل أنت متأكد من تعطيل هذا الموظف؟"
+      }
+    },
+
     "customer_status": {
       "on": {
         "title": "تمكين الحساب",
-        "description": "هل انت متأكد من تفعيل هذا الحساب؟"
+        "description": "هل أنت متأكد من تفعيل هذا الحساب؟"
       },
       "off": {
         "title": "تعطيل الحساب",
-        "description": "هل انت متأكد من تعطيل هذا الحساب؟"
+        "description": "هل أنت متأكد من تعطيل هذا الحساب؟"
       }
     }
   },
+
   "Overview": {
-    "total_customers": "المستخدمين",
-    "total_customers_pay_as_you_go": "المستخدمين حسب الاستخدام",
+    "total_customers": "إجمالي المستخدمين",
+    "total_customers_pay_as_you_go": "مستخدمو الدفع حسب الاستخدام",
     "total_customers_monthly": "عملاء الباقات الشهرية",
     "total_customers_yearly": "عملاء الباقات السنوية",
-    "total_customers_active": "عملاء نشطين",
-    "total_customers_suspended": "حسابات معلقة",
+    "total_customers_active": "عملاء نشطون",
+    "total_customers_suspended": "حسابات معلّقة",
     "total_customers_expired": "حسابات منتهية",
-    "total_customers_sessions": "جلسات الدخول",
+    "total_customers_sessions": "جلسات تسجيل الدخول",
     "total_customers_activity": "سجل النشاط",
-    "total_customers_trials": "حسابات التجريبية",
-    "total_employees": "الموظفين",
+    "total_customers_trials": "حسابات تجريبية",
+    "total_employees": "الموظفون",
     "total_coupons": "الكوبونات",
+
     "tickets": {
-      "open": "تكت مفتوحة",
+      "open": "تذاكر مفتوحة",
       "pending": "قيد المعالجة",
-      "closed": "تكت مغلقة"
+      "closed": "تذاكر مغلقة"
     },
-    "orders": "الطلبات - 14يوم",
-    "income_expenses": "الصادر/الوارد",
+
+    "orders": "الطلبات (آخر 14 يوم)",
+    "income_expenses": "الإيرادات / المصروفات",
     "plans": "الباقات",
-    "pay_health": "صحة الدفع"
+    "pay_health": "حالة الدفع"
   },
   "finance-tabs": {
-    "transactions": "المعاملات",
-    "terms": "البنود"
+    "transactions": "المعاملات المالية",
+    "terms": "البنود المحاسبية"
   },
+
   "page-header": {
     "overview": {
       "title": "نظرة عامة",
-      "description": "نظرة عامة على الأحصائيات والأرقام الأساسية للموقع والمستخدمين"
+      "description": "متابعة شاملة لأهم الإحصائيات والأرقام الأساسية الخاصة بالمنصة"
     },
+
     "plans": {
       "title": "إدارة الباقات",
-      "description": "إدارة وتنظيم الباقات والأسعار المتاحة للمستخدمين"
+      "description": "إدارة وتنظيم باقات الاشتراك والأسعار المتاحة للمستخدمين",
+      "create": {
+        "title": "إنشاء باقة",
+        "description": "إضافة باقة اشتراك جديدة وتحديد خصائصها"
+      }
     },
+
     "customers": {
       "title": "إدارة العملاء",
-      "description": "إدارة وتنظيم العملاء"
+      "description": "إدارة حسابات العملاء ومتابعة نشاطهم وحالات الاشتراك"
     },
+
     "accounts": {
       "title": "الحسابات والخزائن",
-      "description": "إدارة الحسابات البنكية والخزائن النقدية، وتتبع الأرصدة، ومراقبة الحالة المالية."
+      "description": "إدارة الحسابات البنكية والخزائن النقدية وتتبع الأرصدة والحركة المالية"
     },
+
     "income": {
       "title": "الإيرادات",
-      "description": "تتبع معاملات الإيرادات، وإدارة مصادر الدخل، ومراجعة المبالغ المستلمة."
+      "description": "تتبع جميع الإيرادات ومصادر الدخل والمعاملات الواردة"
     },
+
     "expenses": {
       "title": "المصروفات",
-      "description": "مراقبة معاملات المصروفات، والتحكم في الإنفاق، وتحليل المدفوعات الخارجة."
+      "description": "مراقبة المصروفات والتحكم في الإنفاق وتحليل المدفوعات الخارجة"
     },
+
     "terms": {
       "title": "البنود",
-      "description": "إدارة بنود الإيرادات والمصروفات لتنظيم معاملات الأرباح والمصروفات."
+      "description": "تنظيم وتصنيف بنود الإيرادات والمصروفات لتسهيل المحاسبة"
     },
+
     "coupons": {
       "title": "الكوبونات",
-      "description": "إدارة كوبونات الخصم، التحكم في عدد الاستخدامات، ومتابعة نشاط الكوبونات."
+      "description": "إدارة كوبونات الخصم والتحكم في عدد مرات الاستخدام"
     },
+
     "integrations": {
       "title": "التكاملات",
-      "description": "إدارة التكاملات مع خدمات أخرى وتطبيقات أخرى."
+      "description": "إدارة التكاملات مع الأنظمة والخدمات الخارجية"
     },
+
     "countries": {
       "title": "الدول",
-      "description": "إدارة الدول والإعدادات."
+      "description": "إدارة الدول والإعدادات المرتبطة بكل دولة"
+    },
+
+    "staff": {
+      "title": "إدارة الموظفين",
+      "description": "إدارة الموظفين وتحديد الأدوار والصلاحيات"
     }
   },
+
   "finance": {
     "accounts": {
       "add": "إضافة حساب",
       "dialog": {
-        "title": "إضافة حساب",
-        "description": "أدخل تفاصيل الحساب الجديد.",
+        "title": "إضافة حساب جديد",
+        "description": "أدخل بيانات الحساب البنكي أو الخزينة النقدية",
         "form": {
-          "name": "اسم الحساب/الخزينة",
+          "name": "اسم الحساب / الخزينة",
           "initial_balance": "الرصيد الافتتاحي"
         }
       }
     },
+
     "income": {
       "add": "إضافة إيراد",
       "dialog": {
-        "title": "إضافة إيراد",
-        "description": "أدخل تفاصيل الإيراد الجديد."
+        "title": "إضافة إيراد جديد",
+        "description": "تسجيل عملية إيراد جديدة"
       },
       "form": {
         "amount": "المبلغ",
-        "bank": "البنك/ الخزينة",
+        "bank": "الحساب / الخزينة",
         "term": "البند",
         "receive_date": "تاريخ الاستلام",
-        "notes": "الملاحظات"
+        "notes": "ملاحظات"
       }
     },
+
     "expenses": {
       "add": "إضافة مصروف",
       "dialog": {
-        "title": "إضافة مصروف",
-        "description": "أدخل تفاصيل المصروف الجديد."
+        "title": "إضافة مصروف جديد",
+        "description": "تسجيل عملية مصروف جديدة"
       },
       "form": {
         "amount": "المبلغ",
-        "bank": "البنك/ الخزينة",
+        "bank": "الحساب / الخزينة",
         "term": "البند",
         "employee": "الموظف",
-        "expense_date": "تاريخ المصروف",
-        "notes": "الملاحظات"
+        "expense_date": "تاريخ الصرف",
+        "notes": "ملاحظات"
       }
     },
+
     "terms": {
       "add": "إضافة بند",
       "dialog": {
-        "title": "إضافة بند",
-        "description": "أدخل تفاصيل البند الجديد."
+        "title": "إضافة بند جديد",
+        "description": "إنشاء بند إيراد أو مصروف جديد"
       },
       "form": {
         "term_name": "اسم البند",
-        "type": "النوع",
-        "notes": "الملاحظات",
+        "type": "نوع البند",
+        "notes": "ملاحظات",
         "labels": {
           "income": "إيراد",
           "expense": "مصروف"
@@ -292,20 +351,131 @@
       }
     }
   },
+
   "customers": {
     "change_password": {
       "title": "تغيير كلمة المرور",
-      "description": "أدخل كلمة المرور الجديدة لهذا العميل.",
+      "description": "تعيين كلمة مرور جديدة لهذا العميل",
       "form": {
-        "password": "كلمة المرور",
+        "password": "كلمة المرور الجديدة",
         "confirm_password": "تأكيد كلمة المرور"
       }
     },
+
     "delete_customer_account": {
       "title": "حذف حساب العميل",
-      "description": "هل أنت متأكد من حذف حساب {name}? لا يمكن التراجع عن هذا الإجراء.",
-      "confirm": "حذف الحساب",
+      "description": "هل أنت متأكد من حذف حساب {name}؟ لا يمكن التراجع عن هذا الإجراء.",
+      "confirm": "تأكيد الحذف",
       "success": "تم حذف حساب العميل بنجاح"
+    }
+  },
+
+  "coupons": {
+    "create": {
+      "title": "إنشاء كوبون",
+      "description": "إضافة كوبون خصم جديد وتحديد إعداداته",
+      "form": {
+        "coupon_code": "كود الكوبون",
+        "discount_type": "نوع الخصم",
+        "discount_value": "قيمة الخصم",
+        "usage_limit": "الحد الأقصى للاستخدام",
+        "active_from": "نشط من",
+        "active_to": "نشط إلى"
+      }
+    }
+  },
+
+  "plans": {
+    "create": {
+      "title": "إنشاء خطة",
+      "dialog": {
+        "title": "إنشاء خطة اشتراك",
+        "description": "إعداد خطة اشتراك جديدة وتحديد تفاصيلها"
+      },
+      "form": {
+        "sections": {
+          "basic": {
+            "title": "المعلومات الأساسية",
+            "name": "اسم الخطة",
+            "type": "نوع الخطة"
+          },
+
+          "pricing": {
+            "title": "التسعير",
+            "payg_description": "تحديد السعر الذي يتم تحصيله مقابل كل طلب وارد",
+            "monthly_description": "تحديد سعر اشتراك شهري ثابت",
+            "plan_price_egp": "سعر الخطة (جنيه مصري)",
+            "order_price_egp": "سعر الطلب (جنيه مصري)",
+            "plan_price_usd": "سعر الخطة (دولار أمريكي)",
+            "order_price_usd": "سعر الطلب (دولار أمريكي)"
+          },
+
+          "employees": {
+            "title": "حدود الموظفين",
+            "call_centers": "موظفو خدمة العملاء",
+            "accountants": "المحاسبون"
+          },
+
+          "stores": {
+            "title": "حدود المتاجر",
+            "shopify": "Shopify",
+            "easy_orders": "Easy Orders",
+            "woo_commerce": "WooCommerce"
+          },
+
+          "free_trial": {
+            "title": "قيود الخطة المجانية / التجريبية",
+            "features": {
+              "call_center": "موظف واحد لخدمة العملاء",
+              "products": "3 منتجات",
+              "stock_history": "3 سجلات لحركة المخزون",
+              "orders_limit": "10 طلبات يوميًا أو 50 طلبًا كحد أقصى",
+              "no_stores": "لا توجد متاجر",
+              "no_shipping": "لا يوجد شحن",
+              "no_reports": "لا توجد تقارير"
+            }
+          }
+        },
+
+        "all_features_unlocked": "جميع الميزات متاحة في هذه الخطة"
+      }
+    }
+  },
+  "staff": {
+    "dialog": {
+      "add": "إضافة موظف",
+      "title": "إضافة موظف",
+      "description": "إضافة موظف جديد وتحديد إعداداته",
+      "form": {
+        "firstName": "الاسم الأول",
+        "lastName": "الاسم الأخير",
+        "email": "البريد الإلكتروني",
+        "password": "كلمة المرور",
+        "phoneNumber": "رقم الهاتف",
+        "country": "البلد",
+        "birthDate": "تاريخ الميلاد",
+        "gender": {
+          "title": "الجنس",
+          "male": "ذكر",
+          "female": "أنثى"
+        },
+        "role": {
+          "title": "الدور",
+          "admin": "مدير",
+          "call_service": "خدمة العملاء",
+          "accountant": "محاسب"
+        },
+        "employeeDate": "تاريخ التوظيف",
+        "salary": "الراتب"
+      }
+    }
+  },
+  "badges": {
+    "roles": {
+      "super_admin": "مدير عام",
+      "admin": "مدير",
+      "call_service": "خدمة العملاء",
+      "accountant": "محاسب"
     }
   }
 }

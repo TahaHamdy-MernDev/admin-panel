@@ -10,12 +10,12 @@ import {
   PaginationEllipsis,
 } from "@/components/ui/pagination";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { PaginationMeta } from "@/types/api-types";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
-import { PaginationMeta } from "..";
 
 interface DataTablePaginationProps {
-  meta: PaginationMeta;
+  meta: PaginationMeta | undefined;
   onPageChange?: (page: number) => void;
   loading?: boolean;
 }
@@ -28,8 +28,8 @@ export function PaginationBar({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const currentPage = meta.current_page;
-  const totalPages = meta.total_pages;
+  const currentPage = meta?.current_page ?? 1;
+  const totalPages = meta?.total_pages ?? 1;
 
   const setPageInUrl = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());

@@ -2,7 +2,6 @@ import { useTranslations } from "next-intl";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   RowCheckbox,
-  RowDropDownMore,
   SelectAllCheckbox,
 } from "@/components/data-table/row-cells";
 import { ConfirmableSwitch } from "@/components/dialogs/confirmable-switch";

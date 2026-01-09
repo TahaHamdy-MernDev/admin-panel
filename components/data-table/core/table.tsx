@@ -1,3 +1,5 @@
+import Text from "@/components/typography";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -14,15 +16,28 @@ import {
 type Props<TData, TValue> = {
   table: TanStackTable<TData>;
   columns: ColumnDef<TData, TValue>[];
+  is_loading?: boolean;
 };
-function MainTable<TData, TValue>({ table, columns }: Props<TData, TValue>) {
-  return (
+function MainTable<TData, TValue>({
+  table,
+  columns,
+  is_loading,
+}: Props<TData, TValue>) {
+  return is_loading ? (
+    <div className="space-y-2">
+      <Skeleton className="w-full h-10 mb-2" />
+      <Skeleton className="w-full h-64" />
+    </div>
+  ) : (
     <Table>
       <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
-              <TableHead key={header.id} className="text-start text-base">
+              <TableHead
+                key={header.id}
+                className="text-start text-balance text-sm"
+              >
                 {header.isPlaceholder
                   ? null
                   : flexRender(

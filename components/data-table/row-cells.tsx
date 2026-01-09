@@ -13,7 +13,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "../ui/button";
 export function SelectAllCheckbox<TData>({ table }: { table: Table<TData> }) {
   return (
-    <div className="rtl:-mb-1 flex justify-center items-center p-1">
+    <div className="rtl:-mb-1 flex justify-center items-center">
       <Checkbox
         checked={
           table.getIsAllPageRowsSelected() ||
@@ -29,7 +29,7 @@ export function SelectAllCheckbox<TData>({ table }: { table: Table<TData> }) {
 
 export function RowCheckbox<TData>({ row }: { row: Row<TData> }) {
   return (
-    <div className="rtl:-mb-1 flex justify-center items-center p-1">
+    <div className="rtl:-mb-1 flex justify-center items-center px-2.5">
       <Checkbox
         checked={row.getIsSelected()}
         className="shadow-none"

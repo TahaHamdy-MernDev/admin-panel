@@ -1,0 +1,6 @@
+export enum PlatformRoles {
+  SUPER_ADMIN = "SUPER_ADMIN",
+  ADMIN = "ADMIN",
+  ACCOUNTANT = "ACCOUNTANT",
+  CALL_SERVICE = "CALL_SERVICE",
+}

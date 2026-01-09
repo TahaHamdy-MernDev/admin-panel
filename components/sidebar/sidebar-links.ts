@@ -6,6 +6,7 @@ import {
   Percent,
   Settings,
   BarChart3,
+  UserCog,
 } from "lucide-react";
 type SubItem = {
   title: string;
@@ -47,18 +48,6 @@ export const SIDEBAR: SidebarData[] = [
       { title: "finance.terms", url: "finance/terms" },
     ],
   },
-
-  // {
-  //   title: "staff.title",
-  //   url: "staff",
-  //   icon: UserCog,
-  //   items: [
-  //     { title: "staff.all", url: "staff" },
-  //     { title: "staff.roles", url: "staff/roles" },
-  //     { title: "staff.teams", url: "staff/teams" },
-  //     { title: "staff.logs", url: "staff/logs" },
-  //   ],
-  // },
 
   {
     title: "coupons.title",
@@ -116,5 +105,16 @@ export const SIDEBAR: SidebarData[] = [
       // { title: "settings.security", url: "settings/security" },
       // { title: "settings.audit_log", url: "settings/audit-log" },
     ],
+  },
+  {
+    title: "staff.title",
+    url: "staff",
+    icon: UserCog,
+    // items: [
+    //   { title: "staff.all", url: "staff" },
+    //   { title: "staff.roles", url: "staff/roles" },
+    //   { title: "staff.teams", url: "staff/teams" },
+    //   { title: "staff.logs", url: "staff/logs" },
+    // ],
   },
 ];

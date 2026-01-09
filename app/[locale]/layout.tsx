@@ -7,6 +7,7 @@ import { getTranslations } from "next-intl/server";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { DirectionProvider } from "@/components/providers/direction-provider";
 import { cn } from "@/lib/utils";
+import { ReactQueryProvider } from "@/components/providers/react-query";
 const din_font = localFont({
   src: "./DINN.ttf",
   variable: "--font-din",
@@ -56,7 +57,7 @@ export default async function RootLayout({ children, params }: Props) {
         >
           <NextIntlClientProvider locale={locale}>
             <DirectionProvider dir={locale === "ar" ? "rtl" : "ltr"}>
-              {children}
+              <ReactQueryProvider>{children}</ReactQueryProvider>
             </DirectionProvider>
           </NextIntlClientProvider>
         </ThemeProvider>

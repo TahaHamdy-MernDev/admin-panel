@@ -156,7 +156,7 @@ function MenuItemWithSub({
                     >
                       <Link href={`/panel/${subItem.url}`}>
                         <Text
-                          as="p"
+                          as="small"
                           className="data-[sub-item-active=true]:text-primary!"
                         >
                           {t(subItem.title)}

@@ -2,13 +2,23 @@
   "Metadata": {
     "title": "Dashboard"
   },
+
   "Page": {
-    "title": "Page not found"
+    "title": "Page Not Found"
   },
+
   "common": {
+    "create": "Create",
     "cancel": "Cancel",
     "delete": "Delete",
     "save": "Save"
+  },
+  "auth": {
+    "login": {
+      "password": "Password",
+      "phoneNumber": "Phone Number",
+      "submit": "Login"
+    }
   },
   "app-sidebar": {
     "dashboard": "Dashboard",
@@ -26,22 +36,22 @@
     },
 
     "customers": {
-      "title": "Customers",
+      "title": "Customer Management",
       "all": "All Customers",
       "active": "Active Customers",
       "suspended": "Suspended Customers",
       "expired": "Expired Subscriptions",
       "sessions": "Login Sessions",
-      "activity": "Activity Logs"
+      "activity": "Activity Log"
     },
 
     "finance": {
-      "title": "Finance",
-      "accounts": "Accounts & Banks",
+      "title": "Finance Management",
+      "accounts": "Bank Accounts & Safes",
       "income": "Income",
       "expenses": "Expenses",
       "terms": "Terms",
-      "withdrawals": "Withdraw Requests"
+      "withdrawals": "Withdrawal Requests"
     },
 
     "staff": {
@@ -62,7 +72,7 @@
     },
 
     "support": {
-      "title": "Support Tickets",
+      "title": "Customer Tickets",
       "open": "Open Tickets",
       "pending": "In Progress",
       "closed": "Closed Tickets",
@@ -76,12 +86,12 @@
       "expenses": "Expense Reports",
       "orders": "Order Reports",
       "delivery": "Delivery Rates",
-      "products": "Top Products",
-      "shipping": "Shipping Companies",
+      "products": "Top-Selling Products",
+      "shipping": "Shipping Company Reports",
       "cities": "City Reports",
       "referrals": "Referral Reports",
-      "sales": "Sales",
-      "communications": "Communications",
+      "sales": "Sales Reports",
+      "communications": "Communication Reports",
       "repeat_customers": "Repeat Customers"
     },
 
@@ -96,201 +106,244 @@
       "audit_log": "Audit Log"
     }
   },
-  "alert-dialog": {
-    "confirm": "Confirm",
-    "cancel": "Cancel",
-    "plans": {
-      "on": {
-        "title": "Enable Plan",
-        "description": "Are you sure you want to enable this plan?"
-      },
-      "off": {
-        "title": "Disable Plan",
-        "description": "Are you sure you want to disable this plan?"
-      }
-    },
-    "customer_status": {
-      "on": {
-        "title": "Enable Customer",
-        "description": "Are you sure you want to enable this customer?"
-      },
-      "off": {
-        "title": "Disable Customer",
-        "description": "Are you sure you want to disable this customer?"
-      }
-    }
-  },
+
   "data-table": {
     "columns": {
       "id": "#",
       "created_at": "Created At",
       "actions": "Actions",
+      "more": "More",
       "edit": "Edit",
       "delete": "Delete",
-      "logs": "Logs",
-      "more": "More",
       "status": "Status",
+      "logs": "Logs",
+      "code": "Code",
       "plans": {
-        "name": "Name",
+        "name": "Plan Name",
         "price": "Price",
-        "pilling": "Pilling",
+        "pilling": "Billing",
         "description": "Description"
       },
+
       "customers": {
-        "customer_info": "معلومات العميل",
-        "phone": "Phone",
+        "customer_info": "Customer Info",
+        "phone": "Phone Number",
         "name": "Name",
         "last_login": "Last Login",
-        "ip": "IP",
+        "ip": "IP Address",
         "device": "Device"
       },
+      "staff": {
+        "info": "Staff Info",
+        "phone": "Phone Number",
+        "email": "Email",
+        "role": "Role",
+        "status": "Status"
+      },
       "finance": {
-        "account_name": "Name",
+        "account_name": "Account Name",
         "balance": "Balance",
         "status": "Status",
-        "logs": "Logs",
+        "logs": "Account Logs",
         "terms": "Terms",
         "term_name": "Term Name",
         "received_at": "Received At",
         "amount": "Amount",
-        "note": "Note",
-        "transaction_ref": "Transaction Ref"
+        "note": "Notes",
+        "transaction_ref": "Transaction Reference"
       },
+
       "coupon": {
-        "code": "Code",
+        "code": "Coupon Code",
         "validity": "Validity Period",
-        "discount": "Discount",
+        "discount": "Discount Value",
         "usage_count": "Usage Count",
         "usage_limit": "Usage Limit"
       }
     }
   },
+
+  "alert-dialog": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+
+    "plans": {
+      "on": {
+        "title": "Enable Plan",
+        "description": "Are you sure you want to enable this plan? It will be available for subscription immediately."
+      },
+      "off": {
+        "title": "Disable Plan",
+        "description": "Are you sure you want to disable this plan? Customers will no longer be able to subscribe."
+      }
+    },
+    "staff": {
+      "on": {
+        "title": "Enable Employee",
+        "description": "Are you sure you want to enable this employee?"
+      },
+      "off": {
+        "title": "Disable Employee",
+        "description": "Are you sure you want to disable this employee?"
+      }
+    },
+    "customer_status": {
+      "on": {
+        "title": "Enable Account",
+        "description": "Are you sure you want to enable this account?"
+      },
+      "off": {
+        "title": "Disable Account",
+        "description": "Are you sure you want to disable this account?"
+      }
+    }
+  },
+
   "Overview": {
-    "title": "Overview",
-    "description": "Overview on the statistics and basic numbers for the site and users",
-    "total_customers": "Total Customers",
-    "total_customers_pay_as_you_go": "Pay As You Go",
-    "total_customers_monthly": "Monthly Plans",
-    "total_customers_yearly": "Yearly Plans",
+    "total_customers": "Total Users",
+    "total_customers_pay_as_you_go": "Pay As You Go Users",
+    "total_customers_monthly": "Monthly Plan Customers",
+    "total_customers_yearly": "Yearly Plan Customers",
     "total_customers_active": "Active Customers",
-    "total_customers_suspended": "Suspended Customers",
-    "total_customers_expired": "Expired Subscriptions",
+    "total_customers_suspended": "Suspended Accounts",
+    "total_customers_expired": "Expired Accounts",
     "total_customers_sessions": "Login Sessions",
-    "total_customers_activity": "Activity Logs",
-    "total_customers_trials": "Trial Periods",
+    "total_customers_activity": "Activity Log",
+    "total_customers_trials": "Trial Accounts",
     "total_employees": "Employees",
     "total_coupons": "Coupons",
+
     "tickets": {
       "open": "Open Tickets",
       "pending": "In Progress",
       "closed": "Closed Tickets"
     },
-    "orders": "Orders - (14Days)",
-    "income_expenses": "Income/Outcome",
+
+    "orders": "Orders (Last 14 Days)",
+    "income_expenses": "Income / Expenses",
     "plans": "Plans",
-    "pay_health": "Pay Health"
+    "pay_health": "Payment Health"
   },
+
   "finance-tabs": {
-    "transactions": "Transactions",
-    "terms": "Terms"
+    "transactions": "Financial Transactions",
+    "terms": "Accounting Terms"
   },
+
   "page-header": {
     "overview": {
       "title": "Overview",
-      "description": "Overview on the statistics and basic numbers for the site and users"
+      "description": "Comprehensive overview of key platform statistics and metrics"
     },
+
     "plans": {
-      "title": "Plans",
-      "description": "Plans on the statistics and basic numbers for the site and users"
+      "title": "Plans Management",
+      "description": "Manage subscription plans and pricing options",
+      "create": {
+        "title": "Create Plan",
+        "description": "Add a new subscription plan and configure its features"
+      }
     },
-    "accounts-safes": {
-      "title": "Accounts & Safes",
-      "description": "Accounts & Safes on the statistics and basic numbers for the site and users"
-    },
+
     "customers": {
-      "title": "Customers",
-      "description": "Customers on the statistics and basic numbers for the site and users"
+      "title": "Customer Management",
+      "description": "Manage customer accounts and track their activity"
     },
+
     "accounts": {
       "title": "Accounts & Safes",
-      "description": "Manage your bank accounts and cash safes, track balances, and monitor financial status."
+      "description": "Manage bank accounts and cash safes, and track balances and transactions"
     },
+
     "income": {
       "title": "Income",
-      "description": "Track all income transactions, manage income sources, and review received amounts."
+      "description": "Track all incoming revenue and income transactions"
     },
 
     "expenses": {
       "title": "Expenses",
-      "description": "Monitor expense transactions, control spending, and analyze outgoing payments."
+      "description": "Monitor expenses and control outgoing payments"
     },
+
     "terms": {
       "title": "Terms",
-      "description": "Manage income and expense categories to organize and classify transactions."
+      "description": "Organize and classify income and expense terms for accounting"
     },
+
     "coupons": {
       "title": "Coupons",
-      "description": "Manage discount coupons, control usage limits, and track coupon activity."
+      "description": "Manage discount coupons and control usage limits"
     },
+
     "integrations": {
       "title": "Integrations",
-      "description": "Manage integrations with other services and applications."
+      "description": "Manage integrations with external services and platforms"
     },
+
     "countries": {
       "title": "Countries",
-      "description": "Manage countries and their settings."
+      "description": "Manage countries and their related settings"
+    },
+
+    "staff": {
+      "title": "Staff Management",
+      "description": "Manage staff members and define roles and permissions"
     }
   },
+
   "finance": {
     "accounts": {
       "add": "Add Account",
       "dialog": {
-        "title": "Add Account",
-        "description": "Enter the new account details.",
+        "title": "Add New Account",
+        "description": "Enter bank account or cash safe details",
         "form": {
-          "name": "Account Name/Cash Box",
+          "name": "Account / Safe Name",
           "initial_balance": "Initial Balance"
         }
       }
     },
+
     "income": {
       "add": "Add Income",
       "dialog": {
-        "title": "Add Income",
-        "description": "Enter the new income details."
+        "title": "Add New Income",
+        "description": "Record a new income transaction"
       },
       "form": {
         "amount": "Amount",
-        "bank": "Bank/Cash Box",
+        "bank": "Account / Safe",
         "term": "Term",
         "receive_date": "Receive Date",
         "notes": "Notes"
       }
     },
+
     "expenses": {
       "add": "Add Expense",
       "dialog": {
-        "title": "Add Expense",
-        "description": "Enter the new expense details."
+        "title": "Add New Expense",
+        "description": "Record a new expense transaction"
       },
       "form": {
         "amount": "Amount",
-        "bank": "Bank/Cash Box",
+        "bank": "Account / Safe",
         "term": "Term",
         "employee": "Employee",
         "expense_date": "Expense Date",
         "notes": "Notes"
       }
     },
+
     "terms": {
       "add": "Add Term",
       "dialog": {
-        "title": "Add Term",
-        "description": "Enter the new term details."
+        "title": "Add New Term",
+        "description": "Create a new income or expense term"
       },
       "form": {
         "term_name": "Term Name",
-        "type": "Type",
+        "type": "Term Type",
         "notes": "Notes",
         "labels": {
           "income": "Income",
@@ -299,20 +352,131 @@
       }
     }
   },
+
   "customers": {
     "change_password": {
       "title": "Change Password",
-      "description": "Enter the new password for this customer.",
+      "description": "Set a new password for this customer",
       "form": {
-        "password": "Password",
+        "password": "New Password",
         "confirm_password": "Confirm Password"
       }
     },
+
     "delete_customer_account": {
       "title": "Delete Customer Account",
-      "description": "Are you sure you want to delete {name}? This action cannot be undone.",
-      "confirm": "Delete Account",
+      "description": "Are you sure you want to delete the account for {name}? This action cannot be undone.",
+      "confirm": "Confirm Deletion",
       "success": "Customer account deleted successfully"
+    }
+  },
+
+  "coupons": {
+    "create": {
+      "title": "Create Coupon",
+      "description": "Add a new discount coupon and configure its settings",
+      "form": {
+        "coupon_code": "Coupon Code",
+        "discount_type": "Discount Type",
+        "discount_value": "Discount Value",
+        "usage_limit": "Maximum Usage",
+        "active_from": "Active From",
+        "active_to": "Active To"
+      }
+    }
+  },
+
+  "plans": {
+    "create": {
+      "title": "Create Plan",
+      "dialog": {
+        "title": "Create Subscription Plan",
+        "description": "Configure a new subscription plan and its details"
+      },
+      "form": {
+        "sections": {
+          "basic": {
+            "title": "Basic Information",
+            "name": "Plan Name",
+            "type": "Plan Type"
+          },
+
+          "pricing": {
+            "title": "Pricing",
+            "payg_description": "Set the price charged for each incoming order",
+            "monthly_description": "Set a fixed monthly subscription price",
+            "plan_price_egp": "Plan Price (EGP)",
+            "order_price_egp": "Order Price (EGP)",
+            "plan_price_usd": "Plan Price (USD)",
+            "order_price_usd": "Order Price (USD)"
+          },
+
+          "employees": {
+            "title": "Employee Limits",
+            "call_centers": "Customer Support Staff",
+            "accountants": "Accountants"
+          },
+
+          "stores": {
+            "title": "Store Limits",
+            "shopify": "Shopify",
+            "easy_orders": "Easy Orders",
+            "woo_commerce": "WooCommerce"
+          },
+
+          "free_trial": {
+            "title": "Free / Trial Plan Restrictions",
+            "features": {
+              "call_center": "One customer support employee",
+              "products": "3 products",
+              "stock_history": "3 stock movement records",
+              "orders_limit": "10 orders per day or 50 orders maximum",
+              "no_stores": "No stores available",
+              "no_shipping": "No shipping",
+              "no_reports": "No reports"
+            }
+          }
+        },
+
+        "all_features_unlocked": "All features are enabled in this plan"
+      }
+    }
+  },
+  "staff": {
+    "dialog": {
+      "add": "Add Employee",
+      "title": "Add Employee",
+      "description": "Add a new employee and set their settings",
+      "form": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "password": "Password",
+        "phoneNumber": "Phone Number",
+        "country": "Country",
+        "birthDate": "Birth Date",
+        "gender": {
+          "title": "Gender",
+          "male": "Male",
+          "female": "Female"
+        },
+        "role": {
+          "title": "Role",
+          "admin": "Admin",
+          "call_service": "Call Service",
+          "accountant": "Accountant"
+        },
+        "employeeDate": "Employee Date",
+        "salary": "Salary"
+      }
+    }
+  },
+  "badge": {
+    "roles": {
+      "super_admin": "Super Admin",
+      "admin": "Admin",
+      "call_service": "Call Service",
+      "accountant": "Accountant"
     }
   }
 }

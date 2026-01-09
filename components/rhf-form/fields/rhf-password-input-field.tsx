@@ -17,6 +17,7 @@ type RHFPasswordInputFieldProps<T extends FieldValues> = {
   label: string;
   placeholder?: string;
   disabled?: boolean;
+  className?: string;
 };
 
 export function RHFPasswordInputField<T extends FieldValues>({
@@ -25,6 +26,7 @@ export function RHFPasswordInputField<T extends FieldValues>({
   label,
   placeholder,
   disabled,
+  className,
 }: RHFPasswordInputFieldProps<T>) {
   const [type, setType] = useState("password");
   return (
@@ -32,7 +34,7 @@ export function RHFPasswordInputField<T extends FieldValues>({
       name={name}
       control={control}
       render={({ field, fieldState }) => (
-        <Field data-invalid={fieldState.invalid}>
+        <Field data-invalid={fieldState.invalid} className={className}>
           <FieldLabel>{label}</FieldLabel>
           <InputGroup>
             <Input
@@ -48,6 +50,7 @@ export function RHFPasswordInputField<T extends FieldValues>({
                 onClick={() =>
                   setType(type === "password" ? "text" : "password")
                 }
+                className="hover:bg-transparent"
               >
                 {type === "password" ? <Eye /> : <EyeOff />}
               </InputGroupButton>
