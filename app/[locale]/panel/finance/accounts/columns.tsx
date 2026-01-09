@@ -1,8 +1,30 @@
-
-import { AccountRow } from "@/hooks/api/finance/use-accounts";
+import { ConfirmableSwitch } from "@/components/dialogs/confirmable-switch";
+import {
+  AccountRow,
+  useSetDefaultFinanceAccountMutation,
+} from "@/hooks/api/finance/use-accounts";
 import { ColumnDef } from "@tanstack/react-table";
+import { format } from "date-fns";
 import { useTranslations } from "next-intl";
-
+function ToggleAccountStatus({
+  is_active,
+  id,
+}: {
+  is_active: boolean;
+  id: number;
+}) {
+  const mutation = useSetDefaultFinanceAccountMutation();
+  async function onSubmit() {
+    await mutation.mutateAsync({ id });
+  }
+  return (
+    <ConfirmableSwitch
+      onConfirm={onSubmit}
+      defaultValue={is_active}
+      feature_key="finance.accounts"
+    />
+  );
+}
 export function useAccountsColumns(): ColumnDef<AccountRow>[] {
   const t = useTranslations("data-table.columns");
   return [
@@ -13,12 +35,20 @@ export function useAccountsColumns(): ColumnDef<AccountRow>[] {
     //   size: 50,
     // },
     {
-      accessorKey: "account_id",
+      accessorKey: "id",
       header: "#",
     },
     {
       accessorKey: "created_at",
       header: t("created_at"),
+      cell: ({ row }) => {
+        return (
+          <span className="flex flex-col">
+            <p>{format(row.original.created_at, "hh:mm a")}</p>
+            <p>{format(row.original.created_at, "yyyy-MM-dd")}</p>
+          </span>
+        );
+      },
     },
     {
       accessorKey: "name",
@@ -29,8 +59,14 @@ export function useAccountsColumns(): ColumnDef<AccountRow>[] {
       header: t("finance.balance"),
     },
     {
-      accessorKey: "status",
-      header: t("finance.status"),
+      accessorKey: "is_default",
+      header: t("finance.is_default"),
+      cell: ({ row }) => (
+        <ToggleAccountStatus
+          is_active={row.original.is_default}
+          id={row.original.id}
+        />
+      ),
     },
   ];
 }

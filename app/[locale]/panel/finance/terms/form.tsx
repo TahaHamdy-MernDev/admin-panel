@@ -5,43 +5,43 @@ import * as z from "zod";
 import { RHFDialogForm } from "@/components/rhf-form/rhf-form-dialog";
 import { FieldGroup } from "@/components/ui/field";
 import { useTranslations } from "next-intl";
-import { toast } from "sonner";
 import { RHFSelectField } from "@/components/rhf-form/fields/rhf-select-field";
 import { RHFInputField } from "@/components/rhf-form/fields/rhf-input-field";
+import { TermType, useCreateTermMutation } from "@/hooks/api/finance/use-terms";
 
 export const addTermSchema = z.object({
-  term_name: z.string().min(2, "Term name must be at least 2 characters"),
-  type: z.string().min(1, "Type is required"),
+  name: z.string().min(2, "Term name must be at least 2 characters"),
+  type: z.enum(TermType),
 });
 
-type AddTermFormValues = z.infer<typeof addTermSchema>;
+export type TermFormValues = z.infer<typeof addTermSchema>;
 
 export default function AddTermDialogForm() {
   const t = useTranslations("finance.terms");
-  const form = useForm<AddTermFormValues>({
+  const mutation = useCreateTermMutation();
+  const form = useForm<TermFormValues>({
     resolver: zodResolver(addTermSchema),
     defaultValues: {
-      term_name: "",
-      type: "",
+      name: "",
+      type: TermType.INCOME,
     },
   });
-  async function onSubmit(data: AddTermFormValues) {
-    toast("Term created", {
-      description: JSON.stringify(data, null, 2),
-    });
+  async function onSubmit(data: TermFormValues) {
+    await mutation.mutateAsync(data);
   }
   return (
-    <RHFDialogForm<AddTermFormValues>
+    <RHFDialogForm<TermFormValues>
       form={form}
       trigger={t("add")}
       title={t("dialog.title")}
       description={t("dialog.description")}
       onSubmit={onSubmit}
+      loading={mutation.isPending}
     >
       <FieldGroup>
         <RHFInputField
           control={form.control}
-          name="term_name"
+          name="name"
           label={t("form.term_name")}
         />
         <RHFSelectField
@@ -49,8 +49,14 @@ export default function AddTermDialogForm() {
           name="type"
           label={t("form.type")}
           options={[
-            { value: "income", label: t("form.labels.income") },
-            { value: "expense", label: t("form.labels.expense") },
+            {
+              value: TermType.INCOME,
+              label: t("form.labels.income"),
+            },
+            {
+              value: TermType.EXPENSE,
+              label: t("form.labels.expense"),
+            },
           ]}
         />
       </FieldGroup>
