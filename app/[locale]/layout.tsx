@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { DirectionProvider } from "@/components/providers/direction-provider";
 import { cn } from "@/lib/utils";
 import { ReactQueryProvider } from "@/components/providers/react-query";
+import { Toaster } from "@/components/ui/sonner";
 const din_font = localFont({
   src: "./DINN.ttf",
   variable: "--font-din",
@@ -57,7 +58,10 @@ export default async function RootLayout({ children, params }: Props) {
         >
           <NextIntlClientProvider locale={locale}>
             <DirectionProvider dir={locale === "ar" ? "rtl" : "ltr"}>
-              <ReactQueryProvider>{children}</ReactQueryProvider>
+              <ReactQueryProvider>
+                {children}
+                <Toaster />
+              </ReactQueryProvider>
             </DirectionProvider>
           </NextIntlClientProvider>
         </ThemeProvider>

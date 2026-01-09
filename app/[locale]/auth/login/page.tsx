@@ -7,6 +7,8 @@ import { RHFCardForm } from "@/components/rhf-form/rhf-form-card";
 import { Button } from "@/components/ui/button";
 import { FieldGroup } from "@/components/ui/field";
 import { useAuthLoginMutation } from "@/hooks/api/auth/use-auth";
+import { useRouter } from "@/i18n/navigation";
+import { PlatformRoles } from "@/types/platform-roles.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { useTranslations } from "next-intl";
@@ -24,18 +26,33 @@ const LoginForm = z.object({
 export type LoginFormValues = z.infer<typeof LoginForm>;
 
 export default function Page() {
+  const router = useRouter();
   const t = useTranslations("auth.login");
   const mutation = useAuthLoginMutation();
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(LoginForm),
     defaultValues: {
-      phoneNumber: "",
-      password: "",
+      phoneNumber: "+201114911898",
+      password: "sdfgdfsgdsfgdsf",
     },
   });
 
   async function onSubmit(data: LoginFormValues) {
-    await mutation.mutateAsync(data);
+    const res = await mutation.mutateAsync(data);
+    console.log(res);
+    if (res?.user) {
+      switch (res.user.role) {
+        case PlatformRoles.SUPER_ADMIN:
+        case PlatformRoles.ACCOUNTANT:
+        case PlatformRoles.ADMIN:
+        case PlatformRoles.CALL_SERVICE:
+          router.push({ pathname: "/panel/overview" });
+          break;
+
+        default:
+          break;
+      }
+    }
   }
 
   return (
@@ -80,7 +97,11 @@ export default function Page() {
                 label={t("password")}
               />
 
-              <Button size="lg" className="w-full">
+              <Button
+                is_loading={mutation.isPending}
+                size="lg"
+                className="w-full"
+              >
                 {t("submit")}
               </Button>
             </FieldGroup>

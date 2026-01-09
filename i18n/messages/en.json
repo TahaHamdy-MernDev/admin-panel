@@ -150,6 +150,8 @@
         "received_at": "Received At",
         "amount": "Amount",
         "note": "Notes",
+        "term_type": "Term Type",
+        "is_default": "Default",
         "transaction_ref": "Transaction Reference"
       },
 
@@ -195,6 +197,18 @@
       "off": {
         "title": "Disable Account",
         "description": "Are you sure you want to disable this account?"
+      }
+    },
+    "finance": {
+      "accounts": {
+        "on": {
+          "title": "Are you sure you want to set this account as the default?",
+          "description": "This account will be set as the default account, used as the primary account with an initial balance, and will be active when new accounts are added."
+        },
+        "off": {
+          "title": "This account cannot be set as default",
+          "description": "There must be at least one account set as the default account."
+        }
       }
     }
   },

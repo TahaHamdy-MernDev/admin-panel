@@ -74,7 +74,12 @@ export function RHFDialogForm<T extends FieldValues>({
             >
               {t("common.cancel")}
             </DialogClose>
-            <Button type="submit" variant={"default"} disabled={loading}>
+            <Button
+              type="submit"
+              variant={"default"}
+              is_loading={loading}
+              disabled={loading}
+            >
               {t("common.save")}
             </Button>
           </DialogFooter>
