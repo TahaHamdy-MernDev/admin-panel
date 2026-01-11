@@ -1,3 +1,5 @@
+import { redirect } from "@/i18n/navigation";
+
 export default function Page() {
-  return <div></div>;
+  return redirect({ href: "/auth/login", locale: "ar" });
 }
