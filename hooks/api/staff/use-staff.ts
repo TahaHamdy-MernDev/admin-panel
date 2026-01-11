@@ -1,6 +1,7 @@
 import { CreatePlatformEmployeeFormValues } from "@/app/[locale]/panel/staff/form";
 
 import { apiClient } from "@/lib/api-client";
+import { PaginatedResult } from "@/types/api-types";
 import { PlatformRoles } from "@/types/platform-roles.types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CountryCode } from "libphonenumber-js";
@@ -27,10 +28,13 @@ export function useStaffQuery({ page, limit }: StaffParams) {
   return useQuery({
     queryKey: [STAFF_QUERY_KEY, { page, limit }],
     queryFn: async () => {
-      const res = await apiClient.get<StaffRow[]>("users/staff", {
-        page,
-        limit,
-      });
+      const res = await apiClient.get<PaginatedResult<StaffRow>>(
+        "users/staff",
+        {
+          page,
+          limit,
+        }
+      );
       return res.data;
     },
   });
