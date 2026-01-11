@@ -9,6 +9,7 @@ export type AccountRow = {
   name: string;
   balance: number;
   created_at: string;
+  is_active: boolean;
   is_default: boolean;
 };
 type AccountsParams = {
@@ -24,8 +25,6 @@ export function useAccountsQuery({ page, limit }: AccountsParams) {
         page,
         limit,
       });
-      console.log("Accounts ", res);
-
       return res.data;
     },
     queryKey: [ACCOUNTS_QUERY_KEY, { page, limit }],
@@ -50,7 +49,6 @@ export function useCreateAccountMutation() {
     },
   });
 }
-//set default :id/default
 export function useSetDefaultFinanceAccountMutation() {
   const queryClient = useQueryClient();
   return useMutation({
@@ -58,6 +56,24 @@ export function useSetDefaultFinanceAccountMutation() {
       apiClient.patch(`accounts/${id}/default`),
     onSuccess: () => {
       toast.success("Account Set Default successfully");
+      queryClient.invalidateQueries({
+        queryKey: [ACCOUNTS_QUERY_KEY],
+        refetchType: "active",
+      });
+    },
+    onError(error) {
+      console.error("Mutation error:", error);
+      toast.error(error.message);
+    },
+  });
+}
+export function useToggleAccountStatusMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id }: { id: number }) =>
+      apiClient.patch(`accounts/${id}/status`),
+    onSuccess: () => {
+      toast.success("Account Status updated successfully");
       queryClient.invalidateQueries({
         queryKey: [ACCOUNTS_QUERY_KEY],
         refetchType: "active",

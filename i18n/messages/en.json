@@ -359,6 +359,7 @@
         "term_name": "Term Name",
         "type": "Term Type",
         "notes": "Notes",
+        "employees_term": "Employees Term",
         "labels": {
           "income": "Income",
           "expense": "Expense"

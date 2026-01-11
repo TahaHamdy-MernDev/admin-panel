@@ -5,51 +5,54 @@ import { RHFSelectField } from "@/components/rhf-form/fields/rhf-select-field";
 import { RHFTextareaField } from "@/components/rhf-form/fields/rhf-textarea-field";
 import { RHFDialogForm } from "@/components/rhf-form/rhf-form-dialog";
 import { FieldGroup } from "@/components/ui/field";
+import { TermType } from "@/hooks/api/finance/use-terms";
+import {
+  useCreateTransactionMutation,
+  useTransactionHelperQuery,
+} from "@/hooks/api/finance/use-transaction";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
-export const expenseSchema = z
-  .object({
-    amount: z.string().min(1, "Amount is required"),
-    bank: z.string().min(1, "Bank is required"),
-    term: z.string().min(1, "Term is required"),
-    employee_id: z.string().optional(),
-    expense_date: z.date({
-      error: "Expense date is required",
-    }),
-    notes: z.string().optional(),
-  })
-  .refine((data) => data.term !== "employees" || !!data.employee_id, {
-    path: ["employee_id"],
-    message: "Employee is required when term is employees",
-  });
+export const expenseSchema = z.object({
+  amount: z.string().min(1, "Amount is required"),
+  account_id: z.string().min(1, "Bank is required"),
+  term_id: z.string().min(1, "Term is required"),
+  employee_id: z.string().optional(),
+  date: z.date({
+    error: "Expense date is required",
+  }),
+  note: z.string().optional(),
+});
 
-type ExpenseFormValues = z.infer<typeof expenseSchema>;
+export type ExpenseFormValues = z.infer<typeof expenseSchema>;
 
 export default function AddExpenseDialog() {
   const t = useTranslations("finance.expenses");
+  const mutation = useCreateTransactionMutation();
+  const { data } = useTransactionHelperQuery({ type: TermType.EXPENSE });
   const form = useForm<ExpenseFormValues>({
     resolver: zodResolver(expenseSchema),
     defaultValues: {
       amount: "",
-      bank: "",
-      term: "",
+      account_id: "",
+      term_id: "",
       employee_id: "",
-      expense_date: undefined,
-      notes: "",
+      date: undefined,
+      note: "",
     },
   });
-  const term = useWatch({
+  const termField = useWatch({
     control: form.control,
-    name: "term",
+    name: "term_id",
   });
+  const selectedTermId = data?.terms?.find((t) => t.id === Number(termField));
+
+  const requiresEmployee = selectedTermId?.requires_employee === true;
   async function onSubmit(data: ExpenseFormValues) {
-    toast("Expense created", {
-      description: JSON.stringify(data, null, 2),
-    });
+    await mutation.mutateAsync(data);
   }
   return (
     <RHFDialogForm<ExpenseFormValues>
@@ -68,48 +71,44 @@ export default function AddExpenseDialog() {
 
         <RHFSelectField
           control={form.control}
-          name="bank"
+          name="account_id"
           label={t("form.bank")}
-          options={[
-            { label: "Bank of America", value: "boa" },
-            { label: "Chase", value: "chase" },
-            { label: "Wise", value: "wise" },
-          ]}
+          options={data?.accounts.map((acc) => ({
+            label: acc.name,
+            value: acc.id.toString(),
+          }))}
         />
 
         <RHFSelectField
           control={form.control}
-          name="term"
+          name="term_id"
           label={t("form.term")}
-          options={[
-            { label: "Monthly", value: "monthly" },
-            { label: "Quarterly", value: "quarterly" },
-            { label: "Yearly", value: "yearly" },
-            { label: "Employees", value: "employees" },
-          ]}
+          options={data?.terms.map((acc) => ({
+            label: acc.name,
+            value: acc.id.toString(),
+          }))}
         />
-
-        {term === "employees" && (
+        {requiresEmployee && (
           <RHFSelectField
             control={form.control}
             name="employee_id"
             label={t("form.employee")}
-            options={[
-              { label: "John Doe", value: "1" },
-              { label: "Jane Smith", value: "2" },
-            ]}
+            options={data?.staff?.map((acc) => ({
+              label: `${acc.firstName} ${acc.lastName}`,
+              value: acc.id.toString(),
+            }))}
           />
         )}
 
         <RHFDatePickerField
           control={form.control}
-          name="expense_date"
+          name="date"
           label={t("form.expense_date")}
         />
 
         <RHFTextareaField
           control={form.control}
-          name="notes"
+          name="note"
           label={t("form.notes")}
           maxLength={200}
           rows={2}

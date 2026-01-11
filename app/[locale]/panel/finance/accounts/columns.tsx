@@ -2,11 +2,12 @@ import { ConfirmableSwitch } from "@/components/dialogs/confirmable-switch";
 import {
   AccountRow,
   useSetDefaultFinanceAccountMutation,
+  useToggleAccountStatusMutation,
 } from "@/hooks/api/finance/use-accounts";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { useTranslations } from "next-intl";
-function ToggleAccountStatus({
+function ToggleDefaultAccountStatus({
   is_active,
   id,
 }: {
@@ -14,6 +15,25 @@ function ToggleAccountStatus({
   id: number;
 }) {
   const mutation = useSetDefaultFinanceAccountMutation();
+  async function onSubmit() {
+    await mutation.mutateAsync({ id });
+  }
+  return (
+    <ConfirmableSwitch
+      onConfirm={onSubmit}
+      defaultValue={is_active}
+      feature_key="finance.accounts"
+    />
+  );
+}
+function ToggleAccountStatus({
+  is_active,
+  id,
+}: {
+  is_active: boolean;
+  id: number;
+}) {
+  const mutation = useToggleAccountStatusMutation();
   async function onSubmit() {
     await mutation.mutateAsync({ id });
   }
@@ -61,9 +81,21 @@ export function useAccountsColumns(): ColumnDef<AccountRow>[] {
     {
       accessorKey: "is_default",
       header: t("finance.is_default"),
+      enableGlobalFilter: false,
+      cell: ({ row }) => (
+        <ToggleDefaultAccountStatus
+          is_active={row.original.is_default}
+          id={row.original.id}
+        />
+      ),
+    },
+    {
+      accessorKey: "is_active",
+      enableGlobalFilter: false,
+      header: t("status"),
       cell: ({ row }) => (
         <ToggleAccountStatus
-          is_active={row.original.is_default}
+          is_active={row.original.is_active}
           id={row.original.id}
         />
       ),

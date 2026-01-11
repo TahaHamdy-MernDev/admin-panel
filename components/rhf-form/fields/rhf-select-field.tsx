@@ -1,38 +1,34 @@
-"use client"
+"use client";
 
-import { Control, Controller, FieldValues, Path } from "react-hook-form"
-import {
-  Field,
-  FieldError,
-  FieldLabel,
-} from "@/components/ui/field"
+import { Control, Controller, FieldValues, Path } from "react-hook-form";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 
 type Option = {
-  label: string
-  value: string
-}
+  label: string;
+  value: string;
+};
 
 type RHFSelectFieldProps<T extends FieldValues> = {
-  control: Control<T>
-  name: Path<T>
-  label: string
-  options: Option[]
-  placeholder?: string
-}
+  control: Control<T>;
+  name: Path<T>;
+  label: string;
+  options?: Option[];
+  placeholder?: string;
+};
 
 export function RHFSelectField<T extends FieldValues>({
   control,
   name,
   label,
-  options,
-  placeholder = "Select",
+  options = [],
+  placeholder = "",
 }: RHFSelectFieldProps<T>) {
   return (
     <Controller

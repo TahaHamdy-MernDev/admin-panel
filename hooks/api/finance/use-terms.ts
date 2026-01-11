@@ -8,10 +8,11 @@ export enum TermType {
   INCOME = "INCOME",
   EXPENSE = "EXPENSE",
 }
+
 export type TermRow = {
   id: number;
   name: string;
-  type: TermType;
+  type: (typeof TermType)[keyof typeof TermType];
   created_at: string;
 };
 type Params = {

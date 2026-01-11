@@ -8,10 +8,12 @@ import { useTranslations } from "next-intl";
 import { RHFSelectField } from "@/components/rhf-form/fields/rhf-select-field";
 import { RHFInputField } from "@/components/rhf-form/fields/rhf-input-field";
 import { TermType, useCreateTermMutation } from "@/hooks/api/finance/use-terms";
+import { RHFCheckboxField } from "@/components/rhf-form/fields/rhf-checkbox-field";
 
 export const addTermSchema = z.object({
   name: z.string().min(2, "Term name must be at least 2 characters"),
   type: z.enum(TermType),
+  requires_employee: z.boolean().optional(),
 });
 
 export type TermFormValues = z.infer<typeof addTermSchema>;
@@ -24,6 +26,7 @@ export default function AddTermDialogForm() {
     defaultValues: {
       name: "",
       type: TermType.INCOME,
+      requires_employee: false,
     },
   });
   async function onSubmit(data: TermFormValues) {
@@ -58,6 +61,11 @@ export default function AddTermDialogForm() {
               label: t("form.labels.expense"),
             },
           ]}
+        />
+        <RHFCheckboxField
+          control={form.control}
+          name="requires_employee"
+          label={t("form.employees_term")}
         />
       </FieldGroup>
     </RHFDialogForm>

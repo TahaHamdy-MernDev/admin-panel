@@ -358,6 +358,7 @@
         "term_name": "اسم البند",
         "type": "نوع البند",
         "notes": "ملاحظات",
+        "employees_term": "بند الموظفين",
         "labels": {
           "income": "إيراد",
           "expense": "مصروف"

@@ -14,9 +14,10 @@ export function ReactQueryProvider({
       new QueryClient({
         defaultOptions: {
           queries: {
-            retry:0,
-            staleTime: 30_000,
-            refetchOnWindowFocus: false,
+            retry: 0,
+            staleTime: 0,
+            refetchOnWindowFocus: true,
+            refetchOnMount: true,
           },
         },
       })
