@@ -28,6 +28,7 @@ export function RHFCheckboxField<T extends FieldValues>({
   disabled,
   className,
   checkboxClassName,
+  ...props
 }: RHFCheckboxFieldProps<T>) {
   return (
     <Controller
@@ -44,6 +45,7 @@ export function RHFCheckboxField<T extends FieldValues>({
               onCheckedChange={field.onChange}
               disabled={disabled}
               className={checkboxClassName}
+              {...props}
             />
 
             {(label || description) && (

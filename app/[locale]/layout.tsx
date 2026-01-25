@@ -60,7 +60,7 @@ export default async function RootLayout({ children, params }: Props) {
             <DirectionProvider dir={locale === "ar" ? "rtl" : "ltr"}>
               <ReactQueryProvider>
                 {children}
-                <Toaster />
+                <Toaster position="top-center" />
               </ReactQueryProvider>
             </DirectionProvider>
           </NextIntlClientProvider>

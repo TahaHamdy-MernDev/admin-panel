@@ -1,4 +1,4 @@
-import Text from "@/components/typography";
+
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
@@ -35,6 +35,9 @@ function MainTable<TData, TValue>({
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
               <TableHead
+                style={{
+                  width: header.getSize(),
+                }}
                 key={header.id}
                 className="text-start text-balance text-sm"
               >

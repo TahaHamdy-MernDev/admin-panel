@@ -116,8 +116,24 @@
       "edit": "Edit",
       "delete": "Delete",
       "status": "Status",
+      "visible": "Visible",
       "logs": "Logs",
       "code": "Code",
+      "image": "Image",
+      "slug": "Slug",
+      "name": "Name",
+      "country": "Country",
+      "active": "Active",
+      "inactive": "Inactive",
+      "integrations": {
+        "provider": "Provider",
+        "Shopify": "Shopify",
+        "WooCommerce": "WooCommerce",
+        "Salla": "Salla",
+        "EasyOrder": "EasyOrder",
+        "Posta": "Posta",
+        "Other": "Other"
+      },
       "plans": {
         "name": "Plan Name",
         "price": "Price",
@@ -179,6 +195,16 @@
         "description": "Are you sure you want to disable this plan? Customers will no longer be able to subscribe."
       }
     },
+    "plans-visibility": {
+      "on": {
+        "title": "Make Plan Visible",
+        "description": "Are you sure you want to make this plan visible? It will be available for subscription immediately."
+      },
+      "off": {
+        "title": "Make Plan Hidden",
+        "description": "Are you sure you want to make this plan hidden? Customers will no longer be able to see it."
+      }
+    },
     "staff": {
       "on": {
         "title": "Enable Employee",
@@ -208,6 +234,38 @@
         "off": {
           "title": "This account cannot be set as default",
           "description": "There must be at least one account set as the default account."
+        }
+      }
+    },
+    "countries": {
+      "on": {
+        "title": "Activate country / currency",
+        "description": "This will make the country/currency available on the platform and visible where it is used."
+      },
+      "off": {
+        "title": "Deactivate country / currency",
+        "description": "This will disable the country/currency across the platform. It may be hidden from lists and blocked for new operations."
+      }
+    },
+    "integrations": {
+      "activity": {
+        "on": {
+          "title": "Activate",
+          "description": "This will enable the selected item across the platform. It will be available for use and new operations."
+        },
+        "off": {
+          "title": "Deactivate",
+          "description": "This will disable the selected item across the platform. It may be hidden from selection and blocked for new operations."
+        }
+      },
+      "visibility": {
+        "on": {
+          "title": "Show",
+          "description": "This will make the selected item visible in the dashboard and available in selection lists."
+        },
+        "off": {
+          "title": "Hide",
+          "description": "This will hide the selected item from the dashboard and selection lists. Existing data will not be deleted."
         }
       }
     }
@@ -369,20 +427,34 @@
   },
 
   "customers": {
-    "change_password": {
-      "title": "Change Password",
-      "description": "Set a new password for this customer",
-      "form": {
-        "password": "New Password",
-        "confirm_password": "Confirm Password"
-      }
-    },
-
     "delete_customer_account": {
       "title": "Delete Customer Account",
       "description": "Are you sure you want to delete the account for {name}? This action cannot be undone.",
       "confirm": "Confirm Deletion",
       "success": "Customer account deleted successfully"
+    },
+    "change_password": {
+      "title": "Change password",
+      "description": "Set a new password for this customer.",
+      "form": {
+        "password": "New password",
+        "confirm_password": "Confirm password",
+        "password_hint": "At least 8 characters including uppercase, lowercase, a number, and a symbol."
+      },
+      "validation": {
+        "password_min": "Password must be at least {min} characters",
+        "password_max": "Password must be at most {max} characters",
+        "password_lower": "Include at least one lowercase letter",
+        "password_upper": "Include at least one uppercase letter",
+        "password_number": "Include at least one number",
+        "password_symbol": "Include at least one symbol",
+        "confirm_required": "Please confirm your password",
+        "passwords_mismatch": "Passwords do not match"
+      },
+      "toast": {
+        "success_title": "Password changed",
+        "success_desc": "The password has been updated successfully."
+      }
     }
   },
 
@@ -492,6 +564,66 @@
       "admin": "Admin",
       "call_service": "Call Service",
       "accountant": "Accountant"
+    }
+  },
+  "countries": {
+    "add": "Add",
+    "title": "Add Country / Currency",
+    "description": "Fill in the details below, then click Save.",
+    "schema": {
+      "slug_required": "Slug is required",
+      "slug_max": "Slug must be at most 50 characters",
+      "slug_kebab": "Slug must be lowercase kebab-case (e.g. 'eg', 'usd', 'sa')",
+
+      "code_required": "Currency code is required",
+      "code_max": "Currency code must be at most 50 characters",
+      "code_kebab": "Currency code must be lowercase kebab-case (e.g. 'egp', 'usd', 'sar')",
+
+      "alt_required": "Alternative name is required",
+      "alt_max": "Alternative name must be at most 20 characters",
+
+      "image_required": "Image is required",
+
+      "name_en_max": "English name must be at most 120 characters",
+      "country_en_max": "English country must be at most 120 characters",
+      "name_ar_max": "Arabic name must be at most 120 characters",
+      "country_ar_max": "Arabic country must be at most 120 characters"
+    },
+
+    "form": {
+      "slug": "Slug",
+      "currency_code": "Currency code",
+      "alt_name": "Short name",
+      "image": "Image (URL or path)",
+      "name_en": "Name (English)",
+      "country_en": "Country (English)",
+      "name_ar": "Name (Arabic)",
+      "country_ar": "Country (Arabic)"
+    }
+  },
+  "integrations": {
+    "add": "Add integration",
+    "dialog": {
+      "title": "Create integration",
+      "description": "Add a new external service to connect with shipping or e-commerce platforms.",
+      "form": {
+        "name": "Integration name",
+        "provider": "Provider",
+        "image": "Logo / Image"
+      }
+    },
+    "provider": {
+      "Shopify": "Shopify",
+      "WooCommerce": "WooCommerce",
+      "Salla": "Salla",
+      "EasyOrder": "Easy Order",
+      "POSTA": "POSTA",
+      "Other": "Other"
+    },
+    "validation": {
+      "name_required": "Name is required.",
+      "provider_required": "Provider is required.",
+      "image_required": "Image is required."
     }
   }
 }

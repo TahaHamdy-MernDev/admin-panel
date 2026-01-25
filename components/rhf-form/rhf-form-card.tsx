@@ -13,6 +13,7 @@ type RHFCardFormProps<T extends FieldValues> = {
   description?: string;
   children: React.ReactNode;
   show_actions?: boolean;
+  loading?: boolean;
 };
 
 export function RHFCardForm<T extends FieldValues>({
@@ -22,6 +23,7 @@ export function RHFCardForm<T extends FieldValues>({
   onSubmit,
   children,
   show_actions = true,
+  loading = false,
 }: RHFCardFormProps<T>) {
   const t = useTranslations();
 
@@ -39,15 +41,23 @@ export function RHFCardForm<T extends FieldValues>({
       title={title || ""}
       description={description || ""}
       classes={{ card: "gap-0!", content: "mt-0!" }}
+      with_hover={false}
     >
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
         {children}
         {show_actions && (
           <CardFooter className="flex justify-end gap-2 px-0!">
-            <Button type="button" variant="ghost" onClick={handleCancel}>
+            <Button
+              type="button"
+              variant="ghost"
+              disabled={loading}
+              onClick={handleCancel}
+            >
               {t("common.cancel")}
             </Button>
-            <Button type="submit">{t("common.save")}</Button>
+            <Button type="submit" disabled={loading} is_loading={loading}>
+              {t("common.save")}
+            </Button>
           </CardFooter>
         )}
       </form>

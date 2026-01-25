@@ -21,6 +21,7 @@ type Props = {
     content?: string;
     footer?: string;
   };
+  with_hover?: boolean;
 };
 
 function MainCard({
@@ -30,6 +31,7 @@ function MainCard({
   children,
   footer,
   classes,
+  with_hover = true,
 }: Props) {
   return (
     <Card
@@ -40,7 +42,12 @@ function MainCard({
         classes?.card
       )}
     >
-      <div className="pointer-events-none absolute -right-10 -top-10 h-[30%] w-[40%] rounded-full bg-primary/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {
+        with_hover&& (
+          <div className="pointer-events-none absolute -right-10 -top-10 h-[30%] w-[40%] rounded-full bg-primary/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+        )
+      }
 
       <CardHeader className={cn("p-0", classes?.header)}>
         <div className="flex items-center justify-between">

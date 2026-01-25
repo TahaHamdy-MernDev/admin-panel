@@ -34,6 +34,7 @@ export type PaginatedResult<T> = {
   meta: PaginationMeta;
 };
 export type ApiResult<T> = {
+  errors: null;
   success: boolean;
   data: T;
   message: string;

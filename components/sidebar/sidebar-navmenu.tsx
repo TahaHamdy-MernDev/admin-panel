@@ -30,11 +30,11 @@ export default function SidebarNavMenu({ items }: { items: SidebarData[] }) {
       {items.map((item) => {
         const has_children = !!item.items?.length;
         const is_sub_item_active = item.items?.some(
-          (sub) => `/panel/${sub.url}` === pathname
+          (sub) => `/${sub.url}` === pathname
         );
         const is_item_active = has_children
           ? is_sub_item_active
-          : `/panel/${item.url}` === pathname;
+          : `/${item.url}` === pathname;
         const is_open = openItem === item.title;
         return (
           <Collapsible
@@ -87,7 +87,7 @@ function MenuItem({
         data-active={is_item_active}
         className="group/trigger"
       >
-        <Link href={`/panel/${item.url}`}>
+        <Link href={`/${item.url}`}>
           <item.icon className="transition-all duration-200 size-5.5! text-primary/70 data-[active=true]:text-primary group-hover/trigger:text-primary group-hover/trigger:scale-110" />
           <Text
             as="p"
@@ -142,7 +142,7 @@ function MenuItemWithSub({
             <SidebarMenuSub>
               {item.items?.map((subItem) => {
                 const is_sub_item_active = item.items?.some(
-                  () => `/panel/${subItem.url}` === pathname
+                  () => `/${subItem.url}` === pathname
                 );
                 return (
                   <SidebarMenuSubItem
@@ -154,7 +154,7 @@ function MenuItemWithSub({
                       asChild
                       isActive={is_sub_item_active}
                     >
-                      <Link href={`/panel/${subItem.url}`}>
+                      <Link href={`/${subItem.url}`}>
                         <Text
                           as="small"
                           className="data-[sub-item-active=true]:text-primary!"

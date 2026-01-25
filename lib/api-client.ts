@@ -1,110 +1,235 @@
-import { toast } from "sonner";
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  InternalAxiosRequestConfig,
+} from "axios";
 import { ApiResult } from "../types/api-types";
-import { useQueryClient } from "@tanstack/react-query";
 
 export class ApiError extends Error {
   constructor(
     message: string,
     public statusCode: number,
-    public errors?: Record<string, string[]> | null
+    public errors?: Record<string, string[]> | null,
   ) {
-    console.log(message, statusCode, errors);
     super(message);
-
     this.name = "ApiError";
   }
 }
 
 const BASE_URI = process.env.NEXT_PUBLIC_API_BASE_URI;
 
+// ✅ do NOT set Content-Type globally
+const commonConfig: AxiosRequestConfig = {
+  baseURL: BASE_URI,
+  withCredentials: true,
+  headers: {
+    "x-is-panel": "true",
+  },
+};
+
+const panelHttp: AxiosInstance = axios.create(commonConfig);
+const authHttp: AxiosInstance = axios.create(commonConfig);
+
+function toApiError(err: unknown): ApiError {
+  if (axios.isAxiosError(err)) {
+    const axErr = err as AxiosError<ApiResult<unknown>>;
+    const status = axErr.response?.status ?? 0;
+    const data = axErr.response?.data;
+
+    if (data) {
+      return new ApiError(
+        data.message || "Request failed",
+        data.statusCode || status,
+        data.errors ?? null,
+      );
+    }
+    return new ApiError(axErr.message || "Request failed", status);
+  }
+
+  return new ApiError("Unknown error", 0);
+}
+
+function redirectToLogin() {
+  const path = window.location.pathname;
+  const seg = path.split("/")[1];
+  const locale = seg && seg.length === 2 ? seg : "en";
+  window.location.href = `/${locale}/login`;
+}
+
+// -------------------- refresh mutex --------------------
+let isRefreshing = false;
+let refreshPromise: Promise<boolean> | null = null;
+
+async function refreshSession(): Promise<boolean> {
+  try {
+    const res = await apiClient.post<unknown>("refresh", {}, true);
+    return res.success === true;
+  } catch {
+    return false;
+  }
+}
+
+async function refreshOnce(): Promise<boolean> {
+  if (isRefreshing && refreshPromise) return refreshPromise;
+
+  isRefreshing = true;
+  refreshPromise = (async () => {
+    const ok = await refreshSession();
+    isRefreshing = false;
+    refreshPromise = null;
+    return ok;
+  })();
+
+  return refreshPromise;
+}
+
+// -------------------- 401 interceptor --------------------
+panelHttp.interceptors.response.use(
+  (response) => response,
+  async (error: AxiosError) => {
+    const original = error.config as
+      | (InternalAxiosRequestConfig & { _retry?: boolean })
+      | undefined;
+
+    const status = error.response?.status;
+
+    if (status === 401 && original && !original._retry) {
+      original._retry = true;
+
+      const refreshed = await refreshOnce();
+      if (refreshed) return panelHttp.request(original);
+
+      if (typeof window !== "undefined") redirectToLogin();
+    }
+
+    return Promise.reject(error);
+  },
+);
+
+// -------------------- request wrappers --------------------
 async function request<T>(
-  method: string,
+  method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE",
   endpoint: string,
   body?: unknown,
   params?: Record<string, unknown>,
   is_auth = false,
-  hasRetried = false
 ): Promise<ApiResult<T>> {
-  let url = new URL(`${BASE_URI}/v1/panel/${endpoint}`);
-  if (is_auth) {
-    url = new URL(`${BASE_URI}/auth/panel/${endpoint}`);
-  }
-
-  if (params) {
-    Object.entries(params).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) {
-        url.searchParams.append(key, String(value));
-      }
-    });
-  }
-
-  const res = await fetch(url.toString(), {
-    method,
-    headers: {
-      "Content-Type": "application/json",
-      "x-is-panel": "true",
-    },
-    credentials: "include",
-    body: body ? JSON.stringify(body) : undefined,
-  });
-
-  let json: ApiResult<T>;
+  const http = is_auth ? authHttp : panelHttp;
+  const prefix = is_auth ? "/auth/panel" : "/v1/panel";
+  const url = `${prefix}/${endpoint}`;
 
   try {
-    json = await res.json();
-  } catch {
-    throw new ApiError("Invalid response from server", res.status);
-  }
+    const res = await http.request<ApiResult<T>>({
+      method,
+      url,
+      params,
+      data: body,
+      // If you want to be explicit for JSON requests:
+      headers:
+        body instanceof FormData
+          ? undefined
+          : { "Content-Type": "application/json" },
+    });
 
-  if (
-    res.status === 401 &&
-    !hasRetried &&
-    !is_auth
-  ) {
-    const refreshed = await refreshSession();
+    const json = res.data;
 
-    if (refreshed) {
-      return request<T>(method, endpoint, body, params, is_auth, true);
+    if (!json?.success) {
+      throw new ApiError(
+        json?.message || "Request failed",
+        json?.statusCode || res.status,
+        (json as any)?.errors ?? null,
+      );
     }
-  }
 
-  if (!res.ok || !json.success) {
-    throw new ApiError(
-      json.message || "Request failed",
-      json.statusCode || res.status
-    );
+    return json;
+  } catch (err) {
+    throw toApiError(err);
   }
-
-  return json;
 }
+
+// ✅ Proper multipart request (Axios sets boundary)
+async function requestForm<T>(
+  endpoint: string,
+  formData: FormData,
+): Promise<ApiResult<T>> {
+  const url = `/v1/panel/${endpoint}`;
+
+  try {
+    const res = await panelHttp.request<ApiResult<T>>({
+      method: "POST",
+      url,
+      data: formData,
+      // IMPORTANT: explicitly REMOVE any accidental content-type
+      transformRequest: [
+        (data, headers) => {
+          if (headers && headers["Content-Type"])
+            delete headers["Content-Type"];
+          if (headers && headers["content-type"])
+            delete headers["content-type"];
+          return data;
+        },
+      ],
+      headers: {
+        "x-is-panel": "true",
+      },
+    });
+
+    const json = res.data;
+
+    if (!json?.success) {
+      throw new ApiError(
+        json?.message || "Request failed",
+        json?.statusCode || res.status,
+        (json as any)?.errors ?? null,
+      );
+    }
+
+    return json;
+  } catch (err) {
+    throw toApiError(err);
+  }
+}
+
 export const apiClient = {
   get: <T>(
     endpoint: string,
     params?: Record<string, unknown>,
-    is_auth = false
+    is_auth = false,
   ) => request<T>("GET", endpoint, undefined, params, is_auth),
 
   post: <T>(endpoint: string, body: unknown, is_auth = false) =>
     request<T>("POST", endpoint, body, undefined, is_auth),
 
+  postForm: <T>(endpoint: string, formData: FormData) =>
+    requestForm<T>(endpoint, formData),
   put: <T>(endpoint: string, body: unknown, is_auth = false) =>
     request<T>("PUT", endpoint, body, undefined, is_auth),
-  patch: <T>(endpoint: string) => request<T>("PATCH", endpoint),
+  patch: <T>(endpoint: string, body: unknown, is_auth = false) =>
+    request<T>("PATCH", endpoint, body, undefined, is_auth),
   delete: <T>(endpoint: string, is_auth = false) =>
     request<T>("DELETE", endpoint, undefined, undefined, is_auth),
 };
 
-async function refreshSession(): Promise<boolean> {
-  const res = await fetch(`${BASE_URI}/auth/panel/refresh`, {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "x-is-panel": "true",
-    },
-  });
+// -------------------- FormData helper --------------------
+export function toFormData(values: Record<string, unknown>) {
+  const fd = new FormData();
 
-  if (!res.ok) return false;
+  for (const [key, val] of Object.entries(values)) {
+    if (val === undefined || val === null) continue;
 
-  const json = await res.json();
-  return json?.success === true;
+    if (val instanceof File) {
+      fd.append(key, val);
+      continue;
+    }
+
+    if (Array.isArray(val) && val.every((x) => x instanceof File)) {
+      val.forEach((f) => fd.append(`${key}[]`, f));
+      continue;
+    }
+
+    fd.append(key, String(val));
+  }
+
+  return fd;
 }
