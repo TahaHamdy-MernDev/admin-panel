@@ -7,7 +7,7 @@ export function useToggleAccountStatusMutation() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ id }: { id: number }) =>
-      apiClient.patch(`accounts/${id}/status`),
+      apiClient.patch(`accounts/${id}/status`,{}),
     onSuccess: () => {
       toast.success("Account Status updated successfully");
       queryClient.invalidateQueries({

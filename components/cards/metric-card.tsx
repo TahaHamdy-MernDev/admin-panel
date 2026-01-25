@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { cn } from "@/lib/utils";
@@ -8,7 +6,7 @@ import { useTranslations } from "next-intl";
 type Props = {
   title: string;
   value: string;
-  icon?: React.ElementType<{ className?: string }>;
+  icon?: React.ReactNode;
 };
 
 function MetricCard({ title, value, icon }: Props) {
@@ -21,15 +19,14 @@ function MetricCard({ title, value, icon }: Props) {
         "group relative overflow-hidden rounded-2xl",
         "border border-border bg-card text-card-foreground",
         "shadow-none transition",
-        "p-4!" // use !prefix (Tailwind important) correctly
+        "p-4!",
       )}
     >
-  
       <div
         className={cn(
           "pointer-events-none absolute ltr:-right-10 rtl:-left-10 -top-14 h-32 w-32 rounded-full",
           "bg-primary/15 blur-3xl opacity-0 group-hover:opacity-100",
-          "transition-opacity duration-300"
+          "transition-opacity duration-300",
         )}
       />
 
@@ -44,13 +41,13 @@ function MetricCard({ title, value, icon }: Props) {
           <div
             className={cn(
               "shrink-0 rounded-xl p-2.5",
-              "border border-border bg-muted/40",
+              "border border-border bg-background",
               "transition-transform duration-300 group-hover:scale-[1.02]",
-              "motion-reduce:transition-none"
+              "motion-reduce:transition-none",
             )}
             aria-hidden="true"
           >
-            <Icon className="h-5 w-5 text-primary" />
+            {Icon}
           </div>
         )}
       </CardHeader>

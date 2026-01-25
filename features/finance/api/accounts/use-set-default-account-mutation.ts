@@ -7,7 +7,7 @@ export function useSetDefaultAccountMutation() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ id }: { id: number }) =>
-      apiClient.patch(`accounts/${id}/default`),
+      apiClient.patch(`accounts/${id}/default`,{}),
     onSuccess: () => {
       toast.success("Account Set Default successfully");
       queryClient.invalidateQueries({
