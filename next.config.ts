@@ -5,8 +5,11 @@ const nextConfig: NextConfig = {
   reactCompiler: false,
   poweredByHeader: false,
    images:{
-    domains:[
-      "sgp1.digitaloceanspaces.com"
+    remotePatterns:[
+      {
+        protocol: "https",
+        hostname: "sgp1.digitaloceanspaces.com",
+      }
     ]
    },
   async headers() {

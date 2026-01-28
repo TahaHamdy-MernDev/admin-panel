@@ -50,12 +50,12 @@ function toApiError(err: unknown): ApiError {
   return new ApiError("Unknown error", 0);
 }
 
-function redirectToLogin() {
-  const path = window.location.pathname;
-  const seg = path.split("/")[1];
-  const locale = seg && seg.length === 2 ? seg : "en";
-  window.location.href = `/${locale}/login`;
-}
+// function redirectToLogin() {
+//   const path = window.location.pathname;
+//   const seg = path.split("/")[1];
+//   const locale = seg && seg.length === 2 ? seg : "en";
+//   window.location.href = `/${locale}/login`;
+// }
 
 // -------------------- refresh mutex --------------------
 let isRefreshing = false;
@@ -100,7 +100,9 @@ panelHttp.interceptors.response.use(
       const refreshed = await refreshOnce();
       if (refreshed) return panelHttp.request(original);
 
-      if (typeof window !== "undefined") redirectToLogin();
+      if (typeof window !== "undefined") {
+        console.log("issues here");
+      }
     }
 
     return Promise.reject(error);
