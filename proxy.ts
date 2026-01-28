@@ -4,24 +4,31 @@ import { NextResponse, type NextRequest } from "next/server";
 
 const PUBLIC_FILE = /\.(.*)$/;
 
+// Locale-aware parsing: only treat the first segment as a locale if it's in routing.locales
 function getLocaleAndRest(pathname: string) {
   const segments = pathname.split("/").filter(Boolean);
-  const locale = segments[0]; // e.g. "en"
-  const rest = "/" + segments.slice(1).join("/"); // e.g. "/login"
-  return { locale, rest };
+
+  const first = segments[0] as "ar" | "en";
+  const isLocale = first && routing.locales.includes(first);
+
+  const locale = isLocale ? first : undefined;
+  const restSegments = isLocale ? segments.slice(1) : segments;
+
+  // If nothing left, rest is "/"
+  const rest = "/" + restSegments.join("/");
+  return { locale, rest: rest === "/" ? "/" : rest };
 }
 
 function isPublicPath(pathname: string) {
   // Allow next internals, static files, and API
   if (pathname.startsWith("/_next")) return true;
-  if (pathname.startsWith("/favicon.ico")) return true;
+  if (pathname === "/favicon.ico") return true;
   if (pathname.startsWith("/api")) return true;
   if (PUBLIC_FILE.test(pathname)) return true;
 
-  const { locale, rest } = getLocaleAndRest(pathname);
-  if (!locale) return false;
+  const { rest } = getLocaleAndRest(pathname);
 
-  // Only this route is public
+  // Public pages (add more here if needed)
   if (rest === "/login") return true;
 
   return false;
@@ -52,8 +59,6 @@ function authMiddleware(req: NextRequest) {
   }
 
   // Optional: if user hits /[locale]/login while having tokens, redirect away
-  // Note: login is public, so this only matters if you want to enforce it.
-  // We'll handle it here anyway.
   if (rest === "/login" && (access || refresh)) {
     const url = req.nextUrl.clone();
     url.pathname = `/${resolvedLocale}/`;
@@ -65,7 +70,7 @@ function authMiddleware(req: NextRequest) {
 }
 
 // 3) compose them
-export default function proxy(req: NextRequest) {
+export default async function middleware(req: NextRequest) {
   // Run auth first: it may redirect quickly.
   const authResult = authMiddleware(req);
   if (authResult.status !== 200) return authResult;
@@ -75,6 +80,6 @@ export default function proxy(req: NextRequest) {
 }
 
 export const config = {
-  // Keep next-intl recommended matcher but also include locale routes
+  // next-intl recommended matcher (exclude files, next internals, api, etc.)
   matcher: ["/((?!api|trpc|_next|_vercel|.*\\..*).*)"],
 };
