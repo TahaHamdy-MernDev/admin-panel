@@ -1,5 +1,5 @@
 "use client";
-import { Badge } from "@/components/badge";
+import { TranslatedBadge } from "@/components/badge";
 import {
   RowCheckbox,
   SelectAllCheckbox,
@@ -11,6 +11,7 @@ import { format } from "date-fns";
 import { useTranslations } from "next-intl";
 import { useToggleStaffStatusMutation } from "../api/use-toggle-staff-status-mutation";
 import { StaffRow } from "../types";
+import { DateCell } from "@/components/data-table/reusable/date-cell";
 
 function ToggleStaffStatus({
   staffId,
@@ -35,28 +36,22 @@ function ToggleStaffStatus({
 export function useStaffColumns(): ColumnDef<StaffRow>[] {
   const t = useTranslations("data-table.columns");
   return [
-    {
-      id: "select",
-      header: ({ table }) => <SelectAllCheckbox table={table} />,
-      cell: ({ row }) => <RowCheckbox row={row} />,
-      size: 50,
-    },
+    // {
+    //   id: "select",
+    //   header: ({ table }) => <SelectAllCheckbox table={table} />,
+    //   cell: ({ row }) => <RowCheckbox row={row} />,
+    //   size: 50,
+    // },
     {
       id: "id",
       accessorKey: "id",
       header: "#",
+      size: 50,
     },
     {
       accessorKey: "createdAt",
       header: t("created_at"),
-      cell: ({ row }) => {
-        return (
-          <span className="flex flex-col">
-            <p>{format(row.original.createdAt, "hh:mm a")}</p>
-            <p>{format(row.original.createdAt, "yyyy-MM-dd")}</p>
-          </span>
-        );
-      },
+      cell: ({ row }) => <DateCell date={row.original.createdAt} />,
     },
 
     {
@@ -94,7 +89,7 @@ export function useStaffColumns(): ColumnDef<StaffRow>[] {
       accessorKey: "platform_role",
       header: t("staff.role"),
       cell: ({ row }) => {
-        return <Badge role={row.original.platform_role} />;
+        return <TranslatedBadge badgeKey={row.original.platform_role} />;
       },
     },
     {

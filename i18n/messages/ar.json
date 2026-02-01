@@ -18,6 +18,10 @@
       "submit": "تسجيل الدخول"
     }
   },
+  "header-user": {
+    "logout": "تسجيل الخروج",
+    "profile": "الملف الشخصي"
+  },
   "app-sidebar": {
     "dashboard": "لوحة التحكم",
 
@@ -137,7 +141,10 @@
         "name": "اسم الباقة",
         "price": "السعر",
         "pilling": "الفوترة",
-        "description": "الوصف"
+        "description": "الوصف",
+        "note": "الملاحظات",
+        "start_at": "تاريخ الاشتراك",
+        "end_at": "تاريخ الانتهاء"
       },
 
       "customers": {
@@ -314,6 +321,10 @@
       "create": {
         "title": "إنشاء باقة",
         "description": "إضافة باقة اشتراك جديدة وتحديد خصائصها"
+      },
+      "subscriptions-activity": {
+        "title": "سجل الاشتراكات على الخطة",
+        "description": "اعرض وتابع جميع الاشتراكات التي تمت على هذه الخطة، مع تفاصيل الحالة والتواريخ والمبالغ."
       }
     },
 
@@ -475,6 +486,14 @@
   },
 
   "plans": {
+    "delete_plan": {
+      "title": "حذف الخطة",
+      "description": "هل أنت متأكد من حذف هذه الخطة؟ لا يمكن التراجع عن هذا الإجراء."
+    },
+    "subscriptions": {
+      "title": "الاشتراكات",
+      "description": "إدارة اشتراكات الخطة"
+    },
     "create": {
       "title": "إنشاء خطة",
       "dialog": {
@@ -590,6 +609,13 @@
       "admin": "مدير",
       "call_service": "خدمة العملاء",
       "accountant": "محاسب"
+    },
+    "subs-status": {
+      "active": "نشط",
+      "trialing": "تجريب",
+      "paused": "موقوف",
+      "canceled": "ملغي",
+      "expired": "انتهت"
     }
   },
   "countries": {

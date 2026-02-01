@@ -1,19 +1,30 @@
-"use client";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { useLocaleDirection } from "@/hooks/use-locale-direction";
 import AppHeader from "@/components/sidebar/app-header";
-export default function Layout({ children }: { children: React.ReactNode }) {
-  const { dir } = useLocaleDirection();
+import { cookies } from "next/headers";
+import { redirect } from "@/i18n/navigation";
+export default async function Layout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  const access_token = (await cookies()).get("sa_access_token")?.value;
+  const refresh_token = (await cookies()).get("sa_refresh_token")?.value;
+
+  if (!refresh_token || !access_token) {
+    const { locale } = await params;
+    return redirect({ href: "/login", locale });
+  }
   return (
-    <SidebarProvider className="">
-      <AppSidebar side={dir === "rtl" ? "right" : "left"} />
+    <SidebarProvider>
+      <AppSidebar  />
       <SidebarInset>
         <AppHeader />
         <div className="container mx-auto px-4 py-6 transition-all duration-200 ease-in">
           {children}
         </div>
-     
       </SidebarInset>
     </SidebarProvider>
   );

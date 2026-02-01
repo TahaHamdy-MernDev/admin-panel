@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -132,7 +133,7 @@
   }
 
   .data-table {
-    @apply  rounded-lg p-2 pt-0 border border-border bg-card text-card-foreground;
+    @apply rounded-lg p-2 pt-0 border border-border bg-card text-card-foreground;
   }
 }
 

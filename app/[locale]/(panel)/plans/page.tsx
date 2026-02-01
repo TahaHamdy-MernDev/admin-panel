@@ -2,7 +2,7 @@ import PageHeader from "@/components/page-header";
 import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/button";
-import PlansDataTable from "@/features/plan/components/plan-data-table";
+import PlansDataTable from "@/features/plan/components/table/plan-data-table";
 
 export default async function Page() {
   const t = await getTranslations();

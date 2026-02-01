@@ -28,7 +28,10 @@ export default function ConfirmDeleteCustomerDialog({
   ownerId,
 }: ConfirmDeleteCustomerDialogProps) {
   const t = useTranslations();
-  const mutation = useDeleteCustomerMutation();
+  const mutation = useDeleteCustomerMutation({
+    page: 1,
+    limit: 10,
+  });
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 

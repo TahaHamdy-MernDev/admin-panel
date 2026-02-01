@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { apiClient } from "@/lib/api-client";
 import { PLAN_QUERY_KEY } from "../types";
-import { PlanFormInput } from "../components/plan-form";
+import { PlanFormInput } from "../schema";
 
 export function useCreatePlanMutation() {
   const queryClient = useQueryClient();

@@ -2,6 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { useTranslations } from "next-intl";
 import { TermRow } from "../../types";
+import { DateCell } from "@/components/data-table/reusable/date-cell";
 
 export function useTermsColumns(): ColumnDef<TermRow>[] {
   const t = useTranslations("data-table.columns");
@@ -13,12 +14,13 @@ export function useTermsColumns(): ColumnDef<TermRow>[] {
     {
       accessorKey: "created_at",
       header: t("created_at"),
-      cell: ({ row }) => (
-        <span className="flex flex-col">
-          <p>{format(row.original.created_at, "hh:mm a")}</p>
-          <p>{format(row.original.created_at, "yyyy-MM-dd")}</p>
-        </span>
-      ),
+      cell: ({ row }) => <DateCell date={row.original.created_at} />,
+      //   (
+      //   <span className="flex flex-col">
+      //     <p>{format(row.original.created_at, "hh:mm a")}</p>
+      //     <p>{format(row.original.created_at, "yyyy-MM-dd")}</p>
+      //   </span>
+      // ),
     },
   ];
 }

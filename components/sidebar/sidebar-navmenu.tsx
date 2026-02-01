@@ -120,8 +120,9 @@ function MenuItemWithSub({
           variant="parent"
           tooltip={item.title}
           isActive={is_item_active}
+          className="group/trigger"
         >
-          <item.icon className="transition-all duration-200 size-5.5! text-primary/80 data-[active=true]:text-primary! group-hover/trigger:text-primary group-hover/trigger:scale-110" />
+          <item.icon className="transition-all duration-200 size-5.5! text-primary/70 data-[active=true]:text-primary group-hover/trigger:text-primary group-hover/trigger:scale-110" />
           <Text
             as="p"
             className="text-base font-medium transition-colors duration-200 data-[active=true]:text-primary! group-hover/trigger:text-primary!"
@@ -142,7 +143,7 @@ function MenuItemWithSub({
             <SidebarMenuSub>
               {item.items?.map((subItem) => {
                 const is_sub_item_active = item.items?.some(
-                  () => `/${subItem.url}` === pathname
+                  () => `/${subItem.url}` === pathname,
                 );
                 return (
                   <SidebarMenuSubItem

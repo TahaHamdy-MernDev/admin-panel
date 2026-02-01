@@ -2,6 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { useTranslations } from "next-intl";
 import { TransactionRow } from "../../types";
+import { DateCell } from "@/components/data-table/reusable/date-cell";
 
 export function useTransactionsColumns(): ColumnDef<TransactionRow>[] {
   const t = useTranslations("data-table.columns");
@@ -11,12 +12,13 @@ export function useTransactionsColumns(): ColumnDef<TransactionRow>[] {
     {
       accessorKey: "created_at",
       header: t("created_at"),
-      cell: ({ row }) => (
-        <span className="flex flex-col">
-          <p>{format(row.original.created_at, "hh:mm a")}</p>
-          <p>{format(row.original.created_at, "yyyy-MM-dd")}</p>
-        </span>
-      ),
+      cell: ({ row }) => <DateCell date={row.original.created_at} />,
+      //   (
+      //   <span className="flex flex-col">
+      //     <p>{format(row.original.created_at, "hh:mm a")}</p>
+      //     <p>{format(row.original.created_at, "yyyy-MM-dd")}</p>
+      //   </span>
+      // ),
     },
     { accessorKey: "code", header: t("finance.transaction_ref") },
     { accessorKey: "amount", header: t("finance.amount") },

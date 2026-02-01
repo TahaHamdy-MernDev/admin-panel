@@ -44,7 +44,7 @@ export function LoginForm() {
         case PlatformRoles.ACCOUNTANT:
         case PlatformRoles.ADMIN:
         case PlatformRoles.CALL_SERVICE:
-          router.push({ pathname: "/overview" });
+          router.replace("/overview");
           break;
 
         default:

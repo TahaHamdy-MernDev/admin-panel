@@ -1,6 +1,6 @@
 "use client";
 import DataTable from "@/components/data-table";
-import { useCustomersColumns } from "./customer-columns";
+import { useCustomersColumns } from "./use-customer-columns";
 import { useSearchParams } from "next/navigation";
 import { useCustomersQuery } from "../api/use-customer-query";
 

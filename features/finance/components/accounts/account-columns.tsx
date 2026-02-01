@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { AccountRow } from "../../types";
 import { useSetDefaultAccountMutation } from "../../api/accounts/use-set-default-account-mutation";
 import { useToggleAccountStatusMutation } from "../../api/accounts/use-toggle-account-status-mutation";
+import { DateCell } from "@/components/data-table/reusable/date-cell";
 function ToggleDefaultAccountStatus({
   is_active,
   id,
@@ -60,14 +61,7 @@ export function useAccountsColumns(): ColumnDef<AccountRow>[] {
     {
       accessorKey: "created_at",
       header: t("created_at"),
-      cell: ({ row }) => {
-        return (
-          <span className="flex flex-col">
-            <p>{format(row.original.created_at, "hh:mm a")}</p>
-            <p>{format(row.original.created_at, "yyyy-MM-dd")}</p>
-          </span>
-        );
-      },
+      cell: ({ row }) => <DateCell date={row.original.created_at} />,
     },
     {
       accessorKey: "name",

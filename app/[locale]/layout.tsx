@@ -5,14 +5,15 @@ import { routing } from "@/i18n/routing";
 import localFont from "next/font/local";
 import { getTranslations } from "next-intl/server";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { DirectionProvider } from "@/components/providers/direction-provider";
 import { cn } from "@/lib/utils";
 import { ReactQueryProvider } from "@/components/providers/react-query";
 import { Toaster } from "@/components/ui/sonner";
+import { DirectionProvider } from "@/components/ui/direction";
 const din_font = localFont({
   src: "./DINN.ttf",
   variable: "--font-din",
 });
+
 export async function generateMetadata({
   params,
 }: {
@@ -47,24 +48,24 @@ export default async function RootLayout({ children, params }: Props) {
         className={cn(
           din_font.variable,
           din_font.className,
-          "min-h-svh antialiased "
+          "min-h-svh antialiased ",
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange={true}
-        >
-          <NextIntlClientProvider locale={locale}>
-            <DirectionProvider dir={locale === "ar" ? "rtl" : "ltr"}>
+        <DirectionProvider dir={locale === "ar" ? "rtl" : "ltr"}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange={true}
+          >
+            <NextIntlClientProvider locale={locale}>
               <ReactQueryProvider>
                 {children}
                 <Toaster position="top-center" />
               </ReactQueryProvider>
-            </DirectionProvider>
-          </NextIntlClientProvider>
-        </ThemeProvider>
+            </NextIntlClientProvider>
+          </ThemeProvider>
+        </DirectionProvider>
       </body>
     </html>
   );

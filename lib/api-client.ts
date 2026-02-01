@@ -50,12 +50,12 @@ function toApiError(err: unknown): ApiError {
   return new ApiError("Unknown error", 0);
 }
 
-// function redirectToLogin() {
-//   const path = window.location.pathname;
-//   const seg = path.split("/")[1];
-//   const locale = seg && seg.length === 2 ? seg : "en";
-//   window.location.href = `/${locale}/login`;
-// }
+function redirectToLogin() {
+  const path = window.location.pathname;
+  const seg = path.split("/")[1];
+  const locale = seg && seg.length === 2 ? seg : "en";
+  window.location.href = `/${locale}/login`;
+}
 
 // -------------------- refresh mutex --------------------
 let isRefreshing = false;
@@ -102,6 +102,7 @@ panelHttp.interceptors.response.use(
 
       if (typeof window !== "undefined") {
         console.log("issues here");
+        redirectToLogin();
       }
     }
 
@@ -140,7 +141,7 @@ async function request<T>(
       throw new ApiError(
         json?.message || "Request failed",
         json?.statusCode || res.status,
-        (json as any)?.errors ?? null,
+        // (json as any)?.errors ?? null,
       );
     }
 
@@ -183,7 +184,7 @@ async function requestForm<T>(
       throw new ApiError(
         json?.message || "Request failed",
         json?.statusCode || res.status,
-        (json as any)?.errors ?? null,
+        // (json as any)?.errors ?? null,
       );
     }
 

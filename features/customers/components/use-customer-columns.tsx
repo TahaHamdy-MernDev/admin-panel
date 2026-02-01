@@ -14,6 +14,7 @@ import { Activity, KeyRound, Trash2, User } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useToggleCustomerStatusMutation } from "../api/use-toggle-customer-status-mutation";
 import { CustomerRow } from "../types";
+import { DateCell } from "@/components/data-table/reusable/date-cell";
 function ToggleStatus({ status, id }: { status: boolean; id: string }) {
   const mutation = useToggleCustomerStatusMutation();
   async function handleToggle() {
@@ -45,33 +46,29 @@ export function useCustomersColumns(): ColumnDef<CustomerRow>[] {
   const t = useTranslations("data-table.columns");
   return [
     {
-      id: "select",
-      header: ({ table }) => <SelectAllCheckbox table={table} />,
-      cell: ({ row }) => <RowCheckbox row={row} />,
-      size: 50,
-    },
-    {
-      accessorKey: "owner.code",
-      header: t("id"),
-    },
-    {
       id: "created_at",
       accessorKey: "createdAt",
       header: t("created_at"),
-      cell: ({ row }) => {
-        return formatDate(row.original.owner.createdAt, "yyyy-MM-dd");
-      },
+      cell: ({ row }) => (
+        <DateCell date={row?.original?.owner?.createdAt} format="yyyy-MM-dd" />
+      ),
     },
+    {
+      accessorKey: "owner.code",
+      header: t("code"),
+    },
+
     {
       id: "customer_info",
       accessorFn: (row) =>
-        `${row.owner.firstName} ${row.owner.lastName} - ${row.owner.phoneNumber}`,
+        `${row?.owner?.firstName} ${row?.owner?.lastName} - ${row?.owner?.phoneNumber}`,
       header: t("customers.customer_info"),
       cell: ({ row }) => {
+        const owner = row?.original?.owner;
         return (
           <div className="flex flex-col gap-0">
-            {row.original.owner.firstName} {row.original.owner.lastName} <br />
-            {row.original.owner.phoneNumber}
+            {owner?.firstName} {owner?.lastName} <br />
+            {owner?.phoneNumber}
           </div>
         );
       },
@@ -83,7 +80,11 @@ export function useCustomersColumns(): ColumnDef<CustomerRow>[] {
       header: t("customers.last_login"),
       cell: ({ row }) => {
         const lastLogin = row.original.owner?.sessions[0]?.created_at ?? null;
-        return lastLogin ? formatDate(lastLogin, "yyyy-MM-dd HH:mm a") : "-";
+        return lastLogin ? (
+          <DateCell date={lastLogin} format="yyyy-MM-dd HH:mm a" />
+        ) : (
+          "-"
+        );
       },
     },
     {
@@ -155,7 +156,9 @@ export function useCustomersColumns(): ColumnDef<CustomerRow>[] {
       cell: ({ row }) => {
         return (
           <TableButton variant={"table_icon_activity"}>
-            <Link href={`/panel/customers/activity/${row.original.owner.code}`}>
+            <Link
+              href={`customers/${row.original?.owner?.code?.toLowerCase()}/activity`}
+            >
               <Activity />
             </Link>
           </TableButton>

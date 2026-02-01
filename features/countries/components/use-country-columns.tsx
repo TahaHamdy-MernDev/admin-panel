@@ -5,6 +5,7 @@ import Image from "next/image";
 import { formatDate } from "date-fns";
 import { useToggleCountryStatusMutation } from "../api/use-toggle-country-status-mutation";
 import { ConfirmableSwitch } from "@/components/dialogs/confirmable-switch";
+import { DateCell } from "@/components/data-table/reusable/date-cell";
 function ToggleStatus({ status, id }: { status: boolean; id: string }) {
   const mutation = useToggleCountryStatusMutation();
   async function onConfirm() {
@@ -31,7 +32,7 @@ export function useCountryColumns(): ColumnDef<CurrencyRow>[] {
       accessorKey: "created_at",
       header: t("created_at"),
       cell: ({ row }) => {
-        return formatDate(row.original.created_at, "yyyy-MM-dd HH:mm a");
+        return <DateCell date={row.original.created_at} />;
       },
       size: 150,
     },

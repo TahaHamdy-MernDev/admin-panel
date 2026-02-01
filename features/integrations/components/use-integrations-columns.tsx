@@ -6,6 +6,7 @@ import { useToggleIntegrationVisibilityMutation } from "../api/use-toggle-integr
 import { useToggleIntegrationStatusMutation } from "../api/use-toggle-integration-status-mutation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { formatDate } from "date-fns";
+import { DateCell } from "@/components/data-table/reusable/date-cell";
 function ToggleStatus({ status, id }: { status: boolean; id: number }) {
   const mutation = useToggleIntegrationStatusMutation();
   async function onConfirm() {
@@ -45,10 +46,7 @@ export function useIntegrationsColumns(): ColumnDef<IntegrationRow>[] {
     {
       accessorKey: "created_at",
       header: t("created_at"),
-      cell: ({ row }) => {
-        const created_at = row.getValue("created_at") as string;
-        return formatDate(created_at, "yyyy-MM-dd HH:mm a");
-      },
+      cell: ({ row }) => <DateCell date={row.original.created_at} />,
     },
     {
       accessorKey: "image",
@@ -82,7 +80,7 @@ export function useIntegrationsColumns(): ColumnDef<IntegrationRow>[] {
       header: t("status"),
       cell: ({ row }) => {
         const status = row.original.is_active as boolean;
-        const id = row.original.id 
+        const id = row.original.id;
         return <ToggleStatus status={status} id={id} />;
       },
     },
@@ -92,7 +90,7 @@ export function useIntegrationsColumns(): ColumnDef<IntegrationRow>[] {
       cell: ({ row }) => {
         const status = row.original.is_visible as boolean;
         console.log("status", status);
-        const id = row.original.id 
+        const id = row.original.id;
         return <ToggleVisibility status={status} id={id} />;
       },
     },

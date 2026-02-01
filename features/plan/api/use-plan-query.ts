@@ -1,17 +1,13 @@
 import { apiClient } from "@/lib/api-client";
-import { PaginatedResult } from "@/types/api-types";
 import { useQuery } from "@tanstack/react-query";
 
-import { PlanParams, PLAN_QUERY_KEY, PlanRow } from "../types";
+import { GetPlanRes, PLAN_QUERY_KEY } from "../types";
 
-export function usePlanQuery({ page, limit }: PlanParams) {
+export function usePlanQuery(code: string) {
   return useQuery({
-    queryKey: [PLAN_QUERY_KEY, { page, limit }],
+    queryKey: [PLAN_QUERY_KEY, code],
     queryFn: async () => {
-      const res = await apiClient.get<PaginatedResult<PlanRow>>("plans/all", {
-        page,
-        limit,
-      });
+      const res = await apiClient.get<GetPlanRes>(`plans/${code}`);
       return res.data;
     },
   });
