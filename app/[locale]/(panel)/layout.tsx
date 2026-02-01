@@ -17,10 +17,15 @@ export default async function Layout({
   const accessToken = cookieStore.get("sa_access_token")?.value;
   const refreshToken = cookieStore.get("sa_refresh_token")?.value;
 
-  if (!accessToken || !refreshToken) {
-    redirect({ href: "/login", locale });
-  }
+  // if (!accessToken || !refreshToken) {
+  //   redirect({ href: "/login", locale });
+  // }
 
+  console.log({
+    accessToken,
+    refreshToken
+  });
+  
   return (
     <SidebarProvider>
       <AppSidebar />
