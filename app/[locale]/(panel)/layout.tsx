@@ -12,6 +12,10 @@ export default async function Layout({
 }) {
   const access_token = (await cookies()).get("sa_access_token")?.value;
   const refresh_token = (await cookies()).get("sa_refresh_token")?.value;
+  console.log({
+    refresh_token,
+    access_token,
+  });
 
   if (!refresh_token || !access_token) {
     const { locale } = await params;
@@ -19,7 +23,7 @@ export default async function Layout({
   }
   return (
     <SidebarProvider>
-      <AppSidebar  />
+      <AppSidebar />
       <SidebarInset>
         <AppHeader />
         <div className="container mx-auto px-4 py-6 transition-all duration-200 ease-in">
