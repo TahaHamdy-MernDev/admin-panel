@@ -17,6 +17,7 @@ import { CustomerRow } from "../types";
 import { DateCell } from "@/components/data-table/reusable/date-cell";
 function ToggleStatus({ status, id }: { status: boolean; id: string }) {
   const mutation = useToggleCustomerStatusMutation();
+  if (!id) return "-";
   async function handleToggle() {
     await mutation.mutateAsync(id);
   }
@@ -30,6 +31,9 @@ function ToggleStatus({ status, id }: { status: boolean; id: string }) {
   );
 }
 function DeleteCustomer({ owner }: { owner: CustomerRow["owner"] }) {
+  if (!owner) {
+    return "-";
+  }
   return (
     <ConfirmDeleteCustomerDialog
       trigger={
@@ -115,12 +119,11 @@ export function useCustomersColumns(): ColumnDef<CustomerRow>[] {
       accessorKey: "owner",
       header: t("status"),
       cell: ({ row }) => {
-        const status = row.original.owner.is_active;
-        console.log("status ", status);
+        const owner = row.original.owner;
+        const status = owner ? owner.is_active : false;
+        const id = owner?.id?.toString() || "";
 
-        return (
-          <ToggleStatus status={status} id={row.original.owner.id.toString()} />
-        );
+        return <ToggleStatus status={status} id={id} />;
       },
     },
     {
