@@ -1,27 +1,30 @@
-"use client"
+"use client";
 
-import { Control, Controller, FieldValues, Path } from "react-hook-form"
+import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import {
   Field,
   FieldError,
   FieldLabel,
   FieldDescription,
-} from "@/components/ui/field"
+} from "@/components/ui/field";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
   InputGroupTextarea,
-} from "@/components/ui/input-group"
+} from "@/components/ui/input-group";
 
 type RHFTextareaFieldProps<T extends FieldValues> = {
-  control: Control<T>
-  name: Path<T>
-  label: string
-  description?: string
-  maxLength?: number
-  rows?: number
-}
+  control: Control<T>;
+  name: Path<T>;
+  label?: string;
+  description?: string;
+  maxLength?: number;
+  placeholder?: string;
+  rows?: number;
+  className?: string;
+  border?: string;
+};
 
 export function RHFTextareaField<T extends FieldValues>({
   control,
@@ -29,7 +32,10 @@ export function RHFTextareaField<T extends FieldValues>({
   label,
   description,
   maxLength,
+  placeholder,
+  className,
   rows = 5,
+  border,
 }: RHFTextareaFieldProps<T>) {
   return (
     <Controller
@@ -37,13 +43,14 @@ export function RHFTextareaField<T extends FieldValues>({
       control={control}
       render={({ field, fieldState }) => (
         <Field data-invalid={fieldState.invalid}>
-          <FieldLabel>{label}</FieldLabel>
-
-          <InputGroup>
+          {label && <FieldLabel>{label}</FieldLabel>}
+          <InputGroup className={border}>
             <InputGroupTextarea
               {...field}
               rows={rows}
               aria-invalid={fieldState.invalid}
+              placeholder={placeholder}
+              className={className}
             />
 
             {maxLength && (
@@ -55,15 +62,11 @@ export function RHFTextareaField<T extends FieldValues>({
             )}
           </InputGroup>
 
-          {description && (
-            <FieldDescription>{description}</FieldDescription>
-          )}
+          {description && <FieldDescription>{description}</FieldDescription>}
 
-          {fieldState.error && (
-            <FieldError errors={[fieldState.error]} />
-          )}
+          {fieldState.error && <FieldError errors={[fieldState.error]} />}
         </Field>
       )}
     />
-  )
+  );
 }

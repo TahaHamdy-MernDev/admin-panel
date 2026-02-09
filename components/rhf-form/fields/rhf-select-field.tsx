@@ -21,6 +21,7 @@ type RHFSelectFieldProps<T extends FieldValues> = {
   label: string;
   options?: Option[];
   placeholder?: string;
+  disabled?: boolean;
 };
 
 export function RHFSelectField<T extends FieldValues>({
@@ -29,23 +30,38 @@ export function RHFSelectField<T extends FieldValues>({
   label,
   options = [],
   placeholder = "",
+  disabled = false,
 }: RHFSelectFieldProps<T>) {
   return (
     <Controller
       name={name}
       control={control}
+      disabled={disabled}
+      aria-disabled={disabled}
       render={({ field, fieldState }) => (
-        <Field data-invalid={fieldState.invalid}>
+        <Field data-invalid={fieldState.invalid} aria-disabled={disabled}>
           <FieldLabel>{label}</FieldLabel>
 
-          <Select value={field.value ?? ""} onValueChange={field.onChange}>
-            <SelectTrigger aria-invalid={fieldState.invalid}>
+          <Select
+            value={field.value ?? ""}
+            onValueChange={field.onChange}
+            disabled={disabled}
+          >
+            <SelectTrigger
+              aria-invalid={fieldState.invalid}
+              aria-disabled={disabled}
+            >
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
 
-            <SelectContent position="popper">
+            <SelectContent position="popper" aria-disabled={disabled}>
               {options.map((opt) => (
-                <SelectItem key={opt.value} value={opt.value}>
+                <SelectItem
+                  key={opt.value}
+                  value={opt.value}
+                  disabled={disabled}
+                  aria-disabled={disabled}
+                >
                   {opt.label}
                 </SelectItem>
               ))}

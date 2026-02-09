@@ -189,7 +189,8 @@ function Sidebar({
           data-slot="sidebar"
           data-mobile="true"
           dir={dir}
-          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
+          data-side={side}
+          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden rtl:start-0"
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,

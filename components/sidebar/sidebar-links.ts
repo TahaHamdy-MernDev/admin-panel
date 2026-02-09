@@ -7,6 +7,7 @@ import {
   Settings,
   BarChart3,
   UserCog,
+  Ticket,
 } from "lucide-react";
 type SubItem = {
   title: string;
@@ -62,17 +63,17 @@ export const SIDEBAR: SidebarData[] = [
     // ],
   },
 
-  // {
-  //   title: "support.title",
-  //   url: "support",
-  //   icon: Ticket,
-  //   items: [
-  //     { title: "support.open", url: "support/open" },
-  //     { title: "support.pending", url: "support/pending" },
-  //     { title: "support.closed", url: "support/closed" },
-  //     { title: "support.chat", url: "support/chat" },
-  //   ],
-  // },
+  {
+    title: "support.title",
+    url: "support",
+    icon: Ticket,
+    // items: [
+    //   { title: "support.open", url: "support/open" },
+    //   { title: "support.pending", url: "support/pending" },
+    //   { title: "support.closed", url: "support/closed" },
+    //   { title: "support.chat", url: "support/chat" },
+    // ],
+  },
 
   {
     title: "reports.title",

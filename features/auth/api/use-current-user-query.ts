@@ -3,7 +3,7 @@ import { apiClient } from "@/lib/api-client";
 import * as types from "../types";
 
 export function useCurrentUserQuery() {
-  return useQuery({
+  return useQuery<types.CurrentUser | null>({
     queryKey: [types.CURRENT_USER_QUERY_KEY],
     queryFn: async () => {
       const res = await apiClient.get<types.CurrentUser>(
@@ -13,5 +13,8 @@ export function useCurrentUserQuery() {
       );
       return res.data;
     },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    retry: false,
+    refetchOnWindowFocus: false,
   });
 }

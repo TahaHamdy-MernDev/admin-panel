@@ -4,7 +4,7 @@ import { PlatformRoles } from "@/types/platform-roles.types";
 import { SubscriptionsStatus } from "@/features/plan/constants";
 
 export const roleBadgeVariants = cva(
-  "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium",
+  "inline-flex items-center rounded-full text-xs font-medium",
   {
     variants: {
       variant: {
@@ -19,6 +19,12 @@ export const roleBadgeVariants = cva(
         [SubscriptionsStatus.CANCELED]: "bg-red-100 text-red-800",
         [SubscriptionsStatus.EXPIRED]: "bg-red-100 text-red-800",
       } satisfies Record<BadgeKey, string>,
+      size: {
+        xs: "px-1.5 py-0.5",
+        sm: "px-2 py-1",
+        md: "px-2.5 py-0.5",
+        lg: "px-3 py-1.5",
+      },
     },
   },
 );

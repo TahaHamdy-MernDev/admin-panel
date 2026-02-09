@@ -10,10 +10,12 @@ import { PlatformEnum } from "@/features/integrations/constants";
 import { BillingTypeEnum, PlanIntervalEnum } from "../../constants";
 import { UserRolesEnum } from "@/features/customers/constants";
 import { enumValues } from "@/lib/zod-enum";
+import { useRouter } from "@/i18n/navigation";
 const ROLE_KEYS = enumValues(UserRolesEnum);
 const PLATFORM_KEYS = enumValues(PlatformEnum);
 
 export default function CreatePlanForm() {
+  const router = useRouter();
   const mutation = useCreatePlanMutation();
 
   const form = useForm<PlanFormInput>({
@@ -23,6 +25,7 @@ export default function CreatePlanForm() {
 
   async function onSubmit(values: PlanFormInput) {
     await mutation.mutateAsync(values);
+    router.back();
   }
 
   return (
@@ -31,6 +34,7 @@ export default function CreatePlanForm() {
       onSubmit={onSubmit}
       loading={mutation.isPending}
       i18nNamespace="plans.create"
+      mode="create"
     />
   );
 }

@@ -74,7 +74,7 @@
     },
 
     "support": {
-      "title": "تذاكر العملاء",
+      "title": "تذاكر الدعم",
       "open": "تذاكر مفتوحة",
       "pending": "قيد المعالجة",
       "closed": "تذاكر مغلقة",
@@ -605,7 +605,7 @@
   },
   "badges": {
     "roles": {
-      "super_admin": "مدير عام",
+      "super_admin": "سوبر أدمن",
       "admin": "مدير",
       "call_service": "خدمة العملاء",
       "accountant": "محاسب"
@@ -676,6 +676,12 @@
       "name_required": "الاسم مطلوب.",
       "provider_required": "مزود الخدمة مطلوب.",
       "image_required": "الصورة مطلوبة."
+    }
+  },
+  "ticket": {
+    "form": {
+      "type_message": "قم بإدخال رسالتك هنا......",
+      "send": "إرسال"
     }
   }
 }

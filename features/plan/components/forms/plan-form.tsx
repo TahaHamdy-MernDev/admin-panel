@@ -25,6 +25,7 @@ type PlanFormProps = {
   onSubmit: (values: PlanFormInput) => Promise<void> | void;
   loading?: boolean;
   i18nNamespace?: string;
+  mode: "create" | "update";
 };
 
 export function PlanForm({
@@ -32,6 +33,7 @@ export function PlanForm({
   onSubmit,
   loading = false,
   i18nNamespace = "plans.create",
+  mode = "create",
 }: PlanFormProps) {
   const t = useTranslations(i18nNamespace);
 
@@ -87,6 +89,7 @@ export function PlanForm({
               control={form.control}
               name="billing_type"
               label={t("form.sections.basic.type")}
+              disabled={mode === "update"}
               options={[
                 {
                   label: t("form.sections.basic.free_trial"),
