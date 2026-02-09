@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import { Check, CheckIcon, ChevronsUpDown, Plus } from "lucide-react";
+import { CheckIcon, Plus } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { Button } from "@/components/ui/button";
+
 import {
   Popover,
   PopoverContent,
@@ -18,12 +18,11 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList,
+  CommandList, 
 } from "@/components/ui/command";
-import { SelectItem } from "@radix-ui/react-select";
-import { Select, SelectContent } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { InputGroup } from "@/components/ui/input-group";
+import { useTranslations } from "next-intl";
 
 type Option = {
   label: string | React.ReactNode;
@@ -38,12 +37,10 @@ type RHFCreatableSelectFieldProps<T extends FieldValues> = {
   options: Option[];
   placeholder?: string;
 
-  /** text shown when typing a custom value */
   addLabel?: (value: string) => string; // e.g. v => `Add "${v}"`
   disabled?: boolean;
   className?: string;
 
-  /** Optional: normalize typed value before saving */
   normalize?: (value: string) => string; // e.g. trim, uppercase
 };
 
@@ -58,6 +55,7 @@ export function RHFCreatableSelectField<T extends FieldValues>({
   className,
   normalize = (v) => v.trim(),
 }: RHFCreatableSelectFieldProps<T>) {
+  const t = useTranslations("common");
   const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
   return (
@@ -73,7 +71,7 @@ export function RHFCreatableSelectField<T extends FieldValues>({
         const canAdd =
           normalizedQuery.length > 0 &&
           !options.some(
-            (o) => o.value.toLowerCase() === normalizedQuery.toLowerCase()
+            (o) => o.value.toLowerCase() === normalizedQuery.toLowerCase(),
           );
 
         function commit(value: string) {
@@ -135,7 +133,7 @@ export function RHFCreatableSelectField<T extends FieldValues>({
                         </button>
                       ) : (
                         <div className="px-2 py-2 text-sm text-muted-foreground">
-                          No results
+                          {t("common.no_results")}
                         </div>
                       )}
                     </CommandEmpty>
@@ -166,7 +164,7 @@ export function RHFCreatableSelectField<T extends FieldValues>({
                               "absolute ltr:right-2 rtl:left-2 flex size-3.5 items-center justify-center",
                               opt.value === currentValue
                                 ? "opacity-100"
-                                : "opacity-0"
+                                : "opacity-0",
                             )}
                           >
                             <CheckIcon />

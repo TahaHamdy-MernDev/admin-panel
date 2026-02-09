@@ -1,4 +1,3 @@
-
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
@@ -13,6 +12,7 @@ import {
   flexRender,
   Table as TanStackTable,
 } from "@tanstack/react-table";
+import { useTranslations } from "next-intl";
 type Props<TData, TValue> = {
   table: TanStackTable<TData>;
   columns: ColumnDef<TData, TValue>[];
@@ -23,6 +23,7 @@ function MainTable<TData, TValue>({
   columns,
   is_loading,
 }: Props<TData, TValue>) {
+  const t = useTranslations("common");
   return is_loading ? (
     <div className="space-y-2">
       <Skeleton className="w-full h-10 mb-2" />
@@ -45,7 +46,7 @@ function MainTable<TData, TValue>({
                   ? null
                   : flexRender(
                       header.column.columnDef.header,
-                      header.getContext()
+                      header.getContext(),
                     )}
               </TableHead>
             ))}
@@ -69,7 +70,7 @@ function MainTable<TData, TValue>({
         ) : (
           <TableRow>
             <TableCell colSpan={columns.length} className="h-24 text-center">
-              No results.
+              {t("no_results")}
             </TableCell>
           </TableRow>
         )}

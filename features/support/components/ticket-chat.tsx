@@ -20,6 +20,8 @@ import { globalQueryClient } from "@/components/providers/react-query";
 import { CurrentUser } from "@/features/auth/types";
 import { useSendMessageMutation } from "../api/use-send-message-mutation";
 import { toFormData } from "@/lib/api-client";
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 
 function TicketChat() {
   const params = useSearchParams();
@@ -62,12 +64,9 @@ function TicketMessages({ ticketId }: { ticketId: number }) {
   };
 
   if (isLoading) {
-    return (
-      <Card className="flex h-full items-center justify-center">
-        <p className="text-muted-foreground">Loading...</p>
-      </Card>
-    );
+    return <TicketChatSkeleton />;
   }
+
   async function handleSubmit(data: { message: string }) {
     if (!data.message.trim() && files.length === 0) return;
 
@@ -188,6 +187,58 @@ function TicketMessages({ ticketId }: { ticketId: number }) {
           </form>
         </div>
       </CardContent>
+    </Card>
+  );
+}
+
+function TicketChatSkeleton() {
+  return (
+    <Card className="flex h-full flex-col">
+      {/* Header */}
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <div className="space-y-2">
+            <Skeleton className="h-5 w-48" />
+            <Skeleton className="h-3 w-24" />
+          </div>
+          <Skeleton className="h-5 w-20 rounded-full" />
+        </div>
+      </CardHeader>
+
+      <Separator />
+
+      {/* Messages */}
+      <CardContent className="flex flex-1 flex-col p-4 space-y-4">
+        {Array.from({ length: 6 }).map((_, i) => {
+          const isAdmin = i % 2 === 0;
+
+          return (
+            <div
+              key={i}
+              className={cn(
+                "flex gap-2",
+                isAdmin ? "justify-end" : "justify-start",
+              )}
+            >
+              {!isAdmin && <Skeleton className="h-8 w-8 rounded-full" />}
+
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-64 rounded-lg" />
+                <Skeleton className="h-3 w-32" />
+              </div>
+
+              {isAdmin && <Skeleton className="h-8 w-8 rounded-full" />}
+            </div>
+          );
+        })}
+      </CardContent>
+
+      <Separator />
+
+      {/* Input */}
+      <div className="p-4">
+        <Skeleton className="h-10 w-full rounded-lg" />
+      </div>
     </Card>
   );
 }

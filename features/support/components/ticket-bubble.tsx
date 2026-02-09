@@ -29,27 +29,20 @@ export function TicketBubble({
         )}
 
         {/* Attachments */}
-        {message.attachments?.length > 0 && (
+        {message.attachments && message.attachments.length > 0 && (
           <div className="mt-2 grid grid-cols-2 gap-2">
             {message.attachments.map((file) => {
-              const isImage = file.mimeType?.startsWith("image/");
+              const isImage = /\.(png|jpe?g|gif|webp|svg)$/i.test(file.url);
 
               return isImage ? (
-                <a
+                <Image
+                  src={file.url}
                   key={file.id}
-                  href={file.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative block overflow-hidden rounded-md border"
-                >
-                  <Image
-                    src={file.url}
-                    alt={file.name}
-                    width={300}
-                    height={300}
-                    className="h-32 w-full object-cover"
-                  />
-                </a>
+                  alt="attachment"
+                  width={300}
+                  height={300}
+                  className="h-36 w-full object-contain"
+                />
               ) : (
                 <a
                   key={file.id}
@@ -58,7 +51,7 @@ export function TicketBubble({
                   rel="noopener noreferrer"
                   className="flex items-center justify-center rounded-md border bg-background px-2 py-3 text-xs hover:bg-muted"
                 >
-                  {file.name}
+                  Download file
                 </a>
               );
             })}

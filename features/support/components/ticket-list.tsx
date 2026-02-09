@@ -8,16 +8,17 @@ import { TicketPriority, TicketStatus } from "../types";
 import { cn } from "@/lib/utils";
 import { useRouter } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function TicketList() {
   const router = useRouter();
   const params = useSearchParams();
   const ticketId = params.get("ticket");
   const { data, isLoading } = useSupportTicketsQuery({ page: 1, limit: 10 });
-  //set id to url
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <TicketListSkeleton />;
   }
+
   function selectTicket(id: number) {
     router.push({ pathname: "/support", query: { ticket: id.toString() } });
   }
@@ -37,8 +38,8 @@ function TicketList() {
               key={ticket.id}
               onClick={() => selectTicket(ticket.id)}
               className={cn(
-                "w-full border-b p-4 text-left hover:bg-muted",
-                ticket.id === Number(ticketId) && "bg-muted",
+                "w-full border-b p-4 text-left hover:bg-primary/20",
+                ticket.id === Number(ticketId) && "bg-primary/20",
               )}
             >
               <div className="flex items-center justify-between">
@@ -74,4 +75,31 @@ export function statusVariant(s: TicketStatus) {
   return "outline";
 }
 
+function TicketListSkeleton() {
+  return (
+    <Card className="h-full">
+      <CardHeader>
+        <Skeleton className="h-5 w-40" />
+      </CardHeader>
+
+      <CardContent className="p-0">
+        <div className="space-y-0">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="border-b p-4">
+              <div className="flex items-center justify-between">
+                <Skeleton className="h-4 w-3/4" />
+                <Skeleton className="h-5 w-14 rounded-full" />
+              </div>
+
+              <div className="mt-2 flex items-center justify-between">
+                <Skeleton className="h-3 w-12" />
+                <Skeleton className="h-5 w-16 rounded-full" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
 export default TicketList;
