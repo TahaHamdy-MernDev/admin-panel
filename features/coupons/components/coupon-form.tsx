@@ -6,39 +6,59 @@ import { RHFSelectField } from "@/components/rhf-form/fields/rhf-select-field";
 import { RHFDialogForm } from "@/components/rhf-form/rhf-form-dialog";
 import { FieldGroup } from "@/components/ui/field";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useForm, useWatch } from "react-hook-form";
-import { toast } from "sonner";
 import * as z from "zod";
+import { useCreateCouponMutation } from "../api/use-coupon-mutation";
+import { toast } from "sonner";
+import { CouponDiscountType } from "../types";
+const useCreateCouponSchema = (t: ReturnType<typeof useTranslations>) => {
+  return z.object({
+    coupon_code: z
+      .string()
+      .min(3, t("create.form.coupon_code.validation.required")),
 
-export const createCouponSchema = z.object({
-  coupon_code: z.string().min(3, "Coupon code must be at least 3 characters"),
+    discount_type: z
+      .string()
+      .min(1, t("create.form.discount_type.validation.required")),
 
-  discount_type: z.string().min(1, "Discount type is required"),
+    discount_value: z
+      .string()
+      .min(1, t("create.form.discount_value.validation.required")),
 
-  discount_value: z.string().min(1, "Discount value is required"),
+    usage_limit: z.string().optional(),
 
-  usage_limit: z.string().optional(),
-
-  active_range: z
-    .object({
-      from: z.date({
-        error: "Start date is required",
+    active_range: z
+      .object({
+        from: z.date({
+          error: () => ({
+            message: t("create.form.active_range.from.label"),
+          }),
+        }),
+        to: z.date({
+          error: () => ({
+            message: t("create.form.active_range.to.label"),
+          }),
+        }),
+      })
+      .refine((range) => range.from <= range.to, {
+        message: t("create.form.active_range.validation.invalid"),
+        path: ["to"],
       }),
-      to: z.date({
-        error: "End date is required",
-      }),
-    })
-    .refine((range) => range.from <= range.to, {
-      message: "End date must be after start date",
-      path: ["to"],
-    }),
-});
+  });
+};
 
-type CreateCouponFormValues = z.infer<typeof createCouponSchema>;
+export type AddCouponFormValues = z.infer<
+  ReturnType<typeof useCreateCouponSchema>
+>;
 
 export function CouponDialogForm() {
-  const form = useForm<CreateCouponFormValues>({
-    resolver: zodResolver(createCouponSchema),
+  const t = useTranslations("coupons");
+  const schema = useCreateCouponSchema(t);
+  const mutation = useCreateCouponMutation();
+
+  const form = useForm<AddCouponFormValues>({
+    resolver: zodResolver(schema),
     defaultValues: {
       coupon_code: "",
       discount_type: "",
@@ -47,59 +67,81 @@ export function CouponDialogForm() {
       active_range: undefined,
     },
   });
-  const discount_type = useWatch({
+
+  const discountType = useWatch({
     control: form.control,
     name: "discount_type",
   });
-  async function onSubmit(data: CreateCouponFormValues) {
-    toast("Coupon created", {
-      description: JSON.stringify(data, null, 2),
-    });
+
+  async function onSubmit(data: AddCouponFormValues) {
+    mutation
+      .mutateAsync(data)
+      .then(() => {
+        toast.success(t("toast.success.title"), {
+          description: t("toast.success.description"),
+        });
+      })
+      .catch((error) => {
+        toast.error(t("toast.error.title"), {
+          description: error.message,
+        });
+      });
   }
+
   return (
-    <RHFDialogForm<CreateCouponFormValues>
+    <RHFDialogForm<AddCouponFormValues>
       form={form}
-      trigger="Create coupon"
-      title="Create coupon"
-      description="Create a new discount coupon."
+      trigger={t("create.title")}
+      title={t("create.title")}
+      description={t("create.description")}
       onSubmit={onSubmit}
     >
       <FieldGroup>
         <RHFInputField
           control={form.control}
           name="coupon_code"
-          label="Coupon code"
-          placeholder="SAVE20"
+          label={t("create.form.coupon_code.label")}
+          placeholder={t("create.form.coupon_code.placeholder")}
         />
+
         <RHFSelectField
           control={form.control}
           name="discount_type"
-          label="Discount type"
+          label={t("create.form.discount_type.label")}
           options={[
-            { label: "Percentage (%)", value: "percentage" },
-            { label: "Fixed amount", value: "fixed" },
+            {
+              label: t("create.form.discount_type.options.percentage"),
+              value: CouponDiscountType.PERCENT,
+            },
+            {
+              label: t("create.form.discount_type.options.fixed"),
+              value: CouponDiscountType.FIXED,
+            },
           ]}
         />
+
         <RHFInputField
           control={form.control}
           name="discount_value"
           label={
-            discount_type === "percentage"
-              ? "Discount percentage"
-              : "Discount amount"
+            discountType === "percentage"
+              ? t("create.form.discount_value.label") + " (%)"
+              : t("create.form.discount_value.label")
           }
-          placeholder={discount_type === "percentage" ? "10" : "25.00"}
+          placeholder={discountType === "percentage" ? "10" : "25"}
         />
+
         <RHFInputField
           control={form.control}
           name="usage_limit"
-          label="Usage limit"
-          placeholder="Unlimited"
+          label={t("create.form.usage_limit.label")}
+          placeholder={t("create.form.usage_limit.placeholder")}
         />
+
         <RHFDateRangePickerField
           control={form.control}
           name="active_range"
-          label="Active range"
+          label={t("create.form.active_range.label")}
         />
       </FieldGroup>
     </RHFDialogForm>

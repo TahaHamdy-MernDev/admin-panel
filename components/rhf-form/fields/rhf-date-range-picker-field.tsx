@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import { type DateRange } from "react-day-picker";
-import { CalendarIcon, ChevronDownIcon } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 
 import { Calendar } from "@/components/ui/calendar";
@@ -27,8 +27,6 @@ import {
   startOfYear,
   endOfYear,
 } from "date-fns";
-import { Separator } from "@/components/ui/separator";
-
 const PREDEFINED_RANGES: {
   label: string;
   getRange: () => DateRange;
@@ -117,7 +115,7 @@ export function RHFDateRangePickerField<T extends FieldValues>({
               <PopoverTrigger asChild>
                 <InputGroup>
                   <InputGroupAddon align={"inline-end"}>
-                    <CalendarIcon />
+                    <CalendarIcon className="opacity-50 dark:text-white" />
                   </InputGroupAddon>
                   <Input
                     value={formatted_range}

@@ -14,7 +14,8 @@
     "create": "Create",
     "cancel": "Cancel",
     "delete": "Delete",
-    "save": "Save"
+    "save": "Save",
+    "no_results": "No results"
   },
   "auth": {
     "login": {
@@ -201,6 +202,7 @@
         "description": "Are you sure you want to disable this plan? Customers will no longer be able to subscribe."
       }
     },
+
     "plans-visibility": {
       "on": {
         "title": "Make Plan Visible",
@@ -219,6 +221,24 @@
       "off": {
         "title": "Disable Employee",
         "description": "Are you sure you want to disable this employee?"
+      }
+    },
+    "coupons": {
+      "toggle": {
+        "on": {
+          "title": "Enable Coupon",
+          "description": "Are you sure you want to enable this coupon?"
+        },
+        "off": {
+          "title": "Disable Coupon",
+          "description": "Are you sure you want to disable this coupon?"
+        }
+      },
+      "alert": {
+        "delete": {
+          "title": "Delete Coupon",
+          "description": "Are you sure you want to delete this coupon? This action cannot be undone."
+        }
       }
     },
     "customer_status": {
@@ -471,14 +491,89 @@
   "coupons": {
     "create": {
       "title": "Create Coupon",
-      "description": "Add a new discount coupon and configure its settings",
+      "description": "Create and manage discount coupons for your customers",
       "form": {
-        "coupon_code": "Coupon Code",
-        "discount_type": "Discount Type",
-        "discount_value": "Discount Value",
-        "usage_limit": "Maximum Usage",
-        "active_from": "Active From",
-        "active_to": "Active To"
+        "coupon_code": {
+          "label": "Coupon Code",
+          "placeholder": "Enter coupon code",
+          "validation": {
+            "required": "Coupon code is required",
+            "unique": "This coupon code already exists"
+          }
+        },
+        "discount_type": {
+          "label": "Discount Type",
+          "options": {
+            "percentage": "Percentage",
+            "fixed": "Fixed Amount"
+          },
+          "validation": {
+            "required": "Discount type is required"
+          }
+        },
+        "discount_value": {
+          "label": "Discount Value",
+          "placeholder": "Enter discount value",
+          "validation": {
+            "required": "Discount value is required",
+            "invalid": "Invalid discount value"
+          }
+        },
+        "usage_limit": {
+          "label": "Usage Limit",
+          "placeholder": "Maximum number of uses",
+          "validation": {
+            "invalid": "Usage limit must be a valid number"
+          }
+        },
+        "active_range": {
+          "label": "Active Date Range",
+          "from": {
+            "label": "Start Date",
+            "placeholder": "Select start date"
+          },
+          "to": {
+            "label": "End Date",
+            "placeholder": "Select end date"
+          },
+          "validation": {
+            "invalid": "End date must be after start date"
+          }
+        },
+        "status": {
+          "label": "Status",
+          "active": "Active",
+          "inactive": "Inactive"
+        },
+        "submit": "Create Coupon",
+        "cancel": "Cancel"
+      }
+    },
+
+    "toast": {
+      "success": {
+        "title": "Coupon Created",
+        "description": "The coupon has been created successfully."
+      },
+      "update": {
+        "title": "Coupon Updated",
+        "description": "The coupon has been updated successfully."
+      },
+      "toggle": {
+        "title": "Status Updated",
+        "description": "The coupon status has been updated."
+      },
+      "error": {
+        "title": "Action Failed",
+        "description": "Something went wrong. Please try again."
+      },
+      "duplicate": {
+        "title": "Coupon Already Exists",
+        "description": "A coupon with this code already exists."
+      },
+      "delete": {
+        "title": "Coupon Deleted",
+        "description": "The coupon has been deleted successfully."
       }
     }
   },
@@ -654,6 +749,30 @@
       "name_required": "Name is required.",
       "provider_required": "Provider is required.",
       "image_required": "Image is required."
+    }
+  },
+  "tickets": {
+    "empty_state": {
+      "title": "No content to display",
+      "description": "Select a ticket from the list to view details and chat."
+    },
+    "form": {
+      "type_message": "Enter your message here......",
+      "send": "Send"
+    },
+    "list": {
+      "title": "Support Tickets",
+      "no_title": "No title"
+    },
+    "status": {
+      "open": "Open",
+      "pending": "Pending",
+      "closed": "Closed"
+    },
+    "priority": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
     }
   }
 }

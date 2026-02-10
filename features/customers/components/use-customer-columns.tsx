@@ -9,7 +9,6 @@ import { TableButton } from "@/components/ui/table-button";
 
 import { Link } from "@/i18n/navigation";
 import { ColumnDef } from "@tanstack/react-table";
-import { formatDate } from "date-fns";
 import { Activity, KeyRound, Trash2, User } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useToggleCustomerStatusMutation } from "../api/use-toggle-customer-status-mutation";
@@ -157,11 +156,13 @@ export function useCustomersColumns(): ColumnDef<CustomerRow>[] {
       id: "show_more",
       header: t("more"),
       cell: ({ row }) => {
+        const code = row.original?.owner?.code;
+        if (!code) {
+          return null;
+        }
         return (
           <TableButton variant={"table_icon_activity"}>
-            <Link
-              href={`customers/${row.original?.owner?.code?.toLowerCase()}/activity`}
-            >
+            <Link href={`customers/${code.toLowerCase()}/activity`}>
               <Activity />
             </Link>
           </TableButton>

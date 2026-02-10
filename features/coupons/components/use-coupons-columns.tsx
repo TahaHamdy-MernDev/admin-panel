@@ -1,47 +1,61 @@
 import { ConfirmableSwitch } from "@/components/dialogs/confirmable-switch";
 import { ColumnDef } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
-
-export type CouponRow = {
-  coupon_id: number;
-  created_at: string;
-  code: string;
-  valid_from?: string;
-  valid_to?: string;
-  discount: number;
-  usage_count: number;
-  usage_limit: number;
-  is_active: boolean;
-};
+import { CouponDiscountType, CouponRow } from "../types";
+import { format } from "date-fns";
+import { DateCell } from "@/components/data-table/reusable/date-cell";
+import ToggleCouponStatus from "./toggle-coupon-status-dialog";
+import DeleteCouponDialog from "./delete-coupon-dialog";
 
 export function useCouponsColumns(): ColumnDef<CouponRow>[] {
   const t = useTranslations("data-table.columns");
 
   return [
     {
-      accessorKey: "coupon_id",
+      accessorKey: "id",
       header: "#",
+      size: 50,
+      cell: ({ getValue }) => (
+        <div className="flex items-center justify-start">
+          {getValue<number>()}
+        </div>
+      ),
     },
     {
       accessorKey: "created_at",
       header: t("created_at"),
+      cell: ({ getValue }) => (
+        <DateCell date={getValue<string>()} format="yyyy-MM-dd HH:mm a" />
+      ),
     },
     {
       accessorKey: "code",
       header: t("coupon.code"),
     },
     {
+      accessorKey: "valid_from",
       header: t("coupon.validity"),
       cell: ({ row }) => {
         const from = row.original.valid_from;
         const to = row.original.valid_to;
         if (!from || !to) return "-";
-        return `${from} → ${to}`;
+        return (
+          <span>
+            {format(from, "yyyy-MM-dd")} <br />
+            {format(to, "yyyy-MM-dd")}
+          </span>
+        );
       },
     },
     {
       accessorKey: "discount",
       header: t("coupon.discount"),
+
+      cell: ({ row }) => {
+        const discount = row.original.discount;
+        const discountType = row.original.discountType;
+        return `${discount} ${discountType === CouponDiscountType.FIXED ? "$" : "%"}`;
+      },
     },
     {
       accessorKey: "usage_count",
@@ -54,19 +68,19 @@ export function useCouponsColumns(): ColumnDef<CouponRow>[] {
     {
       accessorKey: "is_active",
       header: t("status"),
-      cell: ({ getValue }) => (
-        <ConfirmableSwitch
-          value={getValue<boolean>()}
-          defaultValue={!!getValue<boolean>()}
-          onConfirm={async (value) => {
-            console.log(value);
-            // await fetch("/api/feature", {
-            //   method: "POST",
-            //   body: JSON.stringify({ enabled: value }),
-            // });
-          }}
-          feature_key="coupon_status"
+      cell: ({ row }) => (
+        <ToggleCouponStatus
+          status={row.original.is_active}
+          id={row.original.id.toString()}
         />
+      ),
+    },
+    {
+      header: t("actions"),
+      cell: ({ row }) => (
+        <div className="flex items-center justify-start">
+          <DeleteCouponDialog id={row.original.id.toString()} />
+        </div>
       ),
     },
   ];

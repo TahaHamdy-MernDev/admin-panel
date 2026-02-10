@@ -7,7 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Paperclip, Send, X } from "lucide-react";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { statusVariant } from "./ticket-list";
 import { useSearchParams } from "next/navigation";
 import { useSupportTicketQuery } from "../api/use-support-query";
@@ -15,22 +15,30 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { RHFTextareaField } from "@/components/rhf-form/fields/rhf-textarea-field";
 import { TicketBubble } from "./ticket-bubble";
-import { QueryClient } from "@tanstack/react-query";
 import { globalQueryClient } from "@/components/providers/react-query";
 import { CurrentUser } from "@/features/auth/types";
 import { useSendMessageMutation } from "../api/use-send-message-mutation";
-import { toFormData } from "@/lib/api-client";
+
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import { Inbox } from "lucide-react";
 
 function TicketChat() {
+  const t = useTranslations("tickets.empty_state");
   const params = useSearchParams();
   const ticketId = params.get("ticket");
 
   if (!ticketId) {
     return (
-      <Card className="flex h-full items-center justify-center">
-        <p className="text-muted-foreground">Select a ticket to view details</p>
+      <Card className="flex h-full flex-col items-center justify-center gap-4 rounded-xl border-dashed text-center">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/15">
+          <Inbox className="h-6 w-6 text-primary" />
+        </div>
+
+        <div className="space-y-1">
+          <h3 className="text-base font-semibold">{t("title")}</h3>
+          <p className="text-sm text-muted-foreground">{t("description")}</p>
+        </div>
       </Card>
     );
   }
@@ -169,7 +177,7 @@ function TicketMessages({ ticketId }: { ticketId: number }) {
             <RHFTextareaField
               control={form.control}
               name="message"
-              placeholder={t("ticket.form.type_message")}
+              placeholder={t("tickets.form.type_message")}
               rows={1}
               border="border-0"
               className="max-h-40 flex-1 resize-none border-0! bg-transparent p-0 text-sm focus-visible:ring-0 placeholder:opacity-40"

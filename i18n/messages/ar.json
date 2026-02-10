@@ -9,7 +9,8 @@
     "create": "إنشاء",
     "cancel": "إلغاء",
     "delete": "حذف",
-    "save": "حفظ"
+    "save": "حفظ",
+    "no_results": "لا توجد نتائج"
   },
   "auth": {
     "login": {
@@ -222,7 +223,24 @@
         "description": "هل أنت متأكد من تعطيل هذا الموظف؟"
       }
     },
-
+    "coupons": {
+      "toggle": {
+        "on": {
+          "title": "تفعيل الكوبون",
+          "description": "هل أنت متأكد من تفعيل هذا الكوبون؟"
+        },
+        "off": {
+          "title": "إيقاف الكوبون",
+          "description": "هل أنت متأكد من إيقاف هذا الكوبون؟ لن يتمكن العملاء من استخدامه."
+        }
+      },
+      "alert": {
+        "delete": {
+          "title": "حذف الكوبون",
+          "description": "هل أنت متأكد من حذف هذا الكوبون؟ لا يمكن التراجع عن هذا الإجراء."
+        }
+      }
+    },
     "customer_status": {
       "on": {
         "title": "تمكين الحساب",
@@ -473,14 +491,88 @@
   "coupons": {
     "create": {
       "title": "إنشاء كوبون",
-      "description": "إضافة كوبون خصم جديد وتحديد إعداداته",
+      "description": "إنشاء وإدارة كوبونات الخصم للعملاء",
       "form": {
-        "coupon_code": "كود الكوبون",
-        "discount_type": "نوع الخصم",
-        "discount_value": "قيمة الخصم",
-        "usage_limit": "الحد الأقصى للاستخدام",
-        "active_from": "نشط من",
-        "active_to": "نشط إلى"
+        "coupon_code": {
+          "label": "كود الكوبون",
+          "placeholder": "أدخل كود الكوبون",
+          "validation": {
+            "required": "كود الكوبون مطلوب",
+            "unique": "كود الكوبون مستخدم بالفعل"
+          }
+        },
+        "discount_type": {
+          "label": "نوع الخصم",
+          "options": {
+            "percentage": "نسبة مئوية",
+            "fixed": "قيمة ثابتة"
+          },
+          "validation": {
+            "required": "نوع الخصم مطلوب"
+          }
+        },
+        "discount_value": {
+          "label": "قيمة الخصم",
+          "placeholder": "أدخل قيمة الخصم",
+          "validation": {
+            "required": "قيمة الخصم مطلوبة",
+            "invalid": "قيمة الخصم غير صحيحة"
+          }
+        },
+        "usage_limit": {
+          "label": "عدد مرات الاستخدام",
+          "placeholder": "الحد الأقصى للاستخدام",
+          "validation": {
+            "invalid": "عدد مرات الاستخدام يجب أن يكون رقمًا صحيحًا"
+          }
+        },
+        "active_range": {
+          "label": "فترة الصلاحية",
+          "from": {
+            "label": "تاريخ البداية",
+            "placeholder": "اختر تاريخ البداية"
+          },
+          "to": {
+            "label": "تاريخ النهاية",
+            "placeholder": "اختر تاريخ النهاية"
+          },
+          "validation": {
+            "invalid": "تاريخ النهاية يجب أن يكون بعد تاريخ البداية"
+          }
+        },
+        "status": {
+          "label": "الحالة",
+          "active": "نشط",
+          "inactive": "غير نشط"
+        },
+        "submit": "إنشاء الكوبون",
+        "cancel": "إلغاء"
+      }
+    },
+    "toast": {
+      "success": {
+        "title": "تم إنشاء الكوبون",
+        "description": "تم إنشاء الكوبون بنجاح."
+      },
+      "update": {
+        "title": "تم تحديث الكوبون",
+        "description": "تم تحديث بيانات الكوبون بنجاح."
+      },
+      "toggle": {
+        "title": "تم تحديث الحالة",
+        "description": "تم تحديث حالة الكوبون بنجاح."
+      },
+      "error": {
+        "title": "فشل العملية",
+        "description": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
+      },
+      "duplicate": {
+        "title": "الكوبون موجود بالفعل",
+        "description": "يوجد كوبون بنفس الكود بالفعل."
+      },
+      "delete": {
+        "title": "تم حذف الكوبون",
+        "description": "تم حذف الكوبون بنجاح."
       }
     }
   },
@@ -678,10 +770,28 @@
       "image_required": "الصورة مطلوبة."
     }
   },
-  "ticket": {
+  "tickets": {
+    "empty_state": {
+      "title": "لا يوجد محتوى للعرض",
+      "description": "اختر تذكرة من القائمة لعرض التفاصيل والمحادثة."
+    },
     "form": {
       "type_message": "قم بإدخال رسالتك هنا......",
       "send": "إرسال"
+    },
+    "list": {
+      "title": "تذاكر الدعم",
+      "no_title": "بدون عنوان"
+    },
+    "status": {
+      "open": "مفتوحة",
+      "pending": "قيد الانتظار",
+      "closed": "مغلقة"
+    },
+    "priority": {
+      "high": "عالية",
+      "medium": "متوسطة",
+      "low": "منخفضة"
     }
   }
 }

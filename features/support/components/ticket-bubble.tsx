@@ -1,7 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TicketMessage, UserTicket } from "../types";
 import { cn } from "@/lib/utils";
-
 import Image from "next/image";
 
 export function TicketBubble({
@@ -13,19 +12,36 @@ export function TicketBubble({
 }) {
   return (
     <div
-      className={cn("flex gap-2", isAdmin ? "justify-end" : "justify-start")}
+      className={cn(
+        "flex w-full gap-2",
+        isAdmin ? "justify-end" : "justify-start",
+      )}
     >
+      {/* User avatar (customer) */}
       {!isAdmin && <UserAvatar user={message.sender} />}
 
+      {/* Bubble */}
       <div
         className={cn(
-          "max-w-[70%] rounded-lg px-3 py-2 text-sm",
-          isAdmin ? "bg-primary text-primary-foreground" : "bg-primary/20",
+          "max-w-[70%] rounded-2xl px-4 py-2 text-sm shadow-sm",
+          isAdmin
+            ? "bg-muted-foreground/15 rounded-tl-sm"
+            : "bg-primary/15 text-primary-foreground rounded-tr-sm",
         )}
       >
-        {/* Text */}
+        {/* Sender + time */}
+        <div className="mb-1 flex items-center gap-2 text-xs opacity-70">
+          <span className="font-medium">
+            {message.sender?.firstName} {message.sender?.lastName}
+          </span>
+          <span>{new Date(message.createdAt).toLocaleTimeString()}</span>
+        </div>
+
+        {/* Message text */}
         {message.message && (
-          <p className="whitespace-pre-wrap">{message.message}</p>
+          <p className="whitespace-pre-wrap leading-relaxed">
+            {message.message}
+          </p>
         )}
 
         {/* Attachments */}
@@ -36,12 +52,12 @@ export function TicketBubble({
 
               return isImage ? (
                 <Image
-                  src={file.url}
                   key={file.id}
+                  src={file.url}
                   alt="attachment"
                   width={300}
                   height={300}
-                  className="h-36 w-full object-contain"
+                  className="h-36 w-full rounded-md object-cover"
                 />
               ) : (
                 <a
@@ -57,23 +73,17 @@ export function TicketBubble({
             })}
           </div>
         )}
-
-        {/* Timestamp */}
-        <span className="mt-1 block text-xs opacity-70">
-          {new Date(message.createdAt).toLocaleString()}
-        </span>
       </div>
 
+      {/* Admin avatar */}
       {isAdmin && <UserAvatar user={message.sender} />}
     </div>
   );
 }
 
 function UserAvatar({ user }: { user: UserTicket }) {
-  console.log("user ", user);
-
   return (
-    <Avatar className="h-8 w-8 ">
+    <Avatar className="h-8 w-8 shrink-0">
       <AvatarImage src={user?.profile_photo ?? ""} />
       <AvatarFallback>
         {user?.firstName?.[0]}

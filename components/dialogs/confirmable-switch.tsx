@@ -11,7 +11,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useConfirmableSwitch } from "@/hooks/use-confirm-switch";
-import { Loader2, X } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Switch } from "../ui/switch";
 import { Fragment } from "react/jsx-runtime";
