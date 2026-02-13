@@ -53,7 +53,7 @@ function MetricCard({ title, value, icon }: Props) {
       </CardHeader>
 
       <CardContent className={cn("p-0!")}>
-        <div className="mt-2 flex items-baseline gap-2">
+        <div className="flex items-baseline gap-2">
           <div className="truncate text-3xl font-semibold tracking-tight">
             {value}
           </div>

@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Card, CardContent } from "@/components/ui/card";
 
-import { ImagePlus, UploadCloud, X } from "lucide-react";
+import { ImagePlus, Trash, Trash2, UploadCloud, X } from "lucide-react";
 
 type ImageValue = File | File[] | null;
 
@@ -306,7 +306,7 @@ export function RHFImageUpload<T extends FieldValues>({
             : "border-border",
           disabledTile ? "opacity-60 pointer-events-none" : "cursor-pointer",
           dropzoneClassName,
-          "shadow-none bg-background"
+          "shadow-none bg-background",
         )}
         role="button"
         tabIndex={0}
@@ -436,10 +436,10 @@ export function RHFImageUpload<T extends FieldValues>({
         };
 
         return (
-          <div className={cn("space-y-3", className)}>
+          <div className={cn("space-y-0", className)}>
             {/* Header */}
             {label ? (
-              <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center justify-between">
                 <Label>{label}</Label>
 
                 <div className="flex items-center gap-2">
@@ -461,7 +461,7 @@ export function RHFImageUpload<T extends FieldValues>({
                       onClick={() => clearAll(onChange)}
                       className="h-8"
                     >
-                      Clear
+                      <Trash2 className="h-4 w-4" />
                     </Button>
                   ) : null}
                 </div>
@@ -484,9 +484,9 @@ export function RHFImageUpload<T extends FieldValues>({
             {/* SINGLE MODE: one card only (either upload or preview+overlay) */}
             {isSingleMode ? (
               singlePreview ? (
-                <Card className="group overflow-hidden rounded-2xl py-0">
+                <Card className="group overflow-hidden rounded-2xl py-0 shadow-none">
                   <CardContent className="relative p-0 h-48">
-                    <div className="relative h-full w-full bg-muted">
+                    <div className="relative h-full w-full bg-background">
                       <Image
                         src={previews[0].url}
                         alt="preview"
@@ -532,7 +532,7 @@ export function RHFImageUpload<T extends FieldValues>({
                             }}
                             className={cn(
                               "inline-flex h-9 w-9 items-center justify-center rounded-full",
-                              "bg-background/90 shadow-sm backdrop-blur",
+                              "bg-background/90 shadow-none backdrop-blur",
                             )}
                             aria-label="Remove image"
                           >
@@ -593,10 +593,10 @@ export function RHFImageUpload<T extends FieldValues>({
                     {previews.map((p, idx) => (
                       <Card
                         key={p.id}
-                        className="group relative overflow-hidden rounded-2xl"
+                        className="group relative overflow-hidden rounded-2xl shadow-none"
                       >
                         <CardContent className="p-0 h-40">
-                          <div className="relative aspect-square w-full bg-muted">
+                          <div className="relative aspect-square w-full bg-background">
                             <Image
                               src={p.url}
                               alt={`preview-${idx}`}
@@ -628,7 +628,7 @@ export function RHFImageUpload<T extends FieldValues>({
                                   }}
                                   className={cn(
                                     "absolute right-2 top-2 inline-flex h-9 w-9 items-center justify-center rounded-full",
-                                    "bg-background/90 shadow-sm backdrop-blur",
+                                    "bg-background/90 shadow-none backdrop-blur",
                                   )}
                                   aria-label="Remove image"
                                 >

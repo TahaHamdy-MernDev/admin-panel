@@ -1,3 +1,4 @@
+"use server";
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import AppHeader from "@/components/sidebar/app-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";

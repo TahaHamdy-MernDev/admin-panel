@@ -1,10 +1,11 @@
 import type { BadgeKey } from "./badge.types";
 import { roleBadgeVariants } from "./role-badge.cva";
 import { useBadgeText } from "./badge.i18n";
+import Text from "../typography";
 
 export function TranslatedBadge({
   badgeKey,
-  size,
+  size = "md",
 }: {
   badgeKey: BadgeKey;
   size?: "xs" | "sm" | "md" | "lg";
@@ -14,7 +15,9 @@ export function TranslatedBadge({
 
   return (
     <span className={roleBadgeVariants({ variant: badgeKey, size })}>
-      {label}
+      <Text as="small" className="text-center">
+        {label}
+      </Text>
     </span>
   );
 }

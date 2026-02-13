@@ -13,55 +13,68 @@ import {
   Table as TanStackTable,
 } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
+
 type Props<TData, TValue> = {
   table: TanStackTable<TData>;
   columns: ColumnDef<TData, TValue>[];
+  t: ReturnType<typeof useTranslations>;
   is_loading?: boolean;
+  skeletonRows?: number;
 };
+
 function MainTable<TData, TValue>({
   table,
   columns,
+  t,
   is_loading,
+  skeletonRows = 5,
 }: Props<TData, TValue>) {
-  const t = useTranslations("common");
-  return is_loading ? (
-    <div className="space-y-2">
-      <Skeleton className="w-full h-10 mb-2" />
-      <Skeleton className="w-full h-64" />
-    </div>
-  ) : (
+  return (
     <Table>
+      {/* ---------- HEADER ---------- */}
       <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
               <TableHead
-                style={{
-                  width: header.getSize(),
-                }}
                 key={header.id}
-                className="text-start text-balance text-sm"
+                style={{ width: header.getSize() }}
+                className="text-center text-balance text-sm"
               >
-                {header.isPlaceholder
-                  ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
+                {is_loading ? (
+                  <Skeleton className="h-4 w-[70%]" />
+                ) : header.isPlaceholder ? null : (
+                  flexRender(
+                    header.column.columnDef.header,
+                    header.getContext(),
+                  )
+                )}
               </TableHead>
             ))}
           </TableRow>
         ))}
       </TableHeader>
+
+      {/* ---------- BODY ---------- */}
       <TableBody>
-        {table.getRowModel().rows?.length ? (
+        {is_loading ? (
+          Array.from({ length: skeletonRows }).map((_, rowIndex) => (
+            <TableRow key={`skeleton-row-${rowIndex}`}>
+              {columns.map((_, colIndex) => (
+                <TableCell key={`skeleton-cell-${rowIndex}-${colIndex}`}>
+                  <Skeleton className="h-4 w-full" />
+                </TableCell>
+              ))}
+            </TableRow>
+          ))
+        ) : table.getRowModel().rows.length ? (
           table.getRowModel().rows.map((row) => (
             <TableRow
               key={row.id}
               data-state={row.getIsSelected() ? "selected" : undefined}
             >
               {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>
+                <TableCell key={cell.id} className="text-center">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
               ))}

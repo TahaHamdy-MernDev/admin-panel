@@ -10,6 +10,7 @@
     "cancel": "إلغاء",
     "delete": "حذف",
     "save": "حفظ",
+    "search": "بحث سريع....",
     "no_results": "لا توجد نتائج"
   },
   "auth": {
@@ -125,6 +126,10 @@
       "image": "الصورة",
       "slug": "المعرّف",
       "name": "الاسم",
+      "governorates": "المحافظات",
+      "districts": "المناطق",
+      "name_ar": "الاسم (بالعربية)",
+      "name_en": "الاسم (بالإنجليزية)",
       "country": "الدولة",
 
       "active": "مفعّل",
@@ -135,7 +140,7 @@
         "WooCommerce": "ووكوميرس",
         "Salla": "سالا",
         "EasyOrder": "ايزي اوردر",
-        "Posta": "بوسطه",
+        "BOSTA": "بوسطه",
         "Other": "اخرى"
       },
       "plans": {
@@ -332,7 +337,18 @@
       "title": "نظرة عامة",
       "description": "متابعة شاملة لأهم الإحصائيات والأرقام الأساسية الخاصة بالمنصة"
     },
-
+    "governorate": {
+      "title": "المحافظات",
+      "description": "إدارة وتنظيم المحافظات والمناطق المتاحة للشحن",
+      "create": {
+        "title": "إنشاء محافظة",
+        "description": "إضافة محافظة جديدة وتحديد خصائصها"
+      }
+    },
+    "districts": {
+      "title": "المناطق",
+      "description": "مناطق المحافظه"
+    },
     "plans": {
       "title": "إدارة الباقات",
       "description": "إدارة وتنظيم باقات الاشتراك والأسعار المتاحة للمستخدمين",
@@ -761,7 +777,7 @@
       "WooCommerce": "WooCommerce",
       "Salla": "سلة",
       "EasyOrder": "Easy Order",
-      "POSTA": "POSTA",
+      "BOSTA": "Bosta",
       "Other": "أخرى"
     },
     "validation": {

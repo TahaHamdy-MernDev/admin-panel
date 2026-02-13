@@ -131,7 +131,7 @@ export function useCustomersColumns(): ColumnDef<CustomerRow>[] {
       cell: ({ row }) => {
         const owner = row.original.owner;
         return (
-          <div className="flex flex-row gap-1 space-x-1">
+          <div className="flex flex-row justify-center items-center gap-1 space-x-1">
             <ChangePasswordDialog
               trigger={
                 <TableButton variant={"table_icon_edit"}>
@@ -161,11 +161,14 @@ export function useCustomersColumns(): ColumnDef<CustomerRow>[] {
           return null;
         }
         return (
-          <TableButton variant={"table_icon_activity"}>
-            <Link href={`customers/${code.toLowerCase()}/activity`}>
+          <Link
+            href={`customers/${code.toLowerCase()}/details`}
+            className="flex items-center justify-center"
+          >
+            <TableButton variant={"table_icon_activity"}>
               <Activity />
-            </Link>
-          </TableButton>
+            </TableButton>
+          </Link>
         );
       },
     },

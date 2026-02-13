@@ -1,3 +1,4 @@
+"use server";
 import "../globals.css";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
@@ -12,6 +13,7 @@ import { DirectionProvider } from "@/components/ui/direction";
 const din_font = localFont({
   src: "./DINN.ttf",
   variable: "--font-din",
+  display: "swap",
 });
 
 export async function generateMetadata({

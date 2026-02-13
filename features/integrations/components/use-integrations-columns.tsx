@@ -5,7 +5,6 @@ import { ConfirmableSwitch } from "@/components/dialogs/confirmable-switch";
 import { useToggleIntegrationVisibilityMutation } from "../api/use-toggle-integration-visibility-mutation";
 import { useToggleIntegrationStatusMutation } from "../api/use-toggle-integration-status-mutation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { formatDate } from "date-fns";
 import { DateCell } from "@/components/data-table/reusable/date-cell";
 function ToggleStatus({ status, id }: { status: boolean; id: number }) {
   const mutation = useToggleIntegrationStatusMutation();
@@ -54,16 +53,20 @@ export function useIntegrationsColumns(): ColumnDef<IntegrationRow>[] {
       cell: ({ row }) => {
         const image = row.getValue("image") as string;
         return (
-          <Avatar>
-            <AvatarImage
-              src={image}
-              alt={row.getValue("provider") as string}
-              className=""
-            />
-            <AvatarFallback>
-              {row.getValue("provider") as string}
-            </AvatarFallback>
-          </Avatar>
+          <div className="flex items-center justify-center">
+            <Avatar size="lg">
+              <AvatarImage
+                src={image}
+                width={50}
+                height={50}
+                alt={row.getValue("provider") as string}
+                className="object-contain"
+              />
+              <AvatarFallback>
+                {row.getValue("provider") as string}
+              </AvatarFallback>
+            </Avatar>
+          </div>
         );
       },
     },

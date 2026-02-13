@@ -78,7 +78,7 @@ export function useCouponsColumns(): ColumnDef<CouponRow>[] {
     {
       header: t("actions"),
       cell: ({ row }) => (
-        <div className="flex items-center justify-start">
+        <div className="flex items-center justify-center">
           <DeleteCouponDialog id={row.original.id.toString()} />
         </div>
       ),

@@ -100,17 +100,19 @@ export function usePlansColumns(): ColumnDef<PlanRow>[] {
       id: "actions",
       header: t("actions"),
       cell: ({ row }) => (
-        <div className="flex flex-row gap-1 space-x-1">
+        <div className="flex flex-row items-center justify-center gap-1 space-x-1">
           <Link href={`/plans/${row.original.code.toLowerCase()}/edit`}>
             <TableButton variant={"table_icon_edit"}>
               <Pen />
             </TableButton>
           </Link>
           <ConfirmDeletePlansDialog
-          trigger={<TableButton variant={"table_icon_danger"}>
-            <Trash2 />
-          </TableButton>}
-          code={row.getValue("code")}
+            trigger={
+              <TableButton variant={"table_icon_danger"}>
+                <Trash2 />
+              </TableButton>
+            }
+            code={row.getValue("code")}
           />
         </div>
       ),
@@ -120,11 +122,14 @@ export function usePlansColumns(): ColumnDef<PlanRow>[] {
       header: t("more"),
       cell: ({ row }) => {
         return (
-          <TableButton variant={"table_icon_activity"}>
-            <Link href={`/plans/${row.original.code.toLowerCase()}/activity`}>
+          <Link
+            href={`/plans/${row.original.code.toLowerCase()}/activity`}
+            className="flex items-center justify-center"
+          >
+            <TableButton variant={"table_icon_activity"}>
               <Activity />
-            </Link>
-          </TableButton>
+            </TableButton>
+          </Link>
         );
       },
     },

@@ -3,7 +3,7 @@ export enum IntegrationProvider {
   WooCommerce = "WooCommerce",
   Salla = "Salla",
   EasyOrder = "EasyOrder",
-  POSTA = "POSTA",
+  BOSTA = "BOSTA",
   Other = "Other",
 }
 export interface IntegrationRow {

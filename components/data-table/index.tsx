@@ -12,6 +12,7 @@ import TableActions from "./core/table-actions";
 import MainTable from "./core/table";
 import { PaginationMeta } from "@/types/api-types";
 import ErrorState from "../shared/error";
+import { useTranslations } from "next-intl";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -38,8 +39,10 @@ export default function DataTable<TData, TValue>({
   right,
   query_state,
 }: DataTableProps<TData, TValue>) {
+   const t = useTranslations("common");
   const [globalFilter, setGlobalFilter] = useState("");
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data: data?.items && data.items.length > 0 ? data.items : [],
     columns,
@@ -69,11 +72,13 @@ export default function DataTable<TData, TValue>({
         total_count={data?.meta.total_count || 0}
         current_limit={data?.meta.limit || 25}
         is_loading={query_state?.isLoading}
+        t={t}
       />
       <MainTable
         table={table}
         columns={columns}
         is_loading={query_state?.isLoading}
+        t={t}
       />
       <PaginationBar meta={data?.meta} />
     </div>

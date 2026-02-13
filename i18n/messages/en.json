@@ -11,6 +11,7 @@
     "profile": "Profile"
   },
   "common": {
+    "search": "Fast Search....",
     "create": "Create",
     "cancel": "Cancel",
     "delete": "Delete",
@@ -123,9 +124,13 @@
       "visible": "Visible",
       "logs": "Logs",
       "code": "Code",
+      "governorates": "Governorates",
       "image": "Image",
       "slug": "Slug",
+      "districts": "Districts",
       "name": "Name",
+      "name_ar": "Name (Arabic)",
+      "name_en": "Name (English)",
       "country": "Country",
       "active": "Active",
       "inactive": "Inactive",
@@ -135,7 +140,7 @@
         "WooCommerce": "WooCommerce",
         "Salla": "Salla",
         "EasyOrder": "EasyOrder",
-        "Posta": "Posta",
+        "Bosta": "Bosta",
         "Other": "Other"
       },
       "plans": {
@@ -333,7 +338,18 @@
       "title": "Overview",
       "description": "Comprehensive overview of key platform statistics and metrics"
     },
-
+    "governorate": {
+      "title": "Governorates",
+      "description": "Manage and organize governorates and available regions for shipping",
+      "create": {
+        "title": "Create Governorate",
+        "description": "Add a new governorate and define its features"
+      }
+    },
+    "districts": {
+      "title": "Districts",
+      "description": "Manage and organize districts and available regions for shipping"
+    },
     "plans": {
       "title": "Plans Management",
       "description": "Manage subscription plans and pricing options",
@@ -742,7 +758,7 @@
       "WooCommerce": "WooCommerce",
       "Salla": "Salla",
       "EasyOrder": "Easy Order",
-      "POSTA": "POSTA",
+      "BOSTA": "Bosta",
       "Other": "Other"
     },
     "validation": {

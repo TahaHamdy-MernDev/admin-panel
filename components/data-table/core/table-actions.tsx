@@ -8,11 +8,13 @@ import { Table } from "@tanstack/react-table";
 
 import { TableLimitSelect } from "./table-limit-selections";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslations } from "next-intl";
 type Props<TData> = {
   table: Table<TData>;
-  right?: React.ReactNode;
+  t: ReturnType<typeof useTranslations>;
   total_count: number;
   current_limit: number;
+  right?: React.ReactNode;
   is_loading?: boolean;
 };
 function TableActions<TData>({
@@ -20,6 +22,7 @@ function TableActions<TData>({
   right,
   total_count,
   current_limit,
+  t,
   is_loading,
 }: Props<TData>) {
   return (
@@ -31,7 +34,7 @@ function TableActions<TData>({
           ) : (
             <InputGroup className="shadow-none">
               <InputGroupInput
-                placeholder={"search"}
+                placeholder={t("search")}
                 value={(table.getState().globalFilter as string) ?? ""}
                 onChange={(event) => table.setGlobalFilter(event.target.value)}
                 className="rounded-md pb-1.5 text-xs w-[220px] shadow-none"
